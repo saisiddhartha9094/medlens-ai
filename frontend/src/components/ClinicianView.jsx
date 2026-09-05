@@ -24,10 +24,40 @@ export default function ClinicianView({
 
   if (!currentReport) {
     return (
-      <div className="p-12 text-center bg-slate-800/50 rounded-2xl border border-slate-700/60 max-w-2xl mx-auto my-12">
-        <FileText className="w-12 h-12 text-slate-500 mx-auto mb-4" />
-        <h3 className="text-lg font-semibold text-white">No Diagnostic Report Selected</h3>
-        <p className="text-sm text-slate-400 mt-1">Please select an ingested report or ingest a new document to begin clinical structuring.</p>
+      <div className="p-8 sm:p-12 text-center bg-slate-800/50 rounded-2xl border border-slate-700/60 max-w-2xl mx-auto my-12 space-y-4">
+        <FileText className="w-12 h-12 text-blue-400 mx-auto" />
+        <div>
+          <h3 className="text-lg font-bold text-white">Select a Diagnostic Report</h3>
+          <p className="text-xs text-slate-400 mt-1">
+            Choose one of the ingested reports below to inspect its structured LOINC observations:
+          </p>
+        </div>
+
+        {reportsList && reportsList.length > 0 ? (
+          <div className="space-y-2 pt-2 text-left">
+            {reportsList.map(r => (
+              <button
+                key={r.id}
+                onClick={() => onSelectReport(r.id)}
+                className="w-full p-3 bg-slate-900/80 hover:bg-slate-900 border border-slate-700/80 hover:border-blue-500 rounded-xl flex items-center justify-between transition group"
+              >
+                <div>
+                  <div className="font-semibold text-xs text-slate-200 group-hover:text-blue-400">
+                    {r.documentTitle || r.labName}
+                  </div>
+                  <div className="text-[11px] text-slate-400">
+                    Date: {r.testDate} • {r.observationsCount} Observations
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition" />
+              </button>
+            ))}
+          </div>
+        ) : (
+          <div className="text-xs text-slate-500 pt-2">
+            No reports ingested yet. Click "Ingest Report" above to start.
+          </div>
+        )}
       </div>
     );
   }

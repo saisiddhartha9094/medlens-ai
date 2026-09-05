@@ -38,10 +38,13 @@ export default function App() {
 
       if (reportsRes.success && reportsRes.reports) {
         setReports(reportsRes.reports);
-        if (reportsRes.reports.length > 0) {
+        if (reportsRes.activeReport) {
+          setCurrentReportId(reportsRes.activeReport.id);
+          setCurrentReport(reportsRes.activeReport);
+        } else if (reportsRes.reports.length > 0) {
           const initialId = currentReportId || reportsRes.reports[0].id;
           setCurrentReportId(initialId);
-          loadSingleReport(initialId);
+          await loadSingleReport(initialId);
         }
       }
     } catch (err) {

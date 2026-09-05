@@ -25,6 +25,7 @@ router.get("/samples", (req, res) => {
 router.get("/", (req, res) => {
   res.json({
     success: true,
+    activeReport: store.reports[0] || null,
     reports: store.reports.map(r => ({
       id: r.id,
       documentTitle: r.documentTitle,
