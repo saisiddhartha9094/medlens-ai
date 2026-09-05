@@ -38,7 +38,13 @@ app.use(helmet({
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || "http://localhost:5173,http://127.0.0.1:5173").split(",");
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || ALLOWED_ORIGINS.includes(origin) || origin.startsWith("http://localhost:") || origin.startsWith("http://127.0.0.1:")) {
+    if (
+      !origin || 
+      ALLOWED_ORIGINS.includes(origin) || 
+      origin.startsWith("http://localhost:") || 
+      origin.startsWith("http://127.0.0.1:") ||
+      origin.endsWith(".vercel.app")
+    ) {
       callback(null, true);
     } else {
       callback(new Error(`CORS Error: Origin '${origin}' is not authorized.`));
@@ -138,8 +144,8 @@ async function seedInitialReports() {
 
 seedInitialReports();
 
-// Start HTTP server only if executed directly (not when imported by vitest/supertest)
-if (process.env.NODE_ENV !== "test") {
+// Start HTTP server only if executed directly (not when imported by vitest/supertest or running in Vercel serverless)
+if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`====================================================`);
     console.log(` MedLens Clinical Intelligence API running on :${PORT}`);
@@ -147,3 +153,6 @@ if (process.env.NODE_ENV !== "test") {
     console.log(`====================================================`);
   });
 }
+
+export default app;
+

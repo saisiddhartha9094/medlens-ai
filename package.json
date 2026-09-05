@@ -2,10 +2,18 @@
   "name": "medlens",
   "version": "1.0.0",
   "description": "MedLens — AI-Powered Clinical Information Intelligence",
+  "type": "module",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
-    "backend": "cd backend && npm start",
-    "frontend": "cd frontend && npm run dev",
-    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+    "build": "npm run build --workspace=frontend",
+    "start": "node backend/src/server.js",
+    "backend": "npm start --workspace=backend",
+    "frontend": "npm run dev --workspace=frontend",
+    "test": "npm test --workspace=backend",
+    "install:all": "npm install"
   },
   "keywords": [
     "clinical-nlp",

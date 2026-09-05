@@ -1161,6 +1161,86 @@
   ],
   "auditLog": [
     {
+      "id": "aud-1788599658162-106",
+      "timestamp": "2026-09-05T09:14:18.162Z",
+      "action": "USER_AUTHENTICATION_SUCCESS",
+      "actor": "Dr. Arvind Mehta, MD",
+      "provenance": "SYSTEM",
+      "details": "User Dr. Arvind Mehta, MD logged in with role [CLINICIAN].",
+      "metadata": {}
+    },
+    {
+      "id": "aud-1788599658135-303",
+      "timestamp": "2026-09-05T09:14:18.135Z",
+      "action": "RANGE_VALIDATION_PERFORMED",
+      "actor": "MedLens Anti-Hallucination Engine",
+      "provenance": "AI_EXTRACTED_VERIFIED",
+      "details": "Validation check for 'HAEMOGLOBIN' with range '13.0 - 17.0': VERIFIED_EXACT_MATCH.",
+      "metadata": {
+        "testName": "HAEMOGLOBIN",
+        "referenceRange": "13.0 - 17.0",
+        "validation": {
+          "isValid": true,
+          "isHallucinated": false,
+          "isAbsentInSource": false,
+          "status": "VERIFIED_EXACT_MATCH",
+          "confidence": 1,
+          "provenance": "AI_EXTRACTED_VERIFIED",
+          "matchType": "EXACT_SUBSTRING",
+          "reason": "Extracted reference interval matches source document verbatim.",
+          "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0..."
+        },
+        "evaluation": {
+          "flag": "LOW",
+          "label": "Low",
+          "color": "blue",
+          "note": "Below lower bound (13)",
+          "min": 13,
+          "max": 17
+        }
+      }
+    },
+    {
+      "id": "aud-1788599506960-502",
+      "timestamp": "2026-09-05T09:11:46.960Z",
+      "action": "USER_AUTHENTICATION_SUCCESS",
+      "actor": "Dr. Arvind Mehta, MD",
+      "provenance": "SYSTEM",
+      "details": "User Dr. Arvind Mehta, MD logged in with role [CLINICIAN].",
+      "metadata": {}
+    },
+    {
+      "id": "aud-1788599506930-386",
+      "timestamp": "2026-09-05T09:11:46.930Z",
+      "action": "RANGE_VALIDATION_PERFORMED",
+      "actor": "MedLens Anti-Hallucination Engine",
+      "provenance": "AI_EXTRACTED_VERIFIED",
+      "details": "Validation check for 'HAEMOGLOBIN' with range '13.0 - 17.0': VERIFIED_EXACT_MATCH.",
+      "metadata": {
+        "testName": "HAEMOGLOBIN",
+        "referenceRange": "13.0 - 17.0",
+        "validation": {
+          "isValid": true,
+          "isHallucinated": false,
+          "isAbsentInSource": false,
+          "status": "VERIFIED_EXACT_MATCH",
+          "confidence": 1,
+          "provenance": "AI_EXTRACTED_VERIFIED",
+          "matchType": "EXACT_SUBSTRING",
+          "reason": "Extracted reference interval matches source document verbatim.",
+          "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0..."
+        },
+        "evaluation": {
+          "flag": "LOW",
+          "label": "Low",
+          "color": "blue",
+          "note": "Below lower bound (13)",
+          "min": 13,
+          "max": 17
+        }
+      }
+    },
+    {
       "id": "aud-1788595147739-694",
       "timestamp": "2026-09-05T07:59:07.739Z",
       "action": "USER_AUTHENTICATION_SUCCESS",
