@@ -12,6 +12,7 @@ import {
   Camera,
   Image as ImageIcon
 } from "lucide-react";
+import apiFetch from "../utils/api";
 
 export default function ReportUploadModal({ 
   isOpen, 
@@ -50,7 +51,7 @@ export default function ReportUploadModal({
 
   useEffect(() => {
     if (isOpen) {
-      fetch("/api/reports/samples")
+      apiFetch("/api/reports/samples")
         .then(res => res.json())
         .then(data => {
           if (data.success) {
@@ -66,7 +67,7 @@ export default function ReportUploadModal({
   const handleProcessSample = async (sampleId) => {
     setLoadingSampleId(sampleId);
     try {
-      const res = await fetch(`/api/reports/process-sample/${sampleId}`, {
+      const res = await apiFetch(`/api/reports/process-sample/${sampleId}`, {
         method: "POST"
       });
       const data = await res.json();
@@ -87,7 +88,7 @@ export default function ReportUploadModal({
 
     setUploadingCustom(true);
     try {
-      const res = await fetch("/api/reports/upload", {
+      const res = await apiFetch("/api/reports/upload", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -123,7 +124,7 @@ export default function ReportUploadModal({
     formData.append("testDate", fileDate);
 
     try {
-      const res = await fetch("/api/reports/upload-file", {
+      const res = await apiFetch("/api/reports/upload-file", {
         method: "POST",
         body: formData
       });

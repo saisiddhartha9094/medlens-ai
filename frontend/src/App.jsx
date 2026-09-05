@@ -10,6 +10,7 @@ import PatientIntakeModal from "./components/PatientIntakeModal";
 import ReportUploadModal from "./components/ReportUploadModal";
 import LoginModal from "./components/LoginModal";
 import EditObservationModal from "./components/EditObservationModal";
+import apiFetch from "./utils/api";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("clinician");
@@ -35,7 +36,7 @@ export default function App() {
   useEffect(() => {
     const token = localStorage.getItem("medlens_jwt");
     if (token) {
-      fetch("/api/auth/me", {
+      apiFetch("/api/auth/me", {
         headers: { "Authorization": `Bearer ${token}` }
       })
         .then(r => r.json())
@@ -55,8 +56,8 @@ export default function App() {
     try {
       setLoading(true);
       const [patientRes, reportsRes] = await Promise.all([
-        fetch("/api/patient").then(r => r.json()),
-        fetch("/api/reports").then(r => r.json())
+        apiFetch("/api/patient").then(r => r.json()),
+        apiFetch("/api/reports").then(r => r.json())
       ]);
 
       if (patientRes.success) {
@@ -83,7 +84,7 @@ export default function App() {
 
   const loadSingleReport = async (reportId) => {
     try {
-      const res = await fetch(`/api/reports/${reportId}`);
+      const res = await apiFetch(`/api/reports/${reportId}`);
       const data = await res.json();
       if (data.success && data.report) {
         setCurrentReport(data.report);

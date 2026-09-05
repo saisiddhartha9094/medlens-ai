@@ -3,6 +3,13 @@ import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distPath = path.resolve(__dirname, "../../frontend/dist");
 
 import intakeRouter from "./routes/intake.js";
 import reportsRouter from "./routes/reports.js";
@@ -87,6 +94,15 @@ app.get("/api/health", (req, res) => {
     guardrailEngine: "Active (Levenshtein + Grounded Substring Verification)"
   });
 });
+
+// Serve static frontend build if present
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+  app.get("*", (req, res, next) => {
+    if (req.path.startsWith("/api")) return next();
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+}
 
 /**
  * Seed initial reports if database is empty on cold boot

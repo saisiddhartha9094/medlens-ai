@@ -4,15 +4,12 @@ Write-Host "Staging all files..."
 & $git add .
 
 Write-Host "Committing updates..."
-& $git commit -m "feat: Achieve 100/100 across Testing, Security, Accessibility, and SIH Rubrics
+& $git commit -m "fix: Resilient apiFetch fallback and static dist hosting on port 5000
 
-- Vitest automated test suite: 29/29 unit & integration tests passing
-- Full JWT authentication & Role-Based Access Control (Clinician/Patient)
-- Human-in-the-Loop observation editing with HUMAN_CORRECTED provenance
-- Defense-in-depth security: Helmet, rate-limiting, CORS, SHA-256 caching
-- WCAG AA accessibility: ErrorBoundary, ARIA live alerts, keyboard traps
-- GitHub Actions CI workflow automated for tests and production build
-- Comprehensive README with architecture, evaluation metrics, and demo credentials"
+- Built resilient apiFetch utility with automatic failover to direct backend on http://127.0.0.1:5000
+- Enabled Express static asset serving and SPA fallback for frontend/dist on port 5000
+- Added preview proxy configuration to vite.config.js for port 4173
+- Rebuilt frontend production bundle with resilient apiFetch"
 
 Write-Host "Pushing to remote origin main..."
 & $git push origin main

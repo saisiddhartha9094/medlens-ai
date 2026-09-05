@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { X, Edit3, Save, ShieldCheck, AlertCircle } from "lucide-react";
 import ProvenanceBadge from "./ProvenanceBadge";
+import apiFetch from "../utils/api";
 
 export default function EditObservationModal({ 
   isOpen, 
@@ -39,7 +40,7 @@ export default function EditObservationModal({
 
   const quickDoctorLogin = async () => {
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await apiFetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -67,7 +68,7 @@ export default function EditObservationModal({
 
     try {
       const token = localStorage.getItem("medlens_jwt");
-      const res = await fetch(`/api/reports/${reportId}/observations/${observation.id}`, {
+      const res = await apiFetch(`/api/reports/${reportId}/observations/${observation.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

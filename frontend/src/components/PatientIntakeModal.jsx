@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { X, UserCheck, Save, ShieldCheck, Heart, Pill, AlertCircle } from "lucide-react";
 import ProvenanceBadge from "./ProvenanceBadge";
+import apiFetch from "../utils/api";
 
 export default function PatientIntakeModal({ isOpen, onClose, patient, onUpdatePatient }) {
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ export default function PatientIntakeModal({ isOpen, onClose, patient, onUpdateP
     };
 
     try {
-      const res = await fetch("/api/patient", {
+      const res = await apiFetch("/api/patient", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)

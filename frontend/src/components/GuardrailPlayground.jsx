@@ -8,10 +8,11 @@ import {
   CheckCircle2, 
   XCircle, 
   Code, 
-  RefreshCw,
-  Info
+  RefreshCw, 
+  Info 
 } from "lucide-react";
 import ProvenanceBadge from "./ProvenanceBadge";
+import apiFetch from "../utils/api";
 
 export default function GuardrailPlayground() {
   const PRESETS = [
@@ -82,7 +83,7 @@ NOTICE: Range has not been established for this demographic batch.`
     setLoading(true);
     setResult(null);
     try {
-      const response = await fetch("/api/validator/verify-range", {
+      const response = await apiFetch("/api/validator/verify-range", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

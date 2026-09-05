@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { X, Lock, Stethoscope, User, ShieldCheck, LogIn, AlertCircle } from "lucide-react";
+import apiFetch from "../utils/api";
 
 export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
   const [email, setEmail] = useState("doctor@medlens.health");
@@ -26,7 +27,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
     setError("");
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await apiFetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
