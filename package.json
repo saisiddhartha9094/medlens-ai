@@ -1,0 +1,20 @@
+{
+  "name": "medlens",
+  "version": "1.0.0",
+  "description": "MedLens — AI-Powered Clinical Information Intelligence",
+  "scripts": {
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm run dev",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": [
+    "clinical-nlp",
+    "anti-hallucination",
+    "provenance",
+    "hl7-fhir",
+    "abdm",
+    "smart-india-hackathon"
+  ],
+  "author": "MedLens Team",
+  "license": "MIT"
+}
