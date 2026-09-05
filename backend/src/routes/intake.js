@@ -54,10 +54,15 @@ router.get("/dli", async (req, res) => {
   try {
     const { scanDrugLabInteractions } = await import("../services/dliService.js");
     const medications = store.patient?.patientContext?.currentMedications || [];
+    const { reportId } = req.query;
     
-    // Aggregate observations from all reports
+    // Aggregate observations from selected or all reports
+    const targetReports = reportId 
+      ? (store.reports || []).filter(r => r.id === reportId)
+      : (store.reports || []);
+
     const allObservations = [];
-    (store.reports || []).forEach(r => {
+    targetReports.forEach(r => {
       (r.observations || []).forEach(obs => {
         allObservations.push({
           ...obs,
@@ -73,6 +78,7 @@ router.get("/dli", async (req, res) => {
       success: true,
       patientName: store.patient.fullName,
       activeMedications: medications,
+      reportId: reportId || null,
       totalInteractionsCount: interactions.length,
       criticalCount: interactions.filter(i => i.severity === "HIGH").length,
       interactions
@@ -92,6 +98,44 @@ router.get("/care-gaps", async (req, res) => {
       success: true,
       evaluation
     });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Translation Cache
+const translationCache = new Map();
+
+// POST /api/intake/translate - Server-side translation proxy (MyMemory API)
+router.post("/translate", async (req, res) => {
+  try {
+    const { text, targetLang = "en" } = req.body;
+    if (!text || targetLang === "en") {
+      return res.json({ success: true, translatedText: text });
+    }
+
+    const cacheKey = `${targetLang}:${text.trim().substring(0, 100)}`;
+    if (translationCache.has(cacheKey)) {
+      return res.json({ success: true, translatedText: translationCache.get(cacheKey) });
+    }
+
+    const encoded = encodeURIComponent(text.slice(0, 500));
+    const url = `https://api.mymemory.translated.net/get?q=${encoded}&langpair=en|${targetLang}`;
+    
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data && data.responseData && data.responseData.translatedText) {
+        const result = data.responseData.translatedText;
+        translationCache.set(cacheKey, result);
+        return res.json({ success: true, translatedText: result });
+      }
+    } catch (apiErr) {
+      console.warn("[MedLens Backend Translation Proxy] MyMemory unreachable:", apiErr.message);
+    }
+
+    // Fallback: return source text
+    res.json({ success: true, translatedText: text });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }

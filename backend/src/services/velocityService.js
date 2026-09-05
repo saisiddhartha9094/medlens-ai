@@ -66,6 +66,22 @@ export const VELOCITY_THRESHOLDS = {
     alertName: "Steep Glycated Hemoglobin Divergence",
     warningThreshold: 0.25,
     clinicalContext: "Steep upward drift in long-term glycemic control over a short chronological window."
+  },
+  "POTASSIUM": {
+    rapidDeltaPerMonth: 0.5,
+    unit: "mmol/L/month",
+    severity: "HIGH",
+    alertName: "Rapid Serum Potassium Shift",
+    warningThreshold: 0.3,
+    clinicalContext: "Steep electrolyte divergence risking cardiac conduction defects or arrhythmia."
+  },
+  "ALT": {
+    rapidDeltaPerMonth: 30.0,
+    unit: "U/L/month",
+    severity: "MODERATE",
+    alertName: "Accelerated Transaminase Elevation",
+    warningThreshold: 18.0,
+    clinicalContext: "Rapid transaminitis suggesting acute hepatocellular injury or idiosyncratic drug reaction."
   }
 };
 
@@ -141,14 +157,17 @@ export function calculateSeriesVelocity(testName, points = []) {
     unit: last.unit || "",
     totalDelta: Math.round(deltaValue * 100) / 100,
     daysSpan: Math.round(daysDiff),
+    deltaDays: Math.round(daysDiff),
     monthsSpan: Math.round(monthsDiff * 10) / 10,
     velocityPerMonth,
     velocityPerDay,
     trajectoryDirection,
     isAlert,
+    isRapidChange: isAlert,
     alertSeverity,
     alertTitle,
-    clinicalMessage
+    clinicalMessage,
+    clinicalNote: clinicalMessage
   };
 }
 

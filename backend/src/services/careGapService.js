@@ -12,9 +12,11 @@
 export const SCREENING_PROTOCOLS = [
   {
     id: "gap-dm-uacr",
+    condition: "Diabetes",
     requiredCondition: "Diabetes",
-    testNames: ["URINE MICROALBUMIN", "ALBUMIN/CREATININE RATIO", "MICROALBUMIN", "uACR"],
+    test: "Urine Microalbumin / Albumin-Creatinine Ratio (uACR)",
     recommendedTest: "Urine Microalbumin / Albumin-Creatinine Ratio (uACR)",
+    testNames: ["URINE MICROALBUMIN", "ALBUMIN/CREATININE RATIO", "MICROALBUMIN", "uACR"],
     intervalMonths: 12,
     guidelineBody: "American Diabetes Association (ADA) / KDIGO",
     clinicalRationale: "Annual screening detects subclinical diabetic nephropathy prior to irreversible eGFR decline.",
@@ -22,9 +24,11 @@ export const SCREENING_PROTOCOLS = [
   },
   {
     id: "gap-dm-hba1c",
+    condition: "Diabetes",
     requiredCondition: "Diabetes",
-    testNames: ["HbA1c", "GLYCOSYLATED HB", "HbA1c (GLYCOSYLATED HB)"],
+    test: "HbA1c (Glycosylated Hemoglobin)",
     recommendedTest: "HbA1c (Glycosylated Hemoglobin)",
+    testNames: ["HbA1c", "GLYCOSYLATED HB", "HbA1c (GLYCOSYLATED HB)"],
     intervalMonths: 4,
     guidelineBody: "ADA Standards of Medical Care in Diabetes",
     clinicalRationale: "Quarterly or semi-annual evaluation provides 90-day glycemic trajectory oversight.",
@@ -32,19 +36,35 @@ export const SCREENING_PROTOCOLS = [
   },
   {
     id: "gap-dm-eye",
+    condition: "Diabetes",
     requiredCondition: "Diabetes",
-    testNames: ["DILATED EYE EXAM", "RETINOPATHY SCREENING", "FUNDUS EXAMINATION"],
+    test: "Annual Dilated Retinal Eye Examination",
     recommendedTest: "Annual Dilated Retinal Eye Examination",
+    testNames: ["DILATED EYE EXAM", "RETINOPATHY SCREENING", "FUNDUS EXAMINATION"],
     intervalMonths: 12,
     guidelineBody: "American Academy of Ophthalmology (AAO) / ADA",
     clinicalRationale: "Early detection of proliferative diabetic retinopathy prevents vision loss.",
     priority: "MODERATE"
   },
   {
+    id: "gap-dm-foot",
+    condition: "Diabetes",
+    requiredCondition: "Diabetes",
+    test: "Comprehensive Diabetic Foot Examination",
+    recommendedTest: "Comprehensive Diabetic Foot Examination",
+    testNames: ["FOOT EXAM", "MONOFILAMENT", "DIABETIC FOOT"],
+    intervalMonths: 12,
+    guidelineBody: "ADA Standards of Care",
+    clinicalRationale: "Annual sensory testing detects distal symmetric polyneuropathy and prevents ulceration.",
+    priority: "MODERATE"
+  },
+  {
     id: "gap-htn-renal",
+    condition: "Hypertension",
     requiredCondition: "Hypertension",
-    testNames: ["SERUM CREATININE", "CREATININE", "BUN", "ELECTROLYTES"],
+    test: "Serum Creatinine & Electrolytes (Renal Function Panel)",
     recommendedTest: "Serum Creatinine & Electrolytes (Renal Function Panel)",
+    testNames: ["SERUM CREATININE", "CREATININE", "BUN", "ELECTROLYTES"],
     intervalMonths: 12,
     guidelineBody: "ACC/AHA Hypertension Clinical Guidelines",
     clinicalRationale: "Monitors target organ damage and electrolyte stability on antihypertensive therapy.",
@@ -53,22 +73,49 @@ export const SCREENING_PROTOCOLS = [
   {
     id: "gap-age-lipid",
     minAge: 40,
-    testNames: ["TOTAL CHOLESTEROL", "LIPID PROFILE", "LDL CHOLESTEROL", "TRIGLYCERIDES"],
+    test: "Complete Lipid Profile (Cardiovascular ASCVD Risk)",
     recommendedTest: "Complete Lipid Profile (Cardiovascular ASCVD Risk)",
+    testNames: ["TOTAL CHOLESTEROL", "LIPID PROFILE", "LDL CHOLESTEROL", "TRIGLYCERIDES"],
     intervalMonths: 12,
     guidelineBody: "USPSTF / American College of Cardiology (ACC)",
     clinicalRationale: "Annual screening stratifies 10-year atherosclerotic cardiovascular disease risk.",
     priority: "MODERATE"
   },
   {
+    id: "gap-colorectal-fit",
+    minAge: 45,
+    maxAge: 75,
+    test: "Colorectal Cancer Screening (FIT / Colonoscopy)",
+    recommendedTest: "Colorectal Cancer Screening (FIT / Colonoscopy)",
+    testNames: ["OCCULT BLOOD", "FOBT", "FIT", "COLONOSCOPY", "STOOL DNA"],
+    intervalMonths: 12,
+    guidelineBody: "USPSTF Grade A Recommendation",
+    clinicalRationale: "Universal screening in adults 45-75 detects adenomatous polyps and early-stage colorectal neoplasia.",
+    priority: "HIGH"
+  },
+  {
     id: "gap-age-dm-screen",
     minAge: 35,
-    testNames: ["GLUCOSE, FASTING", "GLUCOSE, FASTING (PLASMA)", "HbA1c"],
+    test: "Fasting Blood Glucose or HbA1c",
     recommendedTest: "Fasting Blood Glucose or HbA1c",
+    testNames: ["GLUCOSE, FASTING", "GLUCOSE, FASTING (PLASMA)", "HbA1c"],
     intervalMonths: 36,
     guidelineBody: "USPSTF Prediabetes & Type 2 Diabetes Recommendation",
     clinicalRationale: "Universal screening in adults 35-70 years facilitates prediabetes intervention.",
     priority: "LOW"
+  },
+  {
+    id: "gap-female-mammogram",
+    minAge: 40,
+    maxAge: 74,
+    gender: "Female",
+    test: "Screening Mammography (Breast Cancer)",
+    recommendedTest: "Screening Mammography (Breast Cancer)",
+    testNames: ["MAMMOGRAPHY", "MAMMOGRAM", "BREAST IMAGING"],
+    intervalMonths: 24,
+    guidelineBody: "USPSTF Grade B Recommendation",
+    clinicalRationale: "Biennial screening reduces breast cancer mortality in women aged 40-74.",
+    priority: "HIGH"
   }
 ];
 
@@ -80,6 +127,7 @@ export const SCREENING_PROTOCOLS = [
  */
 export function evaluateCareGaps(patient = {}, reports = []) {
   const age = patient.age || 48;
+  const gender = (patient.gender || "").toLowerCase();
   const context = patient.patientContext || {};
   const conditions = context.chronicConditions || [];
   const conditionStrings = conditions.map(c => c.toLowerCase());
@@ -90,11 +138,16 @@ export function evaluateCareGaps(patient = {}, reports = []) {
   for (const protocol of SCREENING_PROTOCOLS) {
     // Condition eligibility check
     let isEligible = false;
+    const reqCond = protocol.condition || protocol.requiredCondition;
 
-    if (protocol.requiredCondition) {
-      isEligible = conditionStrings.some(c => c.includes(protocol.requiredCondition.toLowerCase()));
+    if (reqCond) {
+      isEligible = conditionStrings.some(c => c.includes(reqCond.toLowerCase()));
     } else if (protocol.minAge) {
-      isEligible = age >= protocol.minAge;
+      isEligible = age >= protocol.minAge && (!protocol.maxAge || age <= protocol.maxAge);
+    }
+
+    if (protocol.gender && gender && protocol.gender.toLowerCase() !== gender) {
+      isEligible = false;
     }
 
     if (!isEligible) continue;
@@ -103,10 +156,14 @@ export function evaluateCareGaps(patient = {}, reports = []) {
     let latestTestDate = null;
     let latestReportTitle = null;
 
+    const testTargets = protocol.testNames 
+      ? protocol.testNames 
+      : (protocol.test ? [protocol.test] : [protocol.recommendedTest]);
+
     for (const report of reports) {
       const hasMatchingTest = (report.observations || []).some(obs => {
         const obsName = (obs.testName || "").toUpperCase();
-        return protocol.testNames.some(target => obsName.includes(target.toUpperCase()));
+        return testTargets.some(target => obsName.includes(target.toUpperCase()));
       });
 
       if (hasMatchingTest && report.testDate) {

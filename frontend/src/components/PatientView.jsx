@@ -14,7 +14,8 @@ import {
   VolumeX,
   CalendarClock,
   Clock,
-  CheckCircle2
+  CheckCircle2,
+  Pill
 } from "lucide-react";
 import ProvenanceBadge from "./ProvenanceBadge";
 import TrafficLightGauge from "./TrafficLightGauge";
@@ -29,10 +30,12 @@ export default function PatientView({ currentReport, patientContext }) {
   const [selectedLang, setSelectedLang] = useState("en");
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [careGapsData, setCareGapsData] = useState(null);
+  const [dliData, setDliData] = useState(null);
   const [translatedOverview, setTranslatedOverview] = useState("");
+  const [translatedQuestions, setTranslatedQuestions] = useState([]);
   const [isTranslating, setIsTranslating] = useState(false);
 
-  // Load Care Gaps
+  // Load Care Gaps and DLI
   useEffect(() => {
     fetch("/api/intake/care-gaps")
       .then(res => res.json())
@@ -42,25 +45,43 @@ export default function PatientView({ currentReport, patientContext }) {
         }
       })
       .catch(err => console.warn("Failed to load care gaps:", err));
+
+    fetch("/api/intake/dli")
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setDliData(data);
+        }
+      })
+      .catch(err => console.warn("Failed to load DLI:", err));
   }, []);
 
   // Handle translation when language changes
   useEffect(() => {
-    if (!currentReport?.patientSummary?.overview) return;
+    const rawOverview = currentReport?.patientSummary?.overview || "";
+    const rawQuestions = currentReport?.patientSummary?.questionsForDoctor || [];
+
+    if (!rawOverview) return;
     
     if (selectedLang === "en") {
-      setTranslatedOverview(currentReport.patientSummary.overview);
+      setTranslatedOverview(rawOverview);
+      setTranslatedQuestions(rawQuestions);
       return;
     }
 
     setIsTranslating(true);
-    translateText(currentReport.patientSummary.overview, selectedLang)
-      .then(translated => {
-        setTranslatedOverview(translated);
+    Promise.all([
+      translateText(rawOverview, selectedLang),
+      Promise.all(rawQuestions.slice(0, 4).map(q => translateText(q, selectedLang)))
+    ])
+      .then(([translatedOv, translatedQs]) => {
+        setTranslatedOverview(translatedOv);
+        setTranslatedQuestions(translatedQs);
         setIsTranslating(false);
       })
       .catch(() => {
-        setTranslatedOverview(currentReport.patientSummary.overview);
+        setTranslatedOverview(rawOverview);
+        setTranslatedQuestions(rawQuestions);
         setIsTranslating(false);
       });
   }, [selectedLang, currentReport]);
@@ -98,9 +119,11 @@ export default function PatientView({ currentReport, patientContext }) {
       SpeechController.stop();
       setIsSpeaking(false);
     } else {
-      const speechContent = `${translatedOverview || summary.overview}. Key parameters to discuss with doctor: ${
-        summary.keyFindings?.map(f => `${f.parameter}: observed ${f.value}, standard range is ${f.referenceRange}`).join(". ") || ""
-      }`;
+      const activeQuestions = (translatedQuestions && translatedQuestions.length > 0)
+        ? translatedQuestions
+        : (summary.questionsForDoctor || []);
+      const questionsText = activeQuestions.slice(0, 3).join(". ");
+      const speechContent = `${translatedOverview || summary.overview}. ${vText.doctorQuestions || "Questions to ask your doctor"}: ${questionsText}`;
       SpeechController.speak(
         speechContent,
         selectedLang,
@@ -125,6 +148,21 @@ export default function PatientView({ currentReport, patientContext }) {
           </p>
         </div>
       </div>
+
+      {/* Medication & Lab Interaction Patient Advisory */}
+      {dliData && dliData.criticalCount > 0 && (
+        <div className="bg-rose-950/30 border border-rose-600/50 rounded-xl p-4 flex items-start gap-3 text-rose-200 shadow-md">
+          <Pill className="w-5 h-5 text-rose-400 flex-shrink-0 mt-0.5" />
+          <div className="text-xs space-y-1">
+            <div className="font-semibold text-rose-300">
+              Medication & Laboratory Advisory Note ({dliData.criticalCount} notice{dliData.criticalCount > 1 ? 's' : ''})
+            </div>
+            <p className="text-rose-200/90 leading-relaxed">
+              MedLens identified that your active medications (e.g. {dliData.activeMedications?.slice(0, 2).map(m => m.split(' ')[0]).join(', ')}) have clinical interactions with lab findings in this record. Please inform your doctor during your visit so they can evaluate your prescription dosages.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Patient Friendly Overview Card with Multilingual & TTS */}
       <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
@@ -350,7 +388,7 @@ export default function PatientView({ currentReport, patientContext }) {
             Take these questions to your doctor's appointment to discuss what these laboratory values mean for your individual health:
           </p>
           <div className="space-y-2 pt-1">
-            {summary.questionsForDoctor.map((q, idx) => (
+            {(translatedQuestions && translatedQuestions.length > 0 ? translatedQuestions : summary.questionsForDoctor).map((q, idx) => (
               <div 
                 key={idx}
                 className="flex items-start gap-3 bg-slate-900/80 p-3 rounded-xl border border-blue-900/40 text-xs text-slate-200"

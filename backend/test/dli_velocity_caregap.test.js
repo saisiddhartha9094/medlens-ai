@@ -40,6 +40,48 @@ describe("MedLens Clinical Extensions Suite", () => {
       expect(interactions[0].severity).toBe("HIGH");
     });
 
+    it("flags Lithium + elevated Creatinine interaction", () => {
+      const medications = ["Lithium carbonate 300mg"];
+      const observations = [
+        { testName: "SERUM CREATININE", value: 1.6, numericValue: 1.6, unit: "mg/dL" }
+      ];
+
+      const interactions = scanDrugLabInteractions(medications, observations);
+      expect(interactions.length).toBe(1);
+      expect(interactions[0].ruleId).toBe("dli-lithium-creat-sodium");
+      expect(interactions[0].alert).toContain("Lithium");
+    });
+
+    it("flags Digoxin + hypokalemia interaction", () => {
+      const medications = ["Digoxin 0.25mg daily"];
+      const observations = [
+        { testName: "SERUM POTASSIUM", value: 3.1, numericValue: 3.1, unit: "mmol/L" }
+      ];
+
+      const interactions = scanDrugLabInteractions(medications, observations);
+      expect(interactions.length).toBe(1);
+      expect(interactions[0].ruleId).toBe("dli-digoxin-potassium");
+      expect(interactions[0].severity).toBe("HIGH");
+    });
+
+    it("supports singular drugKeyword and testName properties in rule definitions", () => {
+      const customRule = {
+        id: "custom-test",
+        drugKeyword: "aspirin",
+        testName: "PLATELET",
+        condition: (val) => val < 100000,
+        alert: "Aspirin thrombocytopenia alert"
+      };
+
+      const medications = ["Aspirin 75mg"];
+      const observations = [{ testName: "PLATELET COUNT", value: 75000, numericValue: 75000 }];
+
+      DLI_RULES.push(customRule);
+      const interactions = scanDrugLabInteractions(medications, observations);
+      expect(interactions.some(i => i.ruleId === "custom-test")).toBe(true);
+      DLI_RULES.pop(); // cleanup
+    });
+
     it("gracefully returns empty array on empty inputs", () => {
       expect(scanDrugLabInteractions([], [])).toEqual([]);
       expect(scanDrugLabInteractions(null, null)).toEqual([]);
@@ -59,8 +101,23 @@ describe("MedLens Clinical Extensions Suite", () => {
       expect(velocity.totalDelta).toBe(47);
       expect(velocity.velocityPerMonth).toBeGreaterThan(20);
       expect(velocity.isAlert).toBe(true);
+      expect(velocity.isRapidChange).toBe(true);
       expect(velocity.alertSeverity).toBe("HIGH");
       expect(velocity.trajectoryDirection).toBe("UPWARD_ACCELERATING");
+    });
+
+    it("identifies rapid creatinine escalation indicating renal decline / AKI", () => {
+      const points = [
+        { date: "2026-07-02", value: 0.92, unit: "mg/dL" },
+        { date: "2026-08-10", value: 1.52, unit: "mg/dL" }
+      ];
+
+      const velocity = calculateSeriesVelocity("SERUM CREATININE", points);
+      expect(velocity.hasVelocity).toBe(true);
+      expect(velocity.velocityPerMonth).toBeGreaterThan(0.3);
+      expect(velocity.isAlert).toBe(true);
+      expect(velocity.alertSeverity).toBe("CRITICAL");
+      expect(velocity.alertTitle).toContain("Accelerated Renal Decline");
     });
 
     it("identifies precipitous hemoglobin drop", () => {
@@ -109,6 +166,21 @@ describe("MedLens Clinical Extensions Suite", () => {
       expect(uacrGap.status).toBe("OVERDUE");
       expect(uacrGap.actionRequired).toBe(true);
       expect(uacrGap.guidelineBody).toContain("ADA");
+    });
+
+    it("identifies colorectal cancer screening gap for patient age 48", () => {
+      const patient = {
+        age: 48,
+        gender: "Male",
+        patientContext: { chronicConditions: [] }
+      };
+
+      const reports = [];
+      const gapsReport = evaluateCareGaps(patient, reports);
+      const coloGap = gapsReport.careGaps.find(g => g.protocolId === "gap-colorectal-fit");
+      expect(coloGap).toBeDefined();
+      expect(coloGap.status).toBe("OVERDUE");
+      expect(coloGap.guidelineBody).toContain("USPSTF");
     });
 
     it("marks lipid panel as UP_TO_DATE when recent report exists", () => {

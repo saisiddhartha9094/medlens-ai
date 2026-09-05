@@ -8,12 +8,14 @@ import {
   CheckCircle2,
   Info,
   Sliders,
-  Scale
+  Scale,
+  Zap
 } from "lucide-react";
 import ProvenanceBadge from "./ProvenanceBadge";
 
 export default function TrendTracker({ reports }) {
   const [trendsData, setTrendsData] = useState({});
+  const [velocitiesData, setVelocitiesData] = useState({});
   const [selectedParam, setSelectedParam] = useState("GLUCOSE, FASTING (PLASMA)");
   const [isCalibratedView, setIsCalibratedView] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -24,6 +26,7 @@ export default function TrendTracker({ reports }) {
       .then(data => {
         if (data.success && data.trends) {
           setTrendsData(data.trends);
+          setVelocitiesData(data.velocities || {});
           const keys = Object.keys(data.trends);
           if (keys.length > 0 && !data.trends[selectedParam]) {
             setSelectedParam(keys[0]);
@@ -43,6 +46,13 @@ export default function TrendTracker({ reports }) {
   // Check for inter-lab calibration artifacts in this series
   const artifactPoint = currentPoints.find(p => p.calibration?.isCalibrationArtifact);
   const hasInterLabShift = currentPoints.some(p => p.calibration?.interLabShift);
+
+  const selectedVelocity = velocitiesData[selectedParam] || Object.values(velocitiesData).find(v => 
+    v.testName && selectedParam && (
+      v.testName.toUpperCase().includes(selectedParam.toUpperCase()) ||
+      selectedParam.toUpperCase().includes(v.testName.toUpperCase())
+    )
+  );
 
   // Parse reference interval bounds for the parameter
   let minNorm = null;
@@ -182,6 +192,55 @@ export default function TrendTracker({ reports }) {
             <p className="text-purple-200/90 leading-relaxed">
               {artifactPoint.calibration.artifactExplanation}
             </p>
+          </div>
+        </div>
+      )}
+
+      {/* Kinetic Velocity Metric Strip for Selected Parameter */}
+      {selectedVelocity && selectedVelocity.hasVelocity && (
+        <div className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md ${
+          (selectedVelocity.isAlert || selectedVelocity.isRapidChange)
+            ? "bg-amber-950/40 border-amber-500/60 text-amber-200"
+            : "bg-slate-800/60 border-slate-700/70 text-slate-300"
+        }`}>
+          <div className="flex items-start gap-3">
+            <div className={`p-2.5 rounded-lg border ${
+              (selectedVelocity.isAlert || selectedVelocity.isRapidChange)
+                ? "bg-amber-500/20 text-amber-300 border-amber-500/30"
+                : "bg-blue-500/10 text-blue-400 border-blue-500/20"
+            }`}>
+              <Zap className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm text-white">
+                  Biomarker Velocity: {selectedVelocity.velocityPerMonth > 0 ? `+${selectedVelocity.velocityPerMonth}` : selectedVelocity.velocityPerMonth} {selectedVelocity.unit}/month
+                </span>
+                {(selectedVelocity.isAlert || selectedVelocity.isRapidChange) && (
+                  <span className="px-2 py-0.2 rounded text-[10px] font-bold bg-rose-950 text-rose-300 border border-rose-800 animate-pulse">
+                    ⚡ {selectedVelocity.alertSeverity || "RAPID"}
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-slate-400 mt-0.5">
+                {selectedVelocity.clinicalMessage || selectedVelocity.clinicalNote || `Span of ${selectedVelocity.daysSpan} days across ${selectedVelocity.dataPointsCount} records.`}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 text-xs shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-700/60">
+            <div className="text-right">
+              <div className="text-[10px] text-slate-400 uppercase font-mono">Net Delta</div>
+              <div className="font-mono font-bold text-white">
+                {selectedVelocity.totalDelta > 0 ? `+${selectedVelocity.totalDelta}` : selectedVelocity.totalDelta} {selectedVelocity.unit}
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-[10px] text-slate-400 uppercase font-mono">Trajectory</div>
+              <div className={`font-semibold ${selectedVelocity.velocityPerMonth > 0 ? 'text-amber-400' : 'text-blue-400'}`}>
+                {selectedVelocity.trajectoryDirection?.replace('_', ' ') || "STABLE"}
+              </div>
+            </div>
           </div>
         </div>
       )}

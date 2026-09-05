@@ -20,6 +20,7 @@ import {
   ShieldAlert
 } from "lucide-react";
 import ProvenanceBadge from "./ProvenanceBadge";
+import TrafficLightGauge from "./TrafficLightGauge";
 
 export default function ClinicianView({ 
   currentReport, 
@@ -34,6 +35,7 @@ export default function ClinicianView({
   const [dliInteractions, setDliInteractions] = useState([]);
   const [velocities, setVelocities] = useState([]);
   const [careGaps, setCareGaps] = useState(null);
+  const [showCareGapsPanel, setShowCareGapsPanel] = useState(false);
 
   useEffect(() => {
     fetch("/api/intake/dli")
@@ -235,18 +237,103 @@ export default function ClinicianView({
         </div>
       )}
 
-      {/* Care Gaps Summary Notification */}
-      {careGaps && careGaps.careGaps && careGaps.careGaps.some(g => g.status === "OVERDUE" || g.status === "DUE_NOW") && (
-        <div className="bg-purple-950/30 border border-purple-800/50 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2 text-xs shadow-md">
-          <div className="flex items-center gap-2 text-purple-300">
-            <CalendarClock className="w-4 h-4 text-purple-400 shrink-0" />
-            <span>
-              <strong>Care Gaps / Screening:</strong> {careGaps.careGaps.filter(g => g.status === "OVERDUE").length} overdue, {careGaps.careGaps.filter(g => g.status === "DUE_NOW").length} due now (Adherence: {careGaps.adherenceScore}%)
+      {/* Kinetic Biomarker Velocity Alarms Banner */}
+      {velocities.filter(v => v.isAlert || v.isRapidChange).length > 0 && (
+        <div className="bg-amber-950/40 border border-amber-500/60 rounded-xl p-4 space-y-3 shadow-lg">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5 text-amber-400 font-bold text-sm">
+              <Zap className="w-5 h-5 text-amber-400 animate-pulse" />
+              <span>Biomarker Kinetic Velocity Alerts ({velocities.filter(v => v.isAlert || v.isRapidChange).length})</span>
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-900/60 text-amber-200 px-2.5 py-1 rounded border border-amber-700">
+              Temporal Trajectory CDS
             </span>
           </div>
-          <span className="text-[10px] text-purple-400 bg-purple-900/40 px-2 py-0.5 rounded border border-purple-700">
-            ADA / USPSTF / KDIGO Guidelines
-          </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {velocities.filter(v => v.isAlert || v.isRapidChange).map((vel, idx) => (
+              <div key={idx} className="bg-slate-900/90 border border-amber-900/60 p-3 rounded-lg space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-xs text-amber-300 flex items-center gap-1.5">
+                    {vel.velocityPerMonth > 0 ? (
+                      <TrendingUp className="w-4 h-4 text-rose-400" />
+                    ) : (
+                      <TrendingDown className="w-4 h-4 text-blue-400" />
+                    )}
+                    {vel.testName}
+                  </span>
+                  <span className={`text-[10px] mono px-2 py-0.5 rounded font-bold ${
+                    vel.alertSeverity === "CRITICAL"
+                      ? "bg-rose-950 text-rose-300 border border-rose-800"
+                      : "bg-amber-950 text-amber-300 border border-amber-800"
+                  }`}>
+                    {vel.alertSeverity || "ALERT"}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-white">
+                  <span>Δ {vel.velocityPerMonth > 0 ? `+${vel.velocityPerMonth}` : vel.velocityPerMonth} {vel.unit}/month</span>
+                  <span className="text-[11px] font-normal text-slate-400">
+                    ({vel.initialValue} → {vel.latestValue} over {vel.daysSpan || vel.deltaDays} days)
+                  </span>
+                </div>
+                <p className="text-xs text-slate-200 font-medium leading-snug">
+                  {vel.alertTitle || "Rapid Rate of Change"}
+                </p>
+                <div className="text-[11px] text-slate-300 bg-slate-950/60 p-2 rounded border border-slate-800">
+                  {vel.clinicalMessage || vel.clinicalNote}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Care Gaps Summary Notification with Expansion */}
+      {careGaps && careGaps.careGaps && careGaps.careGaps.some(g => g.status === "OVERDUE" || g.status === "DUE_NOW") && (
+        <div className="bg-purple-950/30 border border-purple-800/50 rounded-xl p-3.5 space-y-3 shadow-md">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-2 text-purple-300">
+              <CalendarClock className="w-4 h-4 text-purple-400 shrink-0" />
+              <span>
+                <strong>Care Gaps / Preventive Screening:</strong> {careGaps.careGaps.filter(g => g.status === "OVERDUE").length} overdue, {careGaps.careGaps.filter(g => g.status === "DUE_NOW").length} due now (Adherence: {careGaps.adherenceScore}%)
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] text-purple-400 bg-purple-900/40 px-2 py-0.5 rounded border border-purple-700">
+                ADA / USPSTF / KDIGO Guidelines
+              </span>
+              <button
+                onClick={() => setShowCareGapsPanel(!showCareGapsPanel)}
+                className="text-[11px] text-purple-300 hover:text-white bg-purple-900/60 hover:bg-purple-800 px-2.5 py-0.5 rounded transition border border-purple-700"
+              >
+                {showCareGapsPanel ? "Hide Details" : "Inspect Protocols"}
+              </button>
+            </div>
+          </div>
+
+          {/* Expandable Full Care Gaps Panel */}
+          {showCareGapsPanel && (
+            <div className="pt-2 border-t border-purple-900/40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
+              {careGaps.careGaps.map((gap, gIdx) => (
+                <div key={gIdx} className="bg-slate-900/80 p-3 rounded-lg border border-purple-900/50 text-xs space-y-1.5">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="font-semibold text-white text-[11px]">{gap.recommendedTest}</div>
+                    <span className={`px-1.5 py-0.2 text-[9px] font-bold rounded ${
+                      gap.status === "OVERDUE" ? "bg-rose-950 text-rose-400 border border-rose-800" :
+                      gap.status === "DUE_NOW" ? "bg-amber-950 text-amber-400 border border-amber-800" :
+                      "bg-emerald-950 text-emerald-400 border border-emerald-800"
+                    }`}>
+                      {gap.status}
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-slate-400 leading-snug">{gap.clinicalRationale}</p>
+                  <div className="text-[10px] text-slate-500 pt-1 flex items-center justify-between border-t border-slate-800">
+                    <span>Guideline: {gap.guidelineBody}</span>
+                    <span>Interval: {gap.recommendedIntervalMonths} mo</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -424,21 +511,21 @@ export default function ClinicianView({
                         {vel && (
                           <div 
                             className={`text-[10px] font-semibold flex items-center gap-1 mt-1 px-1.5 py-0.5 rounded border max-w-fit ${
-                              vel.isRapidChange 
+                              (vel.isAlert || vel.isRapidChange) 
                                 ? "bg-rose-950 text-rose-300 border-rose-700 animate-pulse" 
                                 : "bg-slate-800 text-slate-300 border-slate-700"
                             }`}
-                            title={`Rate of Change: ${vel.velocityPerMonth > 0 ? '+' : ''}${vel.velocityPerMonth} ${vel.unit}/month over ${vel.deltaDays} days. ${vel.clinicalNote || ''}`}
+                            title={`Rate of Change: ${vel.velocityPerMonth > 0 ? '+' : ''}${vel.velocityPerMonth} ${vel.unit}/month over ${vel.daysSpan || vel.deltaDays} days. ${vel.clinicalMessage || vel.clinicalNote || ''}`}
                           >
                             {vel.velocityPerMonth > 0 ? (
-                              <TrendingUp className={`w-3 h-3 ${vel.isRapidChange ? 'text-rose-400' : 'text-amber-400'}`} />
+                              <TrendingUp className={`w-3 h-3 ${(vel.isAlert || vel.isRapidChange) ? 'text-rose-400' : 'text-amber-400'}`} />
                             ) : (
                               <TrendingDown className="w-3 h-3 text-blue-400" />
                             )}
                             <span className="mono">
                               Δ {vel.velocityPerMonth > 0 ? `+${vel.velocityPerMonth}` : vel.velocityPerMonth} {vel.unit}/mo
                             </span>
-                            {vel.isRapidChange && (
+                            {(vel.isAlert || vel.isRapidChange) && (
                               <span className="font-bold text-rose-400">⚡ RAPID</span>
                             )}
                           </div>
@@ -463,29 +550,18 @@ export default function ClinicianView({
                         )}
                       </td>
 
-                      {/* Status Flag */}
+                      {/* Traffic-Light Visual Gauge & Status Flag */}
                       <td className="py-3 px-4">
-                        {isNormal && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-950/70 text-emerald-300 border border-emerald-700/60">
-                            Normal
-                          </span>
-                        )}
-                        {isHigh && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-950/80 text-rose-300 border border-rose-700/70">
-                            High (Above Range)
-                          </span>
-                        )}
-                        {isLow && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-950/80 text-blue-300 border border-blue-700/70">
-                            Low (Below Range)
-                          </span>
-                        )}
-                        {isUnverified && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-950/80 text-amber-300 border border-amber-700/70">
-                            Review Required
-                          </span>
-                        )}
-                        <div className="text-[10px] text-slate-400 mt-1 max-w-[180px] truncate" title={obs.interpretationNote}>
+                        <TrafficLightGauge
+                          value={obs.value}
+                          unit={obs.unit}
+                          referenceRange={obs.referenceRange}
+                          calibration={obs.calibration}
+                          flag={obs.flag}
+                          flagColor={obs.flagColor}
+                          compact={true}
+                        />
+                        <div className="text-[10px] text-slate-400 mt-1 max-w-[190px] truncate" title={obs.interpretationNote}>
                           {obs.interpretationNote}
                         </div>
                       </td>
