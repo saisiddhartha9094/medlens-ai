@@ -38,16 +38,31 @@ export function extractNumbers(str) {
  */
 export function parseRangeTokens(rangeStr) {
   if (!rangeStr) return [];
-  const normalized = rangeStr.replace(/,/g, "");
+  const normalized = rangeStr.replace(/,/g, "").trim();
   const tokens = [];
-  const matches = normalized.matchAll(/([<>]=?|\b)\s*(\d+(?:\.\d+)?)\s*(?:[-–—to]+)\s*(\d+(?:\.\d+)?)?/gi);
-  for (const m of matches) {
-    if (m[3]) {
-      tokens.push({ type: "interval", min: parseFloat(m[2]), max: parseFloat(m[3]), raw: m[0] });
-    } else if (m[1]) {
-      tokens.push({ type: "bound", op: m[1].trim(), val: parseFloat(m[2]), raw: m[0] });
-    }
+
+  // Match intervals like "13.0 - 17.0" or "70 to 99"
+  const intervalMatch = normalized.match(/(\d+(?:\.\d+)?)\s*(?:[-–—]|to)\s*(\d+(?:\.\d+)?)/i);
+  if (intervalMatch) {
+    tokens.push({
+      type: "interval",
+      min: parseFloat(intervalMatch[1]),
+      max: parseFloat(intervalMatch[2]),
+      raw: intervalMatch[0]
+    });
   }
+
+  // Match inequalities like "< 200", "<= 100", "> 40", ">= 240"
+  const boundMatches = normalized.matchAll(/([<>]=?)\s*(\d+(?:\.\d+)?)/g);
+  for (const m of boundMatches) {
+    tokens.push({
+      type: "bound",
+      op: m[1].trim(),
+      val: parseFloat(m[2]),
+      raw: m[0]
+    });
+  }
+
   return tokens;
 }
 
@@ -60,7 +75,12 @@ export function parseRangeTokens(rangeStr) {
  * @returns {Object} Verification result with audit trail and confidence score
  */
 export function verifyReferenceRange(testName, referenceRange, sourceOcrText) {
-  if (!referenceRange || referenceRange.trim() === "" || /^(n\/?a|none|pending|not provided|not established)$/i.test(referenceRange.trim())) {
+  const isAbsent = !referenceRange || 
+    referenceRange.trim() === "" || 
+    /^(n\/?a|none|not provided|not established)$/i.test(referenceRange.trim()) ||
+    /pending|not established|standardization|pending clinical/i.test(referenceRange);
+
+  if (isAbsent) {
     return {
       isValid: false,
       isHallucinated: false,

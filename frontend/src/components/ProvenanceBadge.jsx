@@ -32,6 +32,13 @@ export default function ProvenanceBadge({ type, confidence, showTooltip = true }
           icon: AlertTriangle,
           tooltip: "Anti-hallucination guard intercepted fabricated reference range not present in source document."
         };
+      case "HUMAN_CORRECTED":
+        return {
+          label: "Human-Corrected",
+          color: "bg-purple-950/80 text-amber-300 border-amber-500/70 shadow-sm",
+          icon: Database,
+          tooltip: "Clinician manually verified or corrected this parameter. Provenance: Human-in-the-Loop Verified."
+        };
       case "DERIVED":
       case "SYSTEM":
         return {

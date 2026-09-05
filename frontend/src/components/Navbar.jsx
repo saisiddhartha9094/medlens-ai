@@ -8,13 +8,18 @@ import {
   ShieldAlert, 
   FileCode, 
   PlusCircle,
-  UserCheck
+  UserCheck,
+  LogIn,
+  LogOut
 } from "lucide-react";
 
 export default function Navbar({ 
   activeTab, 
   setActiveTab, 
   patient, 
+  currentUser,
+  onOpenLogin,
+  onLogout,
   onOpenUpload, 
   onOpenFhir, 
   onOpenIntake 
@@ -102,9 +107,51 @@ export default function Navbar({
               </button>
             )}
 
+            {/* User Session or Sign In Button */}
+            {currentUser ? (
+              <div className="flex items-center gap-2 bg-slate-800/90 border border-slate-700/90 rounded-lg px-2.5 py-1 text-xs shadow-sm">
+                {currentUser.role === "CLINICIAN" ? (
+                  <div className="w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                    <Stethoscope className="w-3.5 h-3.5" />
+                  </div>
+                ) : (
+                  <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <User className="w-3.5 h-3.5" />
+                  </div>
+                )}
+                <div className="hidden sm:block text-left">
+                  <div className="font-semibold text-slate-200 text-[11px] leading-tight max-w-[130px] truncate">
+                    {currentUser.name}
+                  </div>
+                  <div className="text-[9px] text-slate-400 leading-tight">
+                    {currentUser.role === "CLINICIAN" ? "Clinician (MD)" : "Patient Account"}
+                  </div>
+                </div>
+                <button
+                  onClick={onLogout}
+                  aria-label="Sign out of MedLens"
+                  title="Sign out of MedLens session"
+                  className="ml-1 p-1 text-slate-400 hover:text-rose-300 hover:bg-slate-700/60 rounded transition"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={onOpenLogin}
+                aria-label="Sign in to MedLens"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700/80 text-blue-300 border border-slate-700 transition shadow-sm"
+                title="Sign in with Clinician or Patient role"
+              >
+                <LogIn className="w-3.5 h-3.5 text-blue-400" />
+                <span className="hidden sm:inline">Sign In</span>
+              </button>
+            )}
+
             {/* FHIR Export Button */}
             <button
               onClick={onOpenFhir}
+              aria-label="Export HL7 FHIR R4 Bundle"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700/80 text-slate-200 border border-slate-700 transition shadow-sm"
               title="Export HL7 FHIR R4 Bundle"
             >
@@ -115,6 +162,7 @@ export default function Navbar({
             {/* Ingest Document Button */}
             <button
               onClick={onOpenUpload}
+              aria-label="Ingest clinical report or image"
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-500 hover:to-teal-400 text-white shadow-md shadow-blue-500/20 transition-all active:scale-95"
             >
               <PlusCircle className="w-4 h-4" />

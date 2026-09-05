@@ -8,6 +8,8 @@ import GuardrailPlayground from "./components/GuardrailPlayground";
 import FhirExportModal from "./components/FhirExportModal";
 import PatientIntakeModal from "./components/PatientIntakeModal";
 import ReportUploadModal from "./components/ReportUploadModal";
+import LoginModal from "./components/LoginModal";
+import EditObservationModal from "./components/EditObservationModal";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("clinician");
@@ -18,10 +20,35 @@ export default function App() {
   const [selectedObservation, setSelectedObservation] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // User Authentication state (RBAC)
+  const [currentUser, setCurrentUser] = useState(null);
+
   // Modals
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isFhirOpen, setIsFhirOpen] = useState(false);
   const [isIntakeOpen, setIsIntakeOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [editingObservation, setEditingObservation] = useState(null);
+
+  // Auto-restore session from JWT
+  useEffect(() => {
+    const token = localStorage.getItem("medlens_jwt");
+    if (token) {
+      fetch("/api/auth/me", {
+        headers: { "Authorization": `Bearer ${token}` }
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (data.success && data.user) {
+            setCurrentUser(data.user);
+          } else {
+            localStorage.removeItem("medlens_jwt");
+          }
+        })
+        .catch(() => {});
+    }
+  }, []);
 
   // Fetch initial patient profile and reports list
   const loadData = async () => {
@@ -87,6 +114,37 @@ export default function App() {
     setActiveTab("clinician");
   };
 
+  const handleObservationUpdated = (updatedObservation) => {
+    setCurrentReport(prev => {
+      if (!prev) return prev;
+      const updatedObsList = (prev.observations || []).map(obs => 
+        obs.id === updatedObservation.id ? updatedObservation : obs
+      );
+      return { ...prev, observations: updatedObsList };
+    });
+    setReports(prev => prev.map(r => {
+      if (r.id === currentReportId) {
+        return {
+          ...r,
+          observations: (r.observations || []).map(obs => 
+            obs.id === updatedObservation.id ? updatedObservation : obs
+          )
+        };
+      }
+      return r;
+    }));
+  };
+
+  const handleEditObservation = (obs) => {
+    setEditingObservation(obs);
+    setIsEditOpen(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("medlens_jwt");
+    setCurrentUser(null);
+  };
+
   return (
     <div className="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col selection:bg-blue-600 selection:text-white">
       
@@ -95,6 +153,9 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         patient={patient}
+        currentUser={currentUser}
+        onOpenLogin={() => setIsLoginOpen(true)}
+        onLogout={handleLogout}
         onOpenUpload={() => setIsUploadOpen(true)}
         onOpenFhir={() => setIsFhirOpen(true)}
         onOpenIntake={() => setIsIntakeOpen(true)}
@@ -116,6 +177,8 @@ export default function App() {
                 reportsList={reports}
                 onSelectReport={handleSelectReport}
                 onInspectInSource={handleInspectInSource}
+                onEditObservation={handleEditObservation}
+                currentUser={currentUser}
               />
             )}
 
@@ -183,6 +246,21 @@ export default function App() {
         isOpen={isUploadOpen}
         onClose={() => setIsUploadOpen(false)}
         onReportIngested={handleReportIngested}
+      />
+
+      <LoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        onLoginSuccess={(user) => setCurrentUser(user)}
+      />
+
+      <EditObservationModal
+        isOpen={isEditOpen}
+        onClose={() => setIsEditOpen(false)}
+        observation={editingObservation}
+        reportId={currentReport?.id}
+        onObservationUpdated={handleObservationUpdated}
+        onClinicianAuthenticated={(user) => setCurrentUser(user)}
       />
 
     </div>

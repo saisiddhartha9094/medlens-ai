@@ -262,7 +262,10 @@ NOTICE: Range has not been established for this demographic batch.`
               <div className="space-y-4 animate-in fade-in duration-200">
                 
                 {/* Result Hero Banner */}
-                <div className={`p-4 rounded-xl border flex items-start gap-3.5 ${
+                <div 
+                  role="status"
+                  aria-live="polite"
+                  className={`p-4 rounded-xl border flex items-start gap-3.5 ${
                   result.validation.isValid
                     ? "bg-emerald-950/60 border-emerald-500/70 text-emerald-200"
                     : result.validation.isHallucinated

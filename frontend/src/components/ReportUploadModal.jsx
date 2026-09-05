@@ -8,7 +8,9 @@ import {
   CheckCircle2,
   RefreshCw,
   PlusCircle,
-  FileSearch
+  FileSearch,
+  Camera,
+  Image as ImageIcon
 } from "lucide-react";
 
 export default function ReportUploadModal({ 
@@ -17,7 +19,7 @@ export default function ReportUploadModal({
   onReportIngested 
 }) {
   const [samples, setSamples] = useState([]);
-  const [activeTab, setActiveTab] = useState("samples"); // "samples" or "custom"
+  const [activeTab, setActiveTab] = useState("samples"); // "samples", "custom", "file"
   const [loadingSampleId, setLoadingSampleId] = useState(null);
 
   // Custom text form state
@@ -26,6 +28,25 @@ export default function ReportUploadModal({
   const [labName, setLabName] = useState("");
   const [testDate, setTestDate] = useState(new Date().toISOString().split("T")[0]);
   const [uploadingCustom, setUploadingCustom] = useState(false);
+
+  // File upload state (Local OCR)
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [fileDocTitle, setFileDocTitle] = useState("");
+  const [fileLabName, setFileLabName] = useState("");
+  const [fileDate, setFileDate] = useState(new Date().toISOString().split("T")[0]);
+  const [uploadingFile, setUploadingFile] = useState(false);
+  const [ocrError, setOcrError] = useState("");
+
+  // Keyboard Escape Handler (WCAG AA)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   useEffect(() => {
     if (isOpen) {
@@ -88,8 +109,45 @@ export default function ReportUploadModal({
     }
   };
 
+  const handleFileUpload = async (e) => {
+    e.preventDefault();
+    if (!selectedFile) return;
+
+    setUploadingFile(true);
+    setOcrError("");
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append("documentTitle", fileDocTitle || `Scanned Report (${selectedFile.name})`);
+    formData.append("labName", fileLabName || "Local Scanned Laboratory");
+    formData.append("testDate", fileDate);
+
+    try {
+      const res = await fetch("/api/reports/upload-file", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      if (data.success && data.report) {
+        onReportIngested(data.report);
+        onClose();
+      } else {
+        setOcrError(data.error || "OCR extraction failed to parse legible text.");
+      }
+    } catch (err) {
+      setOcrError("Failed to upload file or run OCR engine.");
+    } finally {
+      setUploadingFile(false);
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-150">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-150"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="upload-modal-title"
+    >
       <div className="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
         
         {/* Header */}
@@ -99,14 +157,17 @@ export default function ReportUploadModal({
               <UploadCloud className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white">Ingest & Structure Diagnostic Report</h3>
+              <h3 id="upload-modal-title" className="text-base font-bold text-white">
+                Ingest & Structure Diagnostic Report
+              </h3>
               <p className="text-xs text-slate-400">
-                Choose a realistic pre-loaded synthetic lab report or paste custom OCR text.
+                Choose synthetic templates, paste OCR text, or upload document images for local Tesseract OCR.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
+            aria-label="Close ingestion dialog"
             className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
           >
             <X className="w-5 h-5" />
@@ -114,10 +175,10 @@ export default function ReportUploadModal({
         </div>
 
         {/* Ingestion Mode Switcher */}
-        <div className="px-6 pt-4 pb-2 flex gap-2 border-b border-slate-800 bg-slate-950/30">
+        <div className="px-6 pt-4 pb-2 flex flex-wrap gap-2 border-b border-slate-800 bg-slate-950/30">
           <button
             onClick={() => setActiveTab("samples")}
-            className={`px-4 py-2 rounded-lg text-xs font-semibold transition ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition ${
               activeTab === "samples"
                 ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
                 : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
@@ -127,19 +188,30 @@ export default function ReportUploadModal({
           </button>
           <button
             onClick={() => setActiveTab("custom")}
-            className={`px-4 py-2 rounded-lg text-xs font-semibold transition ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition ${
               activeTab === "custom"
                 ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
                 : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
             }`}
           >
-            📄 Paste Custom OCR Text / Report
+            📄 Paste Custom OCR Text
+          </button>
+          <button
+            onClick={() => setActiveTab("file")}
+            className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${
+              activeTab === "file"
+                ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+            }`}
+          >
+            <Camera className="w-3.5 h-3.5 text-teal-400" />
+            <span>Image OCR Upload (Tesseract)</span>
           </button>
         </div>
 
         {/* Content Body */}
         <div className="p-6 flex-1 overflow-y-auto">
-          {activeTab === "samples" ? (
+          {activeTab === "samples" && (
             <div className="space-y-3">
               <p className="text-xs text-slate-400 mb-2">
                 Click any report below to test the extraction pipeline, anti-hallucination verification, and LOINC standardization:
@@ -181,6 +253,7 @@ export default function ReportUploadModal({
                     <button
                       onClick={() => handleProcessSample(sample.id)}
                       disabled={isLoading}
+                      aria-label={`Structure report ${sample.title}`}
                       className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap flex items-center gap-1.5 transition active:scale-95 shadow-md flex-shrink-0 ${
                         isEdgeCase
                           ? "bg-rose-600 hover:bg-rose-500 text-white shadow-rose-600/20"
@@ -203,7 +276,9 @@ export default function ReportUploadModal({
                 );
               })}
             </div>
-          ) : (
+          )}
+
+          {activeTab === "custom" && (
             <form onSubmit={handleCustomUpload} className="space-y-4">
               {/* Quick Fill Demo Templates Strip */}
               <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800 space-y-2">
@@ -310,10 +385,11 @@ APO B / APO A1 RATIO         1.03      Ratio       < 0.90
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="sm:col-span-2">
-                  <label className="text-xs font-semibold text-slate-300 block mb-1">
+                  <label htmlFor="custom-doc-title" className="text-xs font-semibold text-slate-300 block mb-1">
                     Document / Panel Title
                   </label>
                   <input
+                    id="custom-doc-title"
                     type="text"
                     placeholder="e.g. Comprehensive Metabolic Panel"
                     value={documentTitle}
@@ -322,10 +398,11 @@ APO B / APO A1 RATIO         1.03      Ratio       < 0.90
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-300 block mb-1">
+                  <label htmlFor="custom-test-date" className="text-xs font-semibold text-slate-300 block mb-1">
                     Report Date
                   </label>
                   <input
+                    id="custom-test-date"
                     type="date"
                     value={testDate}
                     onChange={(e) => setTestDate(e.target.value)}
@@ -335,10 +412,11 @@ APO B / APO A1 RATIO         1.03      Ratio       < 0.90
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-300 block mb-1">
+                <label htmlFor="custom-lab-name" className="text-xs font-semibold text-slate-300 block mb-1">
                   Diagnostic Center / Hospital Name
                 </label>
                 <input
+                  id="custom-lab-name"
                   type="text"
                   placeholder="e.g. Max Healthcare Clinical Laboratory"
                   value={labName}
@@ -348,10 +426,11 @@ APO B / APO A1 RATIO         1.03      Ratio       < 0.90
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-300 block mb-1">
+                <label htmlFor="custom-ocr-text" className="text-xs font-semibold text-slate-300 block mb-1">
                   Raw Diagnostic Report OCR / Text Content (Required)
                 </label>
                 <textarea
+                  id="custom-ocr-text"
                   rows={8}
                   required
                   placeholder={`Paste lab test results here, for example:\nTEST NAME                    VALUE     UNIT        REFERENCE RANGE\nHAEMOGLOBIN                   13.2     g/dL        13.0 - 17.0\nTOTAL CHOLESTEROL            190.0     mg/dL       < 200`}
@@ -376,6 +455,86 @@ APO B / APO A1 RATIO         1.03      Ratio       < 0.90
                     <>
                       <FileSearch className="w-4 h-4" />
                       <span>Ingest & Run Pipeline</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
+
+          {activeTab === "file" && (
+            <form onSubmit={handleFileUpload} className="space-y-4">
+              {ocrError && (
+                <div className="p-3 rounded-lg bg-rose-950/60 border border-rose-800 text-rose-300 text-xs flex items-center gap-2">
+                  <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+                  <span>{ocrError}</span>
+                </div>
+              )}
+
+              <div className="border-2 border-dashed border-slate-700 hover:border-blue-500 rounded-2xl p-6 text-center transition bg-slate-950/40">
+                <input
+                  type="file"
+                  id="image-file-input"
+                  accept="image/png, image/jpeg, image/webp, text/plain"
+                  onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                  className="hidden"
+                />
+                <label htmlFor="image-file-input" className="cursor-pointer space-y-2 block">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center mx-auto border border-blue-500/20">
+                    <ImageIcon className="w-6 h-6" />
+                  </div>
+                  <div className="text-xs text-slate-300 font-semibold">
+                    {selectedFile ? selectedFile.name : "Click to browse or drag & drop report image"}
+                  </div>
+                  <p className="text-[11px] text-slate-500">
+                    Supports PNG, JPG, JPEG, WEBP, or TXT (Max 10MB). Runs pure local Tesseract.js OCR.
+                  </p>
+                </label>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="sm:col-span-2">
+                  <label htmlFor="file-doc-title" className="text-xs font-semibold text-slate-300 block mb-1">
+                    Document Title (Optional)
+                  </label>
+                  <input
+                    id="file-doc-title"
+                    type="text"
+                    placeholder="e.g. Scanned Apollo Lab Slip"
+                    value={fileDocTitle}
+                    onChange={(e) => setFileDocTitle(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="file-test-date" className="text-xs font-semibold text-slate-300 block mb-1">
+                    Report Date
+                  </label>
+                  <input
+                    id="file-test-date"
+                    type="date"
+                    value={fileDate}
+                    onChange={(e) => setFileDate(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end pt-2">
+                <button
+                  type="submit"
+                  disabled={uploadingFile || !selectedFile}
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-500 hover:to-teal-400 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-blue-500/20 active:scale-95 transition disabled:opacity-50"
+                >
+                  {uploadingFile ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      <span>Running Local OCR Engine...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Camera className="w-4 h-4" />
+                      <span>Execute OCR & Structure</span>
                     </>
                   )}
                 </button>

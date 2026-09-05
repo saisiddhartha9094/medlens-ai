@@ -2,30 +2,33 @@
  * MedLens - Guardrailed Plain-Language Summarization Service
  * 
  * CORE CLINICAL SAFETY CONSTRAINT:
- * Strictly non-diagnostic. Never prescribes medications or dosages.
+ * Strictly non-diagnostic. Never prescribes medications, dosages, or definitive clinical conclusions.
  * Explains biological parameters in plain language, highlights values outside
  * the source document's printed reference intervals, and equips the patient
  * with informed questions for their healthcare provider.
  */
 
-const PARAMETER_EXPLANATIONS = {
-  "HAEMOGLOBIN": "The oxygen-carrying protein inside your red blood cells that delivers energy throughout your body.",
-  "RBC COUNT": "The total number of red blood cells circulating to carry oxygen and nutrients.",
-  "TOTAL LEUKOCYTE COUNT (WBC)": "White blood cells that form your body's immune defense against infections and inflammation.",
-  "PLATELET COUNT": "Cell fragments essential for normal blood clotting to prevent bleeding.",
-  "TOTAL CHOLESTEROL": "A fatty substance necessary for building cell walls and hormones, measured in your bloodstream.",
-  "TRIGLYCERIDES": "The most common type of fat in the body, derived from calories that your body does not immediately use.",
-  "HDL CHOLESTEROL": "Often called 'good cholesterol' because it helps clear excess cholesterol from your arteries back to the liver.",
-  "LDL CHOLESTEROL (DIRECT)": "Often called 'bad cholesterol' because high amounts can lead to buildup in blood vessel walls.",
-  "GLUCOSE, FASTING (PLASMA)": "The concentration of sugar in your blood after fasting, which cells use as an essential energy source.",
-  "GLUCOSE, POST-PRANDIAL": "Blood sugar concentration measured 2 hours after a meal to see how efficiently the body handles dietary carbs.",
-  "HbA1c (GLYCOSYLATED HB)": "Measures your average blood sugar levels over the preceding 2 to 3 months.",
-  "SERUM CREATININE": "A natural waste product from muscle wear-and-tear filtered exclusively by healthy kidneys.",
-  "BLOOD UREA NITROGEN (BUN)": "A breakdown product of dietary protein filtered and excreted by your kidneys.",
-  "TSH (ULTRA SENSITIVE)": "Thyroid Stimulating Hormone released by the pituitary gland to regulate your body's metabolism rate.",
-  "SERUM 25-OH VITAMIN D": "Essential vitamin synthesized via sunlight and food that supports calcium absorption and immune health.",
-  "HIGH SENSITIVITY CRP (hsCRP)": "A sensitive blood marker produced by the liver that reflects generalized inflammation in the body."
-};
+import { getParameterExplanation } from "../data/parameterExplanations.js";
+
+// Prohibited diagnostic keywords that must NEVER be returned by this service
+export const FORBIDDEN_DIAGNOSTIC_TERMS = [
+  /\byou have\b/i,
+  /\bthis indicates that you suffer\b/i,
+  /\bwe diagnose\b/i,
+  /\bour diagnosis\b/i,
+  /\byou are suffering from\b/i,
+  /\btake this medication\b/i,
+  /\byou need to take\b/i
+];
+
+export function assertNonDiagnosticLanguage(text) {
+  for (const regex of FORBIDDEN_DIAGNOSTIC_TERMS) {
+    if (regex.test(text)) {
+      throw new Error(`Safety Violation: Prohibited diagnostic phrase matched by safety guard: ${regex}`);
+    }
+  }
+  return true;
+}
 
 export function generatePatientFriendlySummary(report, patientContext = {}) {
   const observations = report.observations || [];
@@ -38,10 +41,9 @@ export function generatePatientFriendlySummary(report, patientContext = {}) {
   const keyFindings = [];
   const questionsForDoctor = [];
 
-  // Plain language summary of out-of-range parameters
   if (highObs.length > 0) {
     highObs.forEach(obs => {
-      const explanation = PARAMETER_EXPLANATIONS[obs.testName.toUpperCase()] || "A standard blood biomarker measured in this diagnostic panel.";
+      const explanation = getParameterExplanation(obs.testName);
       keyFindings.push({
         parameter: obs.testName,
         status: "Higher than the laboratory's printed reference range",
@@ -56,7 +58,7 @@ export function generatePatientFriendlySummary(report, patientContext = {}) {
 
   if (lowObs.length > 0) {
     lowObs.forEach(obs => {
-      const explanation = PARAMETER_EXPLANATIONS[obs.testName.toUpperCase()] || "A standard blood biomarker measured in this diagnostic panel.";
+      const explanation = getParameterExplanation(obs.testName);
       keyFindings.push({
         parameter: obs.testName,
         status: "Lower than the laboratory's printed reference range",
@@ -83,7 +85,6 @@ export function generatePatientFriendlySummary(report, patientContext = {}) {
     });
   }
 
-  // Cross-reference with patient-reported context
   const contextNotes = [];
   if (patientContext.chronicConditions && patientContext.chronicConditions.length > 0) {
     contextNotes.push(`Self-reported history of ${patientContext.chronicConditions.join(", ")} was noted during intake.`);
@@ -92,7 +93,7 @@ export function generatePatientFriendlySummary(report, patientContext = {}) {
     contextNotes.push(`Patient is currently taking: ${patientContext.currentMedications.slice(0, 2).join("; ")}.`);
   }
 
-  return {
+  const summary = {
     overview: `This report from ${report.labName || "your diagnostic center"} dated ${report.testDate || "recently"} contains ${observations.length} structured lab measurements. ${normalObs.length} are within printed standard intervals, while ${highObs.length + lowObs.length} are outside the laboratory's printed reference ranges.`,
     totalParameters: observations.length,
     normalCount: normalObs.length,
@@ -104,4 +105,11 @@ export function generatePatientFriendlySummary(report, patientContext = {}) {
     readingGradeLevel: "Grade 7.5 (Easy, Plain Language)",
     disclaimer: "IMPORTANT NOTICE: MedLens is an assistive clinical information structuring and summarization tool. It DOES NOT diagnose illnesses, prescribe medication, or provide treatment advice. Laboratory results must always be evaluated in clinical context by a licensed medical practitioner."
   };
+
+  // Run Safety Assertions on all output text
+  assertNonDiagnosticLanguage(summary.overview);
+  assertNonDiagnosticLanguage(summary.disclaimer);
+  summary.keyFindings.forEach(f => assertNonDiagnosticLanguage(f.plainExplanation));
+
+  return summary;
 }

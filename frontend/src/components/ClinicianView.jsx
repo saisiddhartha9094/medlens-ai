@@ -9,7 +9,8 @@ import {
   FileText,
   Calendar,
   Building2,
-  ChevronRight
+  ChevronRight,
+  Edit3
 } from "lucide-react";
 import ProvenanceBadge from "./ProvenanceBadge";
 
@@ -17,7 +18,9 @@ export default function ClinicianView({
   currentReport, 
   reportsList, 
   onSelectReport, 
-  onInspectInSource 
+  onInspectInSource,
+  onEditObservation,
+  currentUser
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("ALL"); // ALL, ABNORMAL, IN_RANGE, UNVERIFIED
@@ -63,6 +66,7 @@ export default function ClinicianView({
   }
 
   const observations = currentReport.observations || [];
+  const deltas = currentReport.longitudinalDeltas || [];
 
   // Filter observations
   const filteredObservations = observations.filter(obs => {
@@ -108,6 +112,9 @@ export default function ClinicianView({
               <span className="text-[11px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded font-medium">
                 {currentReport.category || "Clinical Diagnostic"}
               </span>
+              <span className="text-[10px] mono bg-blue-950 text-blue-300 px-2 py-0.5 rounded border border-blue-800">
+                ⚡ {currentReport.extractionEngine || "Grounded NLP"} • {currentReport.processingTimeMs || 120}ms
+              </span>
             </div>
             <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400 mt-1">
               <span className="flex items-center gap-1">
@@ -125,8 +132,11 @@ export default function ClinicianView({
         {/* Report Selector Dropdown (if multiple reports exist) */}
         {reportsList && reportsList.length > 1 && (
           <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-400 font-medium whitespace-nowrap">Switch Report:</span>
+            <label htmlFor="report-switcher-select" className="text-xs text-slate-400 font-medium whitespace-nowrap">
+              Switch Report:
+            </label>
             <select
+              id="report-switcher-select"
               value={currentReport.id}
               onChange={(e) => onSelectReport(e.target.value)}
               className="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-500 max-w-[260px] truncate"
@@ -141,6 +151,40 @@ export default function ClinicianView({
         )}
 
       </div>
+
+      {/* Cross-Visit Inconsistency / Delta Notification Strip (PS Alignment) */}
+      {deltas.length > 0 && (
+        <div className="bg-purple-950/40 border border-purple-700/60 rounded-xl p-3.5 space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs font-bold text-purple-300">
+              <AlertCircle className="w-4 h-4 text-purple-400" />
+              <span>Cross-Visit Clinical Delta Analysis (vs Previous Visit)</span>
+            </div>
+            <span className="text-[10px] text-purple-300/80 bg-purple-900/60 px-2 py-0.5 rounded border border-purple-700">
+              {deltas.length} compared parameters
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-2 pt-1">
+            {deltas.map((d, i) => (
+              <span
+                key={i}
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border ${
+                  d.isSignificant
+                    ? "bg-rose-950/80 text-rose-200 border-rose-700"
+                    : "bg-slate-900 text-slate-300 border-slate-700"
+                }`}
+              >
+                <span>{d.testName}:</span>
+                <strong className="mono">{d.currentValue}</strong>
+                <span className="text-[10px] opacity-80">(prev: {d.priorValue} on {d.priorDate})</span>
+                <span className={`mono text-[10px] font-bold ${d.direction === 'INCREASED' ? 'text-amber-400' : 'text-blue-400'}`}>
+                  {d.diff} ({d.pctChange})
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* KPI Stat Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
@@ -174,8 +218,12 @@ export default function ClinicianView({
       {/* Search & Filter Bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="relative w-full sm:w-80">
+          <label htmlFor="clinician-search-input" className="sr-only">
+            Search investigations or LOINC code
+          </label>
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
           <input
+            id="clinician-search-input"
             type="text"
             placeholder="Search test name, LOINC code..."
             value={searchTerm}
@@ -316,16 +364,28 @@ export default function ClinicianView({
                         />
                       </td>
 
-                      {/* Action: Inspect in Source */}
+                      {/* Action: Verify/Edit & Inspect in Source */}
                       <td className="py-3 px-4 text-right">
-                        <button
-                          onClick={() => onInspectInSource(obs)}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-blue-600 rounded-lg border border-slate-700 transition"
-                          title="Highlight exact line in source document"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                          <span>Inspect</span>
-                        </button>
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => onEditObservation(obs)}
+                            aria-label={`Human verify and correct ${obs.testName}`}
+                            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-purple-300 hover:text-white bg-purple-950/60 hover:bg-purple-600 rounded-lg border border-purple-800 transition shadow-sm"
+                            title="Human-in-the-Loop Clinical Edit"
+                          >
+                            <Edit3 className="w-3.5 h-3.5" />
+                            <span>Verify</span>
+                          </button>
+                          <button
+                            onClick={() => onInspectInSource(obs)}
+                            aria-label={`Highlight ${obs.testName} in source document`}
+                            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-blue-600 rounded-lg border border-slate-700 transition"
+                            title="Highlight exact line in source document"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                            <span>Inspect</span>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
