@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Search, 
   Filter, 
   AlertCircle, 
+  AlertTriangle,
   CheckCircle2, 
   HelpCircle, 
   ExternalLink, 
@@ -10,7 +11,13 @@ import {
   Calendar,
   Building2,
   ChevronRight,
-  Edit3
+  Edit3,
+  Pill,
+  Zap,
+  TrendingUp,
+  TrendingDown,
+  CalendarClock,
+  ShieldAlert
 } from "lucide-react";
 import ProvenanceBadge from "./ProvenanceBadge";
 
@@ -24,6 +31,43 @@ export default function ClinicianView({
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("ALL"); // ALL, ABNORMAL, IN_RANGE, UNVERIFIED
+  const [dliInteractions, setDliInteractions] = useState([]);
+  const [velocities, setVelocities] = useState([]);
+  const [careGaps, setCareGaps] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/intake/dli")
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.interactions) {
+          setDliInteractions(data.interactions);
+        }
+      })
+      .catch(err => console.warn("Failed to load DLI:", err));
+
+    fetch("/api/trends")
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          const list = Array.isArray(data.velocitiesList) 
+            ? data.velocitiesList 
+            : Array.isArray(data.velocities) 
+            ? data.velocities 
+            : Object.values(data.velocities || {});
+          setVelocities(list);
+        }
+      })
+      .catch(err => console.warn("Failed to load velocities:", err));
+
+    fetch("/api/intake/care-gaps")
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.evaluation) {
+          setCareGaps(data.evaluation);
+        }
+      })
+      .catch(err => console.warn("Failed to load care gaps:", err));
+  }, [currentReport]);
 
   if (!currentReport) {
     return (
@@ -151,6 +195,60 @@ export default function ClinicianView({
         )}
 
       </div>
+
+      {/* Drug-Lab Interaction (DLI) Warning Banner */}
+      {dliInteractions.length > 0 && (
+        <div className="bg-rose-950/40 border border-rose-600/60 rounded-xl p-4 space-y-3 shadow-lg">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5 text-rose-400 font-bold text-sm">
+              <Pill className="w-5 h-5 text-rose-400 animate-pulse" />
+              <span>Critical Drug-Lab Interactions Flagged ({dliInteractions.length})</span>
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-wider bg-rose-900/60 text-rose-200 px-2.5 py-1 rounded border border-rose-700">
+              Clinical Decision Support
+            </span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {dliInteractions.map((item, idx) => (
+              <div key={idx} className="bg-slate-900/90 border border-rose-900/60 p-3 rounded-lg space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-xs text-rose-300 flex items-center gap-1.5">
+                    <ShieldAlert className="w-3.5 h-3.5 text-rose-400" />
+                    {(item.matchedMedication || item.drugKeyword || "").toUpperCase()} ↔ {item.testName}
+                  </span>
+                  <span className="text-[10px] mono bg-rose-950 px-2 py-0.5 rounded text-rose-300 font-bold">
+                    {item.observedValue ?? item.observationValue} {item.unit}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-200 font-medium leading-snug">
+                  {item.alert}
+                </p>
+                <div className="text-[11px] text-slate-400">
+                  <strong>Mechanism:</strong> {item.mechanism || item.clinicalMechanism}
+                </div>
+                <div className="text-[11px] text-amber-300/90 bg-amber-950/40 p-1.5 rounded border border-amber-900/40">
+                  <strong>Action:</strong> {item.recommendation}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Care Gaps Summary Notification */}
+      {careGaps && careGaps.careGaps && careGaps.careGaps.some(g => g.status === "OVERDUE" || g.status === "DUE_NOW") && (
+        <div className="bg-purple-950/30 border border-purple-800/50 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2 text-xs shadow-md">
+          <div className="flex items-center gap-2 text-purple-300">
+            <CalendarClock className="w-4 h-4 text-purple-400 shrink-0" />
+            <span>
+              <strong>Care Gaps / Screening:</strong> {careGaps.careGaps.filter(g => g.status === "OVERDUE").length} overdue, {careGaps.careGaps.filter(g => g.status === "DUE_NOW").length} due now (Adherence: {careGaps.adherenceScore}%)
+            </span>
+          </div>
+          <span className="text-[10px] text-purple-400 bg-purple-900/40 px-2 py-0.5 rounded border border-purple-700">
+            ADA / USPSTF / KDIGO Guidelines
+          </span>
+        </div>
+      )}
 
       {/* Cross-Visit Inconsistency / Delta Notification Strip (PS Alignment) */}
       {deltas.length > 0 && (
@@ -282,6 +380,16 @@ export default function ClinicianView({
                   const isNormal = obs.flag === "NORMAL";
                   const isUnverified = obs.flag === "UNVERIFIED" || obs.validationResult?.isValid === false;
 
+                  // Find Velocity for this observation if available
+                  const vel = velocities.find(v => 
+                    (v.loincCode && obs.loincCode && v.loincCode === obs.loincCode) ||
+                    (v.testName && obs.testName && (
+                      v.testName.toLowerCase() === obs.testName.toLowerCase() ||
+                      obs.testName.toLowerCase().includes(v.testName.toLowerCase()) ||
+                      v.testName.toLowerCase().includes(obs.testName.toLowerCase())
+                    ))
+                  );
+
                   return (
                     <tr 
                       key={obs.id} 
@@ -301,14 +409,40 @@ export default function ClinicianView({
                         </div>
                       </td>
 
-                      {/* Observed Value & Unit */}
+                      {/* Observed Value, Unit & Biomarker Velocity (ΔV/Δt) */}
                       <td className="py-3 px-4">
-                        <span className={`text-sm font-bold mono ${
-                          isHigh ? "text-rose-400" : isLow ? "text-blue-400" : "text-emerald-400"
-                        }`}>
-                          {obs.value}
-                        </span>{" "}
-                        <span className="text-slate-400 text-xs">{obs.unit}</span>
+                        <div>
+                          <span className={`text-sm font-bold mono ${
+                            isHigh ? "text-rose-400" : isLow ? "text-blue-400" : "text-emerald-400"
+                          }`}>
+                            {obs.value}
+                          </span>{" "}
+                          <span className="text-slate-400 text-xs">{obs.unit}</span>
+                        </div>
+
+                        {/* Biomarker Velocity Badge */}
+                        {vel && (
+                          <div 
+                            className={`text-[10px] font-semibold flex items-center gap-1 mt-1 px-1.5 py-0.5 rounded border max-w-fit ${
+                              vel.isRapidChange 
+                                ? "bg-rose-950 text-rose-300 border-rose-700 animate-pulse" 
+                                : "bg-slate-800 text-slate-300 border-slate-700"
+                            }`}
+                            title={`Rate of Change: ${vel.velocityPerMonth > 0 ? '+' : ''}${vel.velocityPerMonth} ${vel.unit}/month over ${vel.deltaDays} days. ${vel.clinicalNote || ''}`}
+                          >
+                            {vel.velocityPerMonth > 0 ? (
+                              <TrendingUp className={`w-3 h-3 ${vel.isRapidChange ? 'text-rose-400' : 'text-amber-400'}`} />
+                            ) : (
+                              <TrendingDown className="w-3 h-3 text-blue-400" />
+                            )}
+                            <span className="mono">
+                              Δ {vel.velocityPerMonth > 0 ? `+${vel.velocityPerMonth}` : vel.velocityPerMonth} {vel.unit}/mo
+                            </span>
+                            {vel.isRapidChange && (
+                              <span className="font-bold text-rose-400">⚡ RAPID</span>
+                            )}
+                          </div>
+                        )}
                       </td>
 
                       {/* Reference Interval with Verification Badge */}

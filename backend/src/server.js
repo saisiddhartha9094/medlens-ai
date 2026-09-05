@@ -77,6 +77,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 // Route handlers
 app.use("/api/auth", authRouter);
 app.use("/api/patient", intakeRouter);
+app.use("/api/intake", intakeRouter);
 app.use("/api/reports", reportsRouter);
 app.use("/api/validator", validatorRouter);
 app.use("/api/fhir", fhirRouter);

@@ -1,6 +1,7 @@
 import express from "express";
 import { store } from "../data/store.js";
 import { calibrateTrendSeries, extractCalibrationMetadata } from "../services/calibrationService.js";
+import { computeAllBiomarkerVelocities } from "../services/velocityService.js";
 
 const router = express.Router();
 
@@ -66,10 +67,15 @@ router.get("/", (req, res) => {
       }
     }
 
+    const velocities = computeAllBiomarkerVelocities(activeTrends);
+    const velocitiesList = Object.values(velocities);
+
     res.json({
       success: true,
       patientName: store.patient.fullName,
-      trends: activeTrends
+      trends: activeTrends,
+      velocities,
+      velocitiesList
     });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });

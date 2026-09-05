@@ -27,7 +27,7 @@
       ],
       "familyHistory": "Father had myocardial infarction at age 62; Mother has hypertension."
     },
-    "updatedAt": "2026-09-05T07:51:48.780Z"
+    "updatedAt": "2026-09-05T10:44:18.112Z"
   },
   "reports": [
     {
@@ -38,13 +38,13 @@
       "patientName": "Rajesh Kumar",
       "patientAge": 48,
       "patientGender": "Male",
-      "rawText": "===============================================================\nMETROPOLIS HEALTHCARE LTD.\nGlobal Reference Laboratory, Kohinoor City, Kurla (W), Mumbai\n===============================================================\nPatient Name: Rajesh Kumar          Age / Gender: 48 Y / M\nRegistration: MHL-MUM-773918        Collected   : 10-Aug-2026 08:00 AM\nRef. Doctor : Dr. Arvind Mehta, MD  Report Date : 10-Aug-2026 01:15 PM\n===============================================================\nTEST DESCRIPTION             RESULT    UNIT        REFERENCE RANGE\n===============================================================\nGLUCOSE, FASTING (PLASMA)    142.0     mg/dL       70.0 - 99.0 (Normal)\n                                                   100.0 - 125.0 (Impaired)\n                                                   >= 126.0 (Diabetic)\nGLUCOSE, POST-PRANDIAL       210.0     mg/dL       < 140.0 (Normal)\n                                                   140.0 - 199.0 (Impaired)\n                                                   >= 200.0 (Diabetic)\nHbA1c (GLYCOSYLATED HB)      7.9       %           < 5.7 (Non-diabetic)\n                                                   5.7 - 6.4 (Prediabetes)\n                                                   >= 6.5 (Diabetes)\nESTIMATED AVG GLUCOSE (eAG)  180.0     mg/dL       N/A\nSERUM CREATININE             1.08      mg/dL       0.70 - 1.20\nBLOOD UREA NITROGEN (BUN)    16.5      mg/dL       8.0 - 23.0\nBUN / CREATININE RATIO       15.28     Ratio       10.0 - 20.0\nURIC ACID                    6.4       mg/dL       3.5 - 7.2\n===============================================================\nMethod: HPLC (Bio-Rad D-10) for HbA1c; Hexokinase for Plasma Glucose.\n*** END OF REPORT ***",
-      "observationsCount": 8,
-      "abnormalCount": 3,
+      "rawText": "===============================================================\nMETROPOLIS HEALTHCARE LTD.\nGlobal Reference Laboratory, Kohinoor City, Kurla (W), Mumbai\n===============================================================\nPatient Name: Rajesh Kumar          Age / Gender: 48 Y / M\nRegistration: MHL-MUM-773918        Collected   : 10-Aug-2026 08:00 AM\nRef. Doctor : Dr. Arvind Mehta, MD  Report Date : 10-Aug-2026 01:15 PM\n===============================================================\nTEST DESCRIPTION             RESULT    UNIT        REFERENCE RANGE\n===============================================================\nGLUCOSE, FASTING (PLASMA)    142.0     mg/dL       70.0 - 99.0 (Normal)\n                                                   100.0 - 125.0 (Impaired)\n                                                   >= 126.0 (Diabetic)\nGLUCOSE, POST-PRANDIAL       210.0     mg/dL       < 140.0 (Normal)\n                                                   140.0 - 199.0 (Impaired)\n                                                   >= 200.0 (Diabetic)\nHbA1c (GLYCOSYLATED HB)      7.9       %           < 5.7 (Non-diabetic)\n                                                   5.7 - 6.4 (Prediabetes)\n                                                   >= 6.5 (Diabetes)\nESTIMATED AVG GLUCOSE (eAG)  180.0     mg/dL       N/A\nSERUM CREATININE             1.52      mg/dL       0.70 - 1.20\nSERUM POTASSIUM              5.3       mmol/L      3.5 - 5.1\nBLOOD UREA NITROGEN (BUN)    16.5      mg/dL       8.0 - 23.0\nBUN / CREATININE RATIO       15.28     Ratio       10.0 - 20.0\nURIC ACID                    6.4       mg/dL       3.5 - 7.2\n===============================================================\nMethod: HPLC (Bio-Rad D-10) for HbA1c; Hexokinase for Plasma Glucose.\n*** END OF REPORT ***",
+      "observationsCount": 9,
+      "abnormalCount": 5,
       "unverifiedCount": 1,
       "observations": [
         {
-          "id": "obs-10-1788594709228",
+          "id": "obs-10-1788605058201",
           "testName": "GLUCOSE, FASTING (PLASMA)",
           "value": "142.0",
           "numericValue": 142,
@@ -69,12 +69,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...sting plasma 142.0 mg/dl 70.0 - 99.0 normal 100.0 - 125.0 impaired >= 126.0 diabetic glucos..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 142,
+            "testName": "GLUCOSE, FASTING (PLASMA)",
+            "unit": "mg/dL",
+            "referenceRange": "70.0 - 99.0 (Normal); 100.0 - 125.0 (Impaired)",
+            "bounds": {
+              "min": 70,
+              "max": 99,
+              "type": "interval"
+            },
+            "normalizedIndex": 2.483,
+            "percentOfNormal": 248,
+            "ratioToULN": 1.43,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 142,
+              "unit": "mg/dL",
+              "originalValue": 142,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 70,
+              "upperBoundary": 99,
+              "midpoint": 84.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.228Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-13-1788594709228",
+          "id": "obs-13-1788605058201",
           "testName": "GLUCOSE, POST-PRANDIAL",
           "value": "210.0",
           "numericValue": 210,
@@ -99,19 +127,47 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...ost-prandial 210.0 mg/dl < 140.0 normal 140.0 - 199.0 impaired >= 200.0 diabetic hba1c ..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 210,
+            "testName": "GLUCOSE, POST-PRANDIAL",
+            "unit": "mg/dL",
+            "referenceRange": "< 140.0 (Normal); 140.0 - 199.0 (Impaired)",
+            "bounds": {
+              "min": 140,
+              "max": 199,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.186,
+            "percentOfNormal": 119,
+            "ratioToULN": 1.06,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 210,
+              "unit": "mg/dL",
+              "originalValue": 210,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 140,
+              "upperBoundary": 199,
+              "midpoint": 169.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.228Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-16-1788594709229",
+          "id": "obs-16-1788605058201",
           "testName": "HbA1c (GLYCOSYLATED HB)",
           "value": "7.9",
           "numericValue": 7.9,
           "unit": "%",
           "referenceRange": "< 5.7 (Non-diabetic); 5.7 - 6.4 (Prediabetes)",
-          "loincCode": "UNK-LOINC",
-          "loincDisplay": "Unclassified Clinical Observation",
+          "loincCode": "4548-4",
+          "loincDisplay": "Hemoglobin A1c/Hemoglobin.total in Blood",
           "flag": "HIGH",
           "flagLabel": "High",
           "flagColor": "red",
@@ -129,19 +185,45 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...1c glycosylated hb 7.9 % < 5.7 non-diabetic 5.7 - 6.4 prediabetes >= 6.5 diabetes estimate..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 7.9,
+            "testName": "HbA1c (GLYCOSYLATED HB)",
+            "unit": "%",
+            "referenceRange": "< 5.7 (Non-diabetic); 5.7 - 6.4 (Prediabetes)",
+            "bounds": {
+              "min": 5.7,
+              "max": 6.4,
+              "type": "interval"
+            },
+            "normalizedIndex": 3.143,
+            "percentOfNormal": 314,
+            "ratioToULN": 1.23,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 7.9,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 5.7,
+              "upperBoundary": 6.4,
+              "midpoint": 6.050000000000001
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.229Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-19-1788594709229",
+          "id": "obs-19-1788605058201",
           "testName": "ESTIMATED AVG GLUCOSE (eAG)",
           "value": "180.0",
           "numericValue": 180,
           "unit": "mg/dL",
           "referenceRange": "N/A",
-          "loincCode": "UNK-LOINC",
-          "loincDisplay": "Unclassified Clinical Observation",
+          "loincCode": "27353-2",
+          "loincDisplay": "Glucose average [Mass/volume] in Blood estimated from HbA1c",
           "flag": "UNVERIFIED",
           "flagLabel": "Needs Review",
           "flagColor": "amber",
@@ -159,25 +241,32 @@
             "recommendation": "Flagged for manual review. MedLens refuses to invent reference intervals.",
             "matchSnippet": null
           },
+          "calibration": {
+            "calibrated": false,
+            "reason": "REFERENCE_RANGE_ABSENT",
+            "normalizedIndex": null,
+            "ratioToULN": null,
+            "calibrationStatus": "UNVERIFIED_ABSENT_RANGE"
+          },
           "provenance": "AI_EXTRACTED_NEEDS_REVIEW",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.229Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-20-1788594709229",
+          "id": "obs-20-1788605058201",
           "testName": "SERUM CREATININE",
-          "value": "1.08",
-          "numericValue": 1.08,
+          "value": "1.52",
+          "numericValue": 1.52,
           "unit": "mg/dL",
           "referenceRange": "0.70 - 1.20",
           "loincCode": "2160-0",
           "loincDisplay": "Creatinine [Mass/volume] in Serum or Plasma",
-          "flag": "NORMAL",
-          "flagLabel": "Normal",
-          "flagColor": "green",
-          "interpretationNote": "Within reference interval (0.7 - 1.2)",
+          "flag": "HIGH",
+          "flagLabel": "High",
+          "flagColor": "red",
+          "interpretationNote": "Above upper bound (1.2)",
           "sourceLineNumber": 21,
-          "sourceSnippet": "SERUM CREATININE             1.08      mg/dL       0.70 - 1.20",
+          "sourceSnippet": "SERUM CREATININE             1.52      mg/dL       0.70 - 1.20",
           "validationResult": {
             "isValid": true,
             "isHallucinated": false,
@@ -187,14 +276,98 @@
             "provenance": "AI_EXTRACTED_VERIFIED",
             "matchType": "EXACT_SUBSTRING",
             "reason": "Extracted reference interval matches source document verbatim.",
-            "matchSnippet": "...um creatinine 1.08 mg/dl 0.70 - 1.20 blood urea nitrogen bun ..."
+            "matchSnippet": "...um creatinine 1.52 mg/dl 0.70 - 1.20 serum potassium 5.3 mmol..."
+          },
+          "calibration": {
+            "calibrated": true,
+            "value": 1.52,
+            "testName": "SERUM CREATININE",
+            "unit": "mg/dL",
+            "referenceRange": "0.70 - 1.20",
+            "bounds": {
+              "min": 0.7,
+              "max": 1.2,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.64,
+            "percentOfNormal": 164,
+            "ratioToULN": 1.27,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 1.52,
+              "unit": "mg/dL",
+              "originalValue": 1.52,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 0.7,
+              "upperBoundary": 1.2,
+              "midpoint": 0.95
+            }
           },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.229Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-21-1788594709229",
+          "id": "obs-21-1788605058201",
+          "testName": "SERUM POTASSIUM",
+          "value": "5.3",
+          "numericValue": 5.3,
+          "unit": "mmol/L",
+          "referenceRange": "3.5 - 5.1",
+          "loincCode": "2823-3",
+          "loincDisplay": "Potassium [Moles/volume] in Serum or Plasma",
+          "flag": "HIGH",
+          "flagLabel": "High",
+          "flagColor": "red",
+          "interpretationNote": "Above upper bound (5.1)",
+          "sourceLineNumber": 22,
+          "sourceSnippet": "SERUM POTASSIUM              5.3       mmol/L      3.5 - 5.1",
+          "validationResult": {
+            "isValid": true,
+            "isHallucinated": false,
+            "isAbsentInSource": false,
+            "status": "VERIFIED_EXACT_MATCH",
+            "confidence": 1,
+            "provenance": "AI_EXTRACTED_VERIFIED",
+            "matchType": "EXACT_SUBSTRING",
+            "reason": "Extracted reference interval matches source document verbatim.",
+            "matchSnippet": "...rum potassium 5.3 mmol/l 3.5 - 5.1 blood urea nitrogen bun ..."
+          },
+          "calibration": {
+            "calibrated": true,
+            "value": 5.3,
+            "testName": "SERUM POTASSIUM",
+            "unit": "mmol/L",
+            "referenceRange": "3.5 - 5.1",
+            "bounds": {
+              "min": 3.5,
+              "max": 5.1,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.125,
+            "percentOfNormal": 113,
+            "ratioToULN": 1.04,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 5.3,
+              "unit": "mmol/L",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 3.5,
+              "upperBoundary": 5.1,
+              "midpoint": 4.3
+            }
+          },
+          "provenance": "AI_EXTRACTED_VERIFIED",
+          "confidence": 1,
+          "extractedAt": "2026-09-05T10:44:18.201Z"
+        },
+        {
+          "id": "obs-22-1788605058201",
           "testName": "BLOOD UREA NITROGEN (BUN)",
           "value": "16.5",
           "numericValue": 16.5,
@@ -206,7 +379,7 @@
           "flagLabel": "Normal",
           "flagColor": "green",
           "interpretationNote": "Within reference interval (8 - 23)",
-          "sourceLineNumber": 22,
+          "sourceLineNumber": 23,
           "sourceSnippet": "BLOOD UREA NITROGEN (BUN)    16.5      mg/dL       8.0 - 23.0",
           "validationResult": {
             "isValid": true,
@@ -219,12 +392,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... nitrogen bun 16.5 mg/dl 8.0 - 23.0 bun / creatinine ratio 1..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 16.5,
+            "testName": "BLOOD UREA NITROGEN (BUN)",
+            "unit": "mg/dL",
+            "referenceRange": "8.0 - 23.0",
+            "bounds": {
+              "min": 8,
+              "max": 23,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.567,
+            "percentOfNormal": 57,
+            "ratioToULN": 0.72,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 16.5,
+              "unit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 8,
+              "upperBoundary": 23,
+              "midpoint": 15.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.229Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-22-1788594709229",
+          "id": "obs-23-1788605058201",
           "testName": "BUN / CREATININE RATIO",
           "value": "15.28",
           "numericValue": 15.28,
@@ -236,7 +435,7 @@
           "flagLabel": "Normal",
           "flagColor": "green",
           "interpretationNote": "Within reference interval (10 - 20)",
-          "sourceLineNumber": 23,
+          "sourceLineNumber": 24,
           "sourceSnippet": "BUN / CREATININE RATIO       15.28     Ratio       10.0 - 20.0",
           "validationResult": {
             "isValid": true,
@@ -249,12 +448,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...tinine ratio 15.28 ratio 10.0 - 20.0 uric acid 6.4 mg/dl 3.5 ..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 15.28,
+            "testName": "BUN / CREATININE RATIO",
+            "unit": "Ratio",
+            "referenceRange": "10.0 - 20.0",
+            "bounds": {
+              "min": 10,
+              "max": 20,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.528,
+            "percentOfNormal": 53,
+            "ratioToULN": 0.76,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 15.28,
+              "unit": "Ratio",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 10,
+              "upperBoundary": 20,
+              "midpoint": 15
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.229Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-23-1788594709230",
+          "id": "obs-24-1788605058201",
           "testName": "URIC ACID",
           "value": "6.4",
           "numericValue": 6.4,
@@ -266,7 +491,7 @@
           "flagLabel": "Normal",
           "flagColor": "green",
           "interpretationNote": "Within reference interval (3.5 - 7.2)",
-          "sourceLineNumber": 24,
+          "sourceLineNumber": 25,
           "sourceSnippet": "URIC ACID                    6.4       mg/dL       3.5 - 7.2",
           "validationResult": {
             "isValid": true,
@@ -279,20 +504,81 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...20.0 uric acid 6.4 mg/dl 3.5 - 7.2 ========================..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 6.4,
+            "testName": "URIC ACID",
+            "unit": "mg/dL",
+            "referenceRange": "3.5 - 7.2",
+            "bounds": {
+              "min": 3.5,
+              "max": 7.2,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.784,
+            "percentOfNormal": 78,
+            "ratioToULN": 0.89,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 6.4,
+              "unit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 3.5,
+              "upperBoundary": 7.2,
+              "midpoint": 5.35
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.230Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         }
       ],
+      "calibrationMetadata": {
+        "methods": [
+          "HPLC (High-Performance Liquid Chromatography)",
+          "Hexokinase (Enzymatic)"
+        ],
+        "analyzers": [
+          "Bio-Rad D-10 Hemoglobin Analyzer"
+        ],
+        "accreditations": []
+      },
       "extractionEngine": "MedLens Grounded Clinical NLP Engine (Offline Deterministic)",
-      "processingTimeMs": 2,
-      "processedAt": "2026-09-05T07:51:49.230Z",
-      "longitudinalDeltas": [],
+      "processingTimeMs": 0,
+      "processedAt": "2026-09-05T10:44:18.201Z",
+      "longitudinalDeltas": [
+        {
+          "testName": "GLUCOSE, FASTING (PLASMA)",
+          "currentValue": 142,
+          "priorValue": 116,
+          "priorDate": "2026-07-02",
+          "unit": "mg/dL",
+          "diff": "+26",
+          "pctChange": "+22%",
+          "isSignificant": true,
+          "direction": "INCREASED",
+          "flagChange": null
+        },
+        {
+          "testName": "SERUM CREATININE",
+          "currentValue": 1.52,
+          "priorValue": 0.92,
+          "priorDate": "2026-07-02",
+          "unit": "mg/dL",
+          "diff": "+0.6",
+          "pctChange": "+65%",
+          "isSignificant": true,
+          "direction": "INCREASED",
+          "flagChange": "NORMAL → HIGH"
+        }
+      ],
       "patientSummary": {
-        "overview": "This report from Metropolis Healthcare Ltd. - Global Reference Lab dated 2026-08-10 contains 8 structured lab measurements. 4 are within printed standard intervals, while 3 are outside the laboratory's printed reference ranges.",
-        "totalParameters": 8,
-        "normalCount": 4,
-        "abnormalCount": 3,
+        "overview": "This report from Metropolis Healthcare Ltd. - Global Reference Lab dated 2026-08-10 contains 9 structured lab measurements. 3 are within printed standard intervals, while 5 are outside the laboratory's printed reference ranges.",
+        "totalParameters": 9,
+        "normalCount": 3,
+        "abnormalCount": 5,
         "unverifiedCount": 1,
         "keyFindings": [
           {
@@ -320,6 +606,22 @@
             "statusType": "HIGH"
           },
           {
+            "parameter": "SERUM CREATININE",
+            "status": "Higher than the laboratory's printed reference range",
+            "value": "1.52 mg/dL",
+            "referenceRange": "0.70 - 1.20",
+            "plainExplanation": "A natural muscle metabolism byproduct filtered and cleared by healthy kidneys.",
+            "statusType": "HIGH"
+          },
+          {
+            "parameter": "SERUM POTASSIUM",
+            "status": "Higher than the laboratory's printed reference range",
+            "value": "5.3 mmol/L",
+            "referenceRange": "3.5 - 5.1",
+            "plainExplanation": "Critical intracellular electrolyte governing cellular membrane potentials and cardiac rhythm.",
+            "statusType": "HIGH"
+          },
+          {
             "parameter": "ESTIMATED AVG GLUCOSE (eAG)",
             "status": "Reference range missing or unverified in source document",
             "value": "180.0 mg/dL",
@@ -332,7 +634,8 @@
           "What lifestyle, dietary, or clinical factors might explain why my GLUCOSE, FASTING (PLASMA) (142.0 mg/dL) is above the lab range (70.0 - 99.0 (Normal); 100.0 - 125.0 (Impaired))?",
           "What lifestyle, dietary, or clinical factors might explain why my GLUCOSE, POST-PRANDIAL (210.0 mg/dL) is above the lab range (< 140.0 (Normal); 140.0 - 199.0 (Impaired))?",
           "What lifestyle, dietary, or clinical factors might explain why my HbA1c (GLYCOSYLATED HB) (7.9 %) is above the lab range (< 5.7 (Non-diabetic); 5.7 - 6.4 (Prediabetes))?",
-          "The laboratory did not list a biological reference interval for ESTIMATED AVG GLUCOSE (eAG) (180.0 mg/dL). Could you help interpret how this result relates to my current health?"
+          "What lifestyle, dietary, or clinical factors might explain why my SERUM CREATININE (1.52 mg/dL) is above the lab range (0.70 - 1.20)?",
+          "What lifestyle, dietary, or clinical factors might explain why my SERUM POTASSIUM (5.3 mmol/L) is above the lab range (3.5 - 5.1)?"
         ],
         "patientContextNotes": [
           "Self-reported history of Type 2 Diabetes Mellitus (Diagnosed 2021), Mild Dyslipidemia, Primary Hypertension was noted during intake.",
@@ -350,13 +653,13 @@
       "patientName": "Rajesh Kumar",
       "patientAge": 48,
       "patientGender": "Male",
-      "rawText": "===============================================================\nAPOLLO DIAGNOSTICS - CLINICAL BIOCHEMISTRY DIVISION\nApollo Hospitals Enterprise Ltd, Jubilee Hills, Hyderabad\n===============================================================\nPatient Name: Rajesh Kumar          Age / Gender: 48 Yrs / Male\nSample ID   : AP-LIP-48201          Collection  : 02-Jul-2026 07:15 AM\nReferred By : Dr. Arvind Mehta, MD  Reported    : 02-Jul-2026 12:30 PM\nTest Panel  : LIPID PROFILE (FASTING - 12 HRS)\n===============================================================\nINVESTIGATION                OBSERVED  UNIT        BIOLOGICAL REF INTERVAL\n===============================================================\nTOTAL CHOLESTEROL            242.0     mg/dL       Desirable: < 200\n                                                   Borderline: 200 - 239\n                                                   High: >= 240\nTRIGLYCERIDES                215.0     mg/dL       Normal: < 150\n                                                   Borderline: 150 - 199\n                                                   High: 200 - 499\nHDL CHOLESTEROL              38.5      mg/dL       Desirable: > 40\n                                                   Low: < 40\nLDL CHOLESTEROL (DIRECT)     160.5     mg/dL       Optimal: < 100\n                                                   Near Optimal: 100 - 129\n                                                   Borderline High: 130 - 159\n                                                   High: >= 160\nVLDL CHOLESTEROL             43.0      mg/dL       Normal: 5 - 40\nCHOL / HDL RATIO             6.28      Ratio       Low Risk: 3.3 - 4.4\n                                                   Moderate: 4.5 - 7.0\nLDL / HDL RATIO              4.17      Ratio       Low Risk: 0.5 - 3.0\n===============================================================\nMETHODOLOGY: Fully Automated Enzymatic Spectrophotometry.\nNote: Fasting status confirmed (12 hours). Please correlate clinically.\n*** END OF REPORT ***",
-      "observationsCount": 7,
-      "abnormalCount": 6,
+      "rawText": "===============================================================\nAPOLLO DIAGNOSTICS - CLINICAL BIOCHEMISTRY DIVISION\nApollo Hospitals Enterprise Ltd, Jubilee Hills, Hyderabad\n===============================================================\nPatient Name: Rajesh Kumar          Age / Gender: 48 Yrs / Male\nSample ID   : AP-LIP-48201          Collection  : 02-Jul-2026 07:15 AM\nReferred By : Dr. Arvind Mehta, MD  Reported    : 02-Jul-2026 12:30 PM\nTest Panel  : LIPID PROFILE (FASTING - 12 HRS)\n===============================================================\nINVESTIGATION                OBSERVED  UNIT        BIOLOGICAL REF INTERVAL\n===============================================================\nTOTAL CHOLESTEROL            242.0     mg/dL       Desirable: < 200\n                                                   Borderline: 200 - 239\n                                                   High: >= 240\nTRIGLYCERIDES                215.0     mg/dL       Normal: < 150\n                                                   Borderline: 150 - 199\n                                                   High: 200 - 499\nHDL CHOLESTEROL              38.5      mg/dL       Desirable: > 40\n                                                   Low: < 40\nLDL CHOLESTEROL (DIRECT)     160.5     mg/dL       Optimal: < 100\n                                                   Near Optimal: 100 - 129\n                                                   Borderline High: 130 - 159\n                                                   High: >= 160\nVLDL CHOLESTEROL             43.0      mg/dL       Normal: 5 - 40\nCHOL / HDL RATIO             6.28      Ratio       Low Risk: 3.3 - 4.4\n                                                   Moderate: 4.5 - 7.0\nLDL / HDL RATIO              4.17      Ratio       Low Risk: 0.5 - 3.0\nGLUCOSE, FASTING (PLASMA)    116.0     mg/dL       70.0 - 99.0\nSERUM CREATININE             0.92      mg/dL       0.70 - 1.20\n===============================================================\nMETHODOLOGY: Fully Automated Enzymatic Spectrophotometry.\nNote: Fasting status confirmed (12 hours). Please correlate clinically.\n*** END OF REPORT ***",
+      "observationsCount": 9,
+      "abnormalCount": 7,
       "unverifiedCount": 0,
       "observations": [
         {
-          "id": "obs-11-1788594709218",
+          "id": "obs-11-1788605058197",
           "testName": "TOTAL CHOLESTEROL",
           "value": "242.0",
           "numericValue": 242,
@@ -381,12 +684,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... cholesterol 242.0 mg/dl desirable < 200 borderline 200 - 239 high >= 240 triglycerides 215.0 mg/d..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 242,
+            "testName": "TOTAL CHOLESTEROL",
+            "unit": "mg/dL",
+            "referenceRange": "Desirable: < 200; Borderline: 200 - 239; High: >= 240",
+            "bounds": {
+              "min": 200,
+              "max": 239,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.077,
+            "percentOfNormal": 108,
+            "ratioToULN": 1.01,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 242,
+              "unit": "mg/dL",
+              "originalValue": 242,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 200,
+              "upperBoundary": 239,
+              "midpoint": 219.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.218Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-14-1788594709219",
+          "id": "obs-14-1788605058197",
           "testName": "TRIGLYCERIDES",
           "value": "215.0",
           "numericValue": 215,
@@ -411,12 +742,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...riglycerides 215.0 mg/dl normal < 150 borderline 150 - 199 high 200 - 499 hdl cholesterol 38.5 mg/..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 215,
+            "testName": "TRIGLYCERIDES",
+            "unit": "mg/dL",
+            "referenceRange": "Normal: < 150; Borderline: 150 - 199; High: 200 - 499",
+            "bounds": {
+              "min": 150,
+              "max": 199,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.327,
+            "percentOfNormal": 133,
+            "ratioToULN": 1.08,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 215,
+              "unit": "mg/dL",
+              "originalValue": 215,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 150,
+              "upperBoundary": 199,
+              "midpoint": 174.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.219Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-17-1788594709219",
+          "id": "obs-17-1788605058197",
           "testName": "HDL CHOLESTEROL",
           "value": "38.5",
           "numericValue": 38.5,
@@ -441,12 +800,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...l cholesterol 38.5 mg/dl desirable > 40 low < 40 ldl cholesterol direct 1..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 38.5,
+            "testName": "HDL CHOLESTEROL",
+            "unit": "mg/dL",
+            "referenceRange": "Desirable: > 40; Low: < 40",
+            "bounds": {
+              "min": 40,
+              "max": null,
+              "type": "lower_only"
+            },
+            "normalizedIndex": 0.963,
+            "percentOfNormal": 96,
+            "ratioToULN": null,
+            "calibrationStatus": "BELOW_LOWER_LIMIT",
+            "harmonized": {
+              "value": 38.5,
+              "unit": "mg/dL",
+              "originalValue": 38.5,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 40,
+              "upperBoundary": null,
+              "midpoint": null
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.219Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-19-1788594709219",
+          "id": "obs-19-1788605058197",
           "testName": "LDL CHOLESTEROL (DIRECT)",
           "value": "160.5",
           "numericValue": 160.5,
@@ -471,12 +858,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...terol direct 160.5 mg/dl optimal < 100 near optimal 100 - 129 b..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 160.5,
+            "testName": "LDL CHOLESTEROL (DIRECT)",
+            "unit": "mg/dL",
+            "referenceRange": "Optimal: < 100",
+            "bounds": {
+              "min": 0,
+              "max": 100,
+              "type": "upper_only"
+            },
+            "normalizedIndex": 1.605,
+            "percentOfNormal": 161,
+            "ratioToULN": 1.61,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 160.5,
+              "unit": "mg/dL",
+              "originalValue": 160.5,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 0,
+              "upperBoundary": 100,
+              "midpoint": 50
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.219Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-23-1788594709219",
+          "id": "obs-23-1788605058197",
           "testName": "VLDL CHOLESTEROL",
           "value": "43.0",
           "numericValue": 43,
@@ -501,12 +916,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...l cholesterol 43.0 mg/dl normal 5 - 40 chol / hdl ratio 6.28 ra..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 43,
+            "testName": "VLDL CHOLESTEROL",
+            "unit": "mg/dL",
+            "referenceRange": "Normal: 5 - 40",
+            "bounds": {
+              "min": 5,
+              "max": 40,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.086,
+            "percentOfNormal": 109,
+            "ratioToULN": 1.08,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 43,
+              "unit": "mg/dL",
+              "originalValue": 43,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 5,
+              "upperBoundary": 40,
+              "midpoint": 22.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.219Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-24-1788594709220",
+          "id": "obs-24-1788605058197",
           "testName": "CHOL / HDL RATIO",
           "value": "6.28",
           "numericValue": 6.28,
@@ -531,12 +974,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...l / hdl ratio 6.28 ratio low risk 3.3 - 4.4 moderate 4.5 - 7.0 ldl /..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 6.28,
+            "testName": "CHOL / HDL RATIO",
+            "unit": "Ratio",
+            "referenceRange": "Low Risk: 3.3 - 4.4",
+            "bounds": {
+              "min": 3.3,
+              "max": 4.4,
+              "type": "interval"
+            },
+            "normalizedIndex": 2.709,
+            "percentOfNormal": 271,
+            "ratioToULN": 1.43,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 6.28,
+              "unit": "Ratio",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 3.3,
+              "upperBoundary": 4.4,
+              "midpoint": 3.85
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.220Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-26-1788594709220",
+          "id": "obs-26-1788605058198",
           "testName": "LDL / HDL RATIO",
           "value": "4.17",
           "numericValue": 4.17,
@@ -559,22 +1028,172 @@
             "provenance": "AI_EXTRACTED_VERIFIED",
             "matchType": "EXACT_SUBSTRING",
             "reason": "Extracted reference interval matches source document verbatim.",
-            "matchSnippet": "...l / hdl ratio 4.17 ratio low risk 0.5 - 3.0 ========================..."
+            "matchSnippet": "...l / hdl ratio 4.17 ratio low risk 0.5 - 3.0 glucose fasting plasma 1..."
+          },
+          "calibration": {
+            "calibrated": true,
+            "value": 4.17,
+            "testName": "LDL / HDL RATIO",
+            "unit": "Ratio",
+            "referenceRange": "Low Risk: 0.5 - 3.0",
+            "bounds": {
+              "min": 0.5,
+              "max": 3,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.468,
+            "percentOfNormal": 147,
+            "ratioToULN": 1.39,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 4.17,
+              "unit": "Ratio",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 0.5,
+              "upperBoundary": 3,
+              "midpoint": 1.75
+            }
           },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.220Z"
+          "extractedAt": "2026-09-05T10:44:18.198Z"
+        },
+        {
+          "id": "obs-27-1788605058198",
+          "testName": "GLUCOSE, FASTING (PLASMA)",
+          "value": "116.0",
+          "numericValue": 116,
+          "unit": "mg/dL",
+          "referenceRange": "70.0 - 99.0",
+          "loincCode": "1558-6",
+          "loincDisplay": "Fasting glucose [Mass/volume] in Plasma",
+          "flag": "HIGH",
+          "flagLabel": "High",
+          "flagColor": "red",
+          "interpretationNote": "Above upper bound (99)",
+          "sourceLineNumber": 28,
+          "sourceSnippet": "GLUCOSE, FASTING (PLASMA)    116.0     mg/dL       70.0 - 99.0",
+          "validationResult": {
+            "isValid": true,
+            "isHallucinated": false,
+            "isAbsentInSource": false,
+            "status": "VERIFIED_EXACT_MATCH",
+            "confidence": 1,
+            "provenance": "AI_EXTRACTED_VERIFIED",
+            "matchType": "EXACT_SUBSTRING",
+            "reason": "Extracted reference interval matches source document verbatim.",
+            "matchSnippet": "...sting plasma 116.0 mg/dl 70.0 - 99.0 serum creatinine 0.92 mg..."
+          },
+          "calibration": {
+            "calibrated": true,
+            "value": 116,
+            "testName": "GLUCOSE, FASTING (PLASMA)",
+            "unit": "mg/dL",
+            "referenceRange": "70.0 - 99.0",
+            "bounds": {
+              "min": 70,
+              "max": 99,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.586,
+            "percentOfNormal": 159,
+            "ratioToULN": 1.17,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 116,
+              "unit": "mg/dL",
+              "originalValue": 116,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 70,
+              "upperBoundary": 99,
+              "midpoint": 84.5
+            }
+          },
+          "provenance": "AI_EXTRACTED_VERIFIED",
+          "confidence": 1,
+          "extractedAt": "2026-09-05T10:44:18.198Z"
+        },
+        {
+          "id": "obs-28-1788605058198",
+          "testName": "SERUM CREATININE",
+          "value": "0.92",
+          "numericValue": 0.92,
+          "unit": "mg/dL",
+          "referenceRange": "0.70 - 1.20",
+          "loincCode": "2160-0",
+          "loincDisplay": "Creatinine [Mass/volume] in Serum or Plasma",
+          "flag": "NORMAL",
+          "flagLabel": "Normal",
+          "flagColor": "green",
+          "interpretationNote": "Within reference interval (0.7 - 1.2)",
+          "sourceLineNumber": 29,
+          "sourceSnippet": "SERUM CREATININE             0.92      mg/dL       0.70 - 1.20",
+          "validationResult": {
+            "isValid": true,
+            "isHallucinated": false,
+            "isAbsentInSource": false,
+            "status": "VERIFIED_EXACT_MATCH",
+            "confidence": 1,
+            "provenance": "AI_EXTRACTED_VERIFIED",
+            "matchType": "EXACT_SUBSTRING",
+            "reason": "Extracted reference interval matches source document verbatim.",
+            "matchSnippet": "...um creatinine 0.92 mg/dl 0.70 - 1.20 ========================..."
+          },
+          "calibration": {
+            "calibrated": true,
+            "value": 0.92,
+            "testName": "SERUM CREATININE",
+            "unit": "mg/dL",
+            "referenceRange": "0.70 - 1.20",
+            "bounds": {
+              "min": 0.7,
+              "max": 1.2,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.44,
+            "percentOfNormal": 44,
+            "ratioToULN": 0.77,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 0.92,
+              "unit": "mg/dL",
+              "originalValue": 0.92,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 0.7,
+              "upperBoundary": 1.2,
+              "midpoint": 0.95
+            }
+          },
+          "provenance": "AI_EXTRACTED_VERIFIED",
+          "confidence": 1,
+          "extractedAt": "2026-09-05T10:44:18.198Z"
         }
       ],
+      "calibrationMetadata": {
+        "methods": [
+          "Ion-Selective Electrode (ISE)",
+          "Spectrophotometry / Photometric"
+        ],
+        "analyzers": [],
+        "accreditations": []
+      },
       "extractionEngine": "MedLens Grounded Clinical NLP Engine (Offline Deterministic)",
-      "processingTimeMs": 3,
-      "processedAt": "2026-09-05T07:51:49.220Z",
+      "processingTimeMs": 2,
+      "processedAt": "2026-09-05T10:44:18.198Z",
       "longitudinalDeltas": [],
       "patientSummary": {
-        "overview": "This report from Apollo Diagnostics - Clinical Biochemistry dated 2026-07-02 contains 7 structured lab measurements. 1 are within printed standard intervals, while 6 are outside the laboratory's printed reference ranges.",
-        "totalParameters": 7,
-        "normalCount": 1,
-        "abnormalCount": 6,
+        "overview": "This report from Apollo Diagnostics - Clinical Biochemistry dated 2026-07-02 contains 9 structured lab measurements. 2 are within printed standard intervals, while 7 are outside the laboratory's printed reference ranges.",
+        "totalParameters": 9,
+        "normalCount": 2,
+        "abnormalCount": 7,
         "unverifiedCount": 0,
         "keyFindings": [
           {
@@ -624,6 +1243,14 @@
             "referenceRange": "Low Risk: 0.5 - 3.0",
             "plainExplanation": "A standard biological biomarker measured in this diagnostic investigation.",
             "statusType": "HIGH"
+          },
+          {
+            "parameter": "GLUCOSE, FASTING (PLASMA)",
+            "status": "Higher than the laboratory's printed reference range",
+            "value": "116.0 mg/dL",
+            "referenceRange": "70.0 - 99.0",
+            "plainExplanation": "The baseline sugar concentration in your blood after fasting, supplying cellular fuel.",
+            "statusType": "HIGH"
           }
         ],
         "questionsForDoctor": [
@@ -655,7 +1282,7 @@
       "unverifiedCount": 0,
       "observations": [
         {
-          "id": "obs-12-1788594709206",
+          "id": "obs-12-1788605058188",
           "testName": "HAEMOGLOBIN",
           "value": "11.8",
           "numericValue": 11.8,
@@ -680,12 +1307,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...== haemoglobin 11.8 g/dl 13.0 - 17.0 rbc count 4.10 mill/cumm..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 11.8,
+            "testName": "HAEMOGLOBIN",
+            "unit": "g/dL",
+            "referenceRange": "13.0 - 17.0",
+            "bounds": {
+              "min": 13,
+              "max": 17,
+              "type": "interval"
+            },
+            "normalizedIndex": -0.3,
+            "percentOfNormal": -30,
+            "ratioToULN": 0.69,
+            "calibrationStatus": "BELOW_LOWER_LIMIT",
+            "harmonized": {
+              "value": 11.8,
+              "unit": "g/dL",
+              "originalValue": 11.8,
+              "originalUnit": "g/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 13,
+              "upperBoundary": 17,
+              "midpoint": 15
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.206Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-13-1788594709207",
+          "id": "obs-13-1788605058188",
           "testName": "RBC COUNT",
           "value": "4.10",
           "numericValue": 4.1,
@@ -710,12 +1365,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...rbc count 4.10 mill/cumm 4.50 - 5.50 pcv hematocrit 36.2 % 40..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 4.1,
+            "testName": "RBC COUNT",
+            "unit": "mill/cumm",
+            "referenceRange": "4.50 - 5.50",
+            "bounds": {
+              "min": 4.5,
+              "max": 5.5,
+              "type": "interval"
+            },
+            "normalizedIndex": -0.4,
+            "percentOfNormal": -40,
+            "ratioToULN": 0.75,
+            "calibrationStatus": "BELOW_LOWER_LIMIT",
+            "harmonized": {
+              "value": 4.1,
+              "unit": "mill/cumm",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 4.5,
+              "upperBoundary": 5.5,
+              "midpoint": 5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.207Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-14-1788594709207",
+          "id": "obs-14-1788605058188",
           "testName": "PCV (HEMATOCRIT)",
           "value": "36.2",
           "numericValue": 36.2,
@@ -740,12 +1421,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...50 pcv hematocrit 36.2 % 40.0 - 50.0 mcv 88.3 fl 80.0 - 100.0..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 36.2,
+            "testName": "PCV (HEMATOCRIT)",
+            "unit": "%",
+            "referenceRange": "40.0 - 50.0",
+            "bounds": {
+              "min": 40,
+              "max": 50,
+              "type": "interval"
+            },
+            "normalizedIndex": -0.38,
+            "percentOfNormal": -38,
+            "ratioToULN": 0.72,
+            "calibrationStatus": "BELOW_LOWER_LIMIT",
+            "harmonized": {
+              "value": 36.2,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 40,
+              "upperBoundary": 50,
+              "midpoint": 45
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.207Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-15-1788594709207",
+          "id": "obs-15-1788605058188",
           "testName": "MCV",
           "value": "88.3",
           "numericValue": 88.3,
@@ -770,12 +1477,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... 40.0 - 50.0 mcv 88.3 fl 80.0 - 100.0 mch 28.8 pg 27.0 - 32.0 ..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 88.3,
+            "testName": "MCV",
+            "unit": "fL",
+            "referenceRange": "80.0 - 100.0",
+            "bounds": {
+              "min": 80,
+              "max": 100,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.415,
+            "percentOfNormal": 41,
+            "ratioToULN": 0.88,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 88.3,
+              "unit": "fL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 80,
+              "upperBoundary": 100,
+              "midpoint": 90
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.207Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-16-1788594709207",
+          "id": "obs-16-1788605058188",
           "testName": "MCH",
           "value": "28.8",
           "numericValue": 28.8,
@@ -800,12 +1533,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...80.0 - 100.0 mch 28.8 pg 27.0 - 32.0 mchc 32.6 g/dl 31.5 - 34..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 28.8,
+            "testName": "MCH",
+            "unit": "pg",
+            "referenceRange": "27.0 - 32.0",
+            "bounds": {
+              "min": 27,
+              "max": 32,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.36,
+            "percentOfNormal": 36,
+            "ratioToULN": 0.9,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 28.8,
+              "unit": "pg",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 27,
+              "upperBoundary": 32,
+              "midpoint": 29.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.207Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-17-1788594709208",
+          "id": "obs-17-1788605058188",
           "testName": "MCHC",
           "value": "32.6",
           "numericValue": 32.6,
@@ -830,12 +1589,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "....0 - 32.0 mchc 32.6 g/dl 31.5 - 34.5 total leukocyte count wb..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 32.6,
+            "testName": "MCHC",
+            "unit": "g/dL",
+            "referenceRange": "31.5 - 34.5",
+            "bounds": {
+              "min": 31.5,
+              "max": 34.5,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.367,
+            "percentOfNormal": 37,
+            "ratioToULN": 0.94,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 32.6,
+              "unit": "g/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 31.5,
+              "upperBoundary": 34.5,
+              "midpoint": 33
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.208Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-18-1788594709208",
+          "id": "obs-18-1788605058188",
           "testName": "TOTAL LEUKOCYTE COUNT (WBC)",
           "value": "11800",
           "numericValue": 11800,
@@ -860,12 +1645,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...unt wbc 11800 cells/cumm 4000 - 10000 neutrophils 76 % 40 - 70..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 11800,
+            "testName": "TOTAL LEUKOCYTE COUNT (WBC)",
+            "unit": "cells/cumm",
+            "referenceRange": "4000 - 10000",
+            "bounds": {
+              "min": 4000,
+              "max": 10000,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.3,
+            "percentOfNormal": 130,
+            "ratioToULN": 1.18,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 11800,
+              "unit": "cells/cumm",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 4000,
+              "upperBoundary": 10000,
+              "midpoint": 7000
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.208Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-19-1788594709208",
+          "id": "obs-19-1788605058188",
           "testName": "NEUTROPHILS",
           "value": "76",
           "numericValue": 76,
@@ -890,12 +1701,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...- 10000 neutrophils 76 % 40 - 70 lymphocytes 18 % 20 - 40..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 76,
+            "testName": "NEUTROPHILS",
+            "unit": "%",
+            "referenceRange": "40 - 70",
+            "bounds": {
+              "min": 40,
+              "max": 70,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.2,
+            "percentOfNormal": 120,
+            "ratioToULN": 1.09,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 76,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 40,
+              "upperBoundary": 70,
+              "midpoint": 55
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.208Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-20-1788594709208",
+          "id": "obs-20-1788605058189",
           "testName": "LYMPHOCYTES",
           "value": "18",
           "numericValue": 18,
@@ -920,12 +1757,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...40 - 70 lymphocytes 18 % 20 - 40 monocytes 4 % 2 - 8 eosi..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 18,
+            "testName": "LYMPHOCYTES",
+            "unit": "%",
+            "referenceRange": "20 - 40",
+            "bounds": {
+              "min": 20,
+              "max": 40,
+              "type": "interval"
+            },
+            "normalizedIndex": -0.1,
+            "percentOfNormal": -10,
+            "ratioToULN": 0.45,
+            "calibrationStatus": "BELOW_LOWER_LIMIT",
+            "harmonized": {
+              "value": 18,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 20,
+              "upperBoundary": 40,
+              "midpoint": 30
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.208Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         },
         {
-          "id": "obs-21-1788594709209",
+          "id": "obs-21-1788605058189",
           "testName": "MONOCYTES",
           "value": "4",
           "numericValue": 4,
@@ -950,12 +1813,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... % 20 - 40 monocytes 4 % 2 - 8 eosinophils 2 % 1 - 6 ba..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 4,
+            "testName": "MONOCYTES",
+            "unit": "%",
+            "referenceRange": "2 - 8",
+            "bounds": {
+              "min": 2,
+              "max": 8,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.333,
+            "percentOfNormal": 33,
+            "ratioToULN": 0.5,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 4,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 2,
+              "upperBoundary": 8,
+              "midpoint": 5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.209Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         },
         {
-          "id": "obs-22-1788594709209",
+          "id": "obs-22-1788605058189",
           "testName": "EOSINOPHILS",
           "value": "2",
           "numericValue": 2,
@@ -980,12 +1869,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... % 2 - 8 eosinophils 2 % 1 - 6 basophils 0 % 0 - 1 abso..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 2,
+            "testName": "EOSINOPHILS",
+            "unit": "%",
+            "referenceRange": "1 - 6",
+            "bounds": {
+              "min": 1,
+              "max": 6,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.2,
+            "percentOfNormal": 20,
+            "ratioToULN": 0.33,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 2,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 1,
+              "upperBoundary": 6,
+              "midpoint": 3.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.209Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         },
         {
-          "id": "obs-23-1788594709209",
+          "id": "obs-23-1788605058189",
           "testName": "BASOPHILS",
           "value": "0",
           "numericValue": 0,
@@ -1010,12 +1925,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0 rbc count 4.10 mill/c..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 0,
+            "testName": "BASOPHILS",
+            "unit": "%",
+            "referenceRange": "0 - 1",
+            "bounds": {
+              "min": 0,
+              "max": 1,
+              "type": "interval"
+            },
+            "normalizedIndex": 0,
+            "percentOfNormal": 0,
+            "ratioToULN": 0,
+            "calibrationStatus": "BORDERLINE_NORMAL",
+            "harmonized": {
+              "value": 0,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 0,
+              "upperBoundary": 1,
+              "midpoint": 0.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.209Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         },
         {
-          "id": "obs-24-1788594709209",
+          "id": "obs-24-1788605058189",
           "testName": "ABSOLUTE NEUTROPHIL COUNT",
           "value": "8968",
           "numericValue": 8968,
@@ -1040,12 +1981,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...il count 8968 cells/cumm 2000 - 7000 platelet count 185000 ce..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 8968,
+            "testName": "ABSOLUTE NEUTROPHIL COUNT",
+            "unit": "cells/cumm",
+            "referenceRange": "2000 - 7000",
+            "bounds": {
+              "min": 2000,
+              "max": 7000,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.394,
+            "percentOfNormal": 139,
+            "ratioToULN": 1.28,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 8968,
+              "unit": "cells/cumm",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 2000,
+              "upperBoundary": 7000,
+              "midpoint": 4500
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.209Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         },
         {
-          "id": "obs-25-1788594709209",
+          "id": "obs-25-1788605058189",
           "testName": "PLATELET COUNT",
           "value": "185000",
           "numericValue": 185000,
@@ -1070,14 +2037,48 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... count 185000 cells/cumm 150000 - 450000 ========================..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 185000,
+            "testName": "PLATELET COUNT",
+            "unit": "cells/cumm",
+            "referenceRange": "150000 - 450000",
+            "bounds": {
+              "min": 150000,
+              "max": 450000,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.117,
+            "percentOfNormal": 12,
+            "ratioToULN": 0.41,
+            "calibrationStatus": "BORDERLINE_NORMAL",
+            "harmonized": {
+              "value": 185000,
+              "unit": "cells/cumm",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 150000,
+              "upperBoundary": 450000,
+              "midpoint": 300000
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.209Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         }
       ],
+      "calibrationMetadata": {
+        "methods": [],
+        "analyzers": [],
+        "accreditations": [
+          "NABL (ISO 15189)",
+          "CAP Certified"
+        ]
+      },
       "extractionEngine": "MedLens Grounded Clinical NLP Engine (Offline Deterministic)",
-      "processingTimeMs": 10,
-      "processedAt": "2026-09-05T07:51:49.210Z",
+      "processingTimeMs": 6,
+      "processedAt": "2026-09-05T10:44:18.189Z",
       "longitudinalDeltas": [],
       "patientSummary": {
         "overview": "This report from Dr. Lal PathLabs Ltd. - Central Reference Lab dated 2026-06-15 contains 14 structured lab measurements. 7 are within printed standard intervals, while 7 are outside the laboratory's printed reference ranges.",
@@ -1161,8 +2162,8 @@
   ],
   "auditLog": [
     {
-      "id": "aud-1788602558433-733",
-      "timestamp": "2026-09-05T10:02:38.433Z",
+      "id": "aud-1788605122596-962",
+      "timestamp": "2026-09-05T10:45:22.596Z",
       "action": "USER_AUTHENTICATION_SUCCESS",
       "actor": "Dr. Arvind Mehta, MD",
       "provenance": "SYSTEM",
@@ -1170,8 +2171,8 @@
       "metadata": {}
     },
     {
-      "id": "aud-1788602558415-850",
-      "timestamp": "2026-09-05T10:02:38.415Z",
+      "id": "aud-1788605122569-869",
+      "timestamp": "2026-09-05T10:45:22.569Z",
       "action": "RANGE_VALIDATION_PERFORMED",
       "actor": "MedLens Anti-Hallucination Engine",
       "provenance": "AI_EXTRACTED_VERIFIED",
@@ -1201,294 +2202,8 @@
       }
     },
     {
-      "id": "aud-1788602526343-710",
-      "timestamp": "2026-09-05T10:02:06.344Z",
-      "action": "DATA_CALIBRATION_PERFORMED",
-      "actor": "MedLens Calibration Service",
-      "provenance": "AI_DERIVED",
-      "details": "Calibrated 'SERUM CREATININE' (88.4 umol/L): status CRITICALLY_ELEVATED, ratio to ULN: 73.67.",
-      "metadata": {
-        "obs": {
-          "testName": "SERUM CREATININE",
-          "value": 88.4,
-          "numericValue": 88.4,
-          "unit": "umol/L",
-          "referenceRange": "0.70 - 1.20 mg/dL",
-          "labName": "International Lab"
-        },
-        "calibration": {
-          "calibrated": true,
-          "value": 88.4,
-          "testName": "SERUM CREATININE",
-          "unit": "umol/L",
-          "referenceRange": "0.70 - 1.20 mg/dL",
-          "bounds": {
-            "min": 0.7,
-            "max": 1.2,
-            "type": "interval"
-          },
-          "normalizedIndex": 175.4,
-          "percentOfNormal": 17540,
-          "ratioToULN": 73.67,
-          "calibrationStatus": "CRITICALLY_ELEVATED",
-          "harmonized": {
-            "value": 1,
-            "unit": "mg/dL",
-            "originalValue": 88.4,
-            "originalUnit": "umol/L",
-            "isConverted": true
-          },
-          "calibratedBand": {
-            "lowerBoundary": 0.7,
-            "upperBoundary": 1.2,
-            "midpoint": 0.95
-          }
-        }
-      }
-    },
-    {
-      "id": "aud-1788602332178-649",
-      "timestamp": "2026-09-05T09:58:52.178Z",
-      "action": "USER_AUTHENTICATION_SUCCESS",
-      "actor": "Dr. Arvind Mehta, MD",
-      "provenance": "SYSTEM",
-      "details": "User Dr. Arvind Mehta, MD logged in with role [CLINICIAN].",
-      "metadata": {}
-    },
-    {
-      "id": "aud-1788602332159-705",
-      "timestamp": "2026-09-05T09:58:52.159Z",
-      "action": "RANGE_VALIDATION_PERFORMED",
-      "actor": "MedLens Anti-Hallucination Engine",
-      "provenance": "AI_EXTRACTED_VERIFIED",
-      "details": "Validation check for 'HAEMOGLOBIN' with range '13.0 - 17.0': VERIFIED_EXACT_MATCH.",
-      "metadata": {
-        "testName": "HAEMOGLOBIN",
-        "referenceRange": "13.0 - 17.0",
-        "validation": {
-          "isValid": true,
-          "isHallucinated": false,
-          "isAbsentInSource": false,
-          "status": "VERIFIED_EXACT_MATCH",
-          "confidence": 1,
-          "provenance": "AI_EXTRACTED_VERIFIED",
-          "matchType": "EXACT_SUBSTRING",
-          "reason": "Extracted reference interval matches source document verbatim.",
-          "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0..."
-        },
-        "evaluation": {
-          "flag": "LOW",
-          "label": "Low",
-          "color": "blue",
-          "note": "Below lower bound (13)",
-          "min": 13,
-          "max": 17
-        }
-      }
-    },
-    {
-      "id": "aud-1788599658162-106",
-      "timestamp": "2026-09-05T09:14:18.162Z",
-      "action": "USER_AUTHENTICATION_SUCCESS",
-      "actor": "Dr. Arvind Mehta, MD",
-      "provenance": "SYSTEM",
-      "details": "User Dr. Arvind Mehta, MD logged in with role [CLINICIAN].",
-      "metadata": {}
-    },
-    {
-      "id": "aud-1788599658135-303",
-      "timestamp": "2026-09-05T09:14:18.135Z",
-      "action": "RANGE_VALIDATION_PERFORMED",
-      "actor": "MedLens Anti-Hallucination Engine",
-      "provenance": "AI_EXTRACTED_VERIFIED",
-      "details": "Validation check for 'HAEMOGLOBIN' with range '13.0 - 17.0': VERIFIED_EXACT_MATCH.",
-      "metadata": {
-        "testName": "HAEMOGLOBIN",
-        "referenceRange": "13.0 - 17.0",
-        "validation": {
-          "isValid": true,
-          "isHallucinated": false,
-          "isAbsentInSource": false,
-          "status": "VERIFIED_EXACT_MATCH",
-          "confidence": 1,
-          "provenance": "AI_EXTRACTED_VERIFIED",
-          "matchType": "EXACT_SUBSTRING",
-          "reason": "Extracted reference interval matches source document verbatim.",
-          "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0..."
-        },
-        "evaluation": {
-          "flag": "LOW",
-          "label": "Low",
-          "color": "blue",
-          "note": "Below lower bound (13)",
-          "min": 13,
-          "max": 17
-        }
-      }
-    },
-    {
-      "id": "aud-1788599506960-502",
-      "timestamp": "2026-09-05T09:11:46.960Z",
-      "action": "USER_AUTHENTICATION_SUCCESS",
-      "actor": "Dr. Arvind Mehta, MD",
-      "provenance": "SYSTEM",
-      "details": "User Dr. Arvind Mehta, MD logged in with role [CLINICIAN].",
-      "metadata": {}
-    },
-    {
-      "id": "aud-1788599506930-386",
-      "timestamp": "2026-09-05T09:11:46.930Z",
-      "action": "RANGE_VALIDATION_PERFORMED",
-      "actor": "MedLens Anti-Hallucination Engine",
-      "provenance": "AI_EXTRACTED_VERIFIED",
-      "details": "Validation check for 'HAEMOGLOBIN' with range '13.0 - 17.0': VERIFIED_EXACT_MATCH.",
-      "metadata": {
-        "testName": "HAEMOGLOBIN",
-        "referenceRange": "13.0 - 17.0",
-        "validation": {
-          "isValid": true,
-          "isHallucinated": false,
-          "isAbsentInSource": false,
-          "status": "VERIFIED_EXACT_MATCH",
-          "confidence": 1,
-          "provenance": "AI_EXTRACTED_VERIFIED",
-          "matchType": "EXACT_SUBSTRING",
-          "reason": "Extracted reference interval matches source document verbatim.",
-          "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0..."
-        },
-        "evaluation": {
-          "flag": "LOW",
-          "label": "Low",
-          "color": "blue",
-          "note": "Below lower bound (13)",
-          "min": 13,
-          "max": 17
-        }
-      }
-    },
-    {
-      "id": "aud-1788595147739-694",
-      "timestamp": "2026-09-05T07:59:07.739Z",
-      "action": "USER_AUTHENTICATION_SUCCESS",
-      "actor": "Dr. Arvind Mehta, MD",
-      "provenance": "SYSTEM",
-      "details": "User Dr. Arvind Mehta, MD logged in with role [CLINICIAN].",
-      "metadata": {}
-    },
-    {
-      "id": "aud-1788595147703-304",
-      "timestamp": "2026-09-05T07:59:07.703Z",
-      "action": "RANGE_VALIDATION_PERFORMED",
-      "actor": "MedLens Anti-Hallucination Engine",
-      "provenance": "AI_EXTRACTED_VERIFIED",
-      "details": "Validation check for 'HAEMOGLOBIN' with range '13.0 - 17.0': VERIFIED_EXACT_MATCH.",
-      "metadata": {
-        "testName": "HAEMOGLOBIN",
-        "referenceRange": "13.0 - 17.0",
-        "validation": {
-          "isValid": true,
-          "isHallucinated": false,
-          "isAbsentInSource": false,
-          "status": "VERIFIED_EXACT_MATCH",
-          "confidence": 1,
-          "provenance": "AI_EXTRACTED_VERIFIED",
-          "matchType": "EXACT_SUBSTRING",
-          "reason": "Extracted reference interval matches source document verbatim.",
-          "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0..."
-        },
-        "evaluation": {
-          "flag": "LOW",
-          "label": "Low",
-          "color": "blue",
-          "note": "Below lower bound (13)",
-          "min": 13,
-          "max": 17
-        }
-      }
-    },
-    {
-      "id": "aud-1788594797171-711",
-      "timestamp": "2026-09-05T07:53:17.171Z",
-      "action": "USER_AUTHENTICATION_SUCCESS",
-      "actor": "Dr. Arvind Mehta, MD",
-      "provenance": "SYSTEM",
-      "details": "User Dr. Arvind Mehta, MD logged in with role [CLINICIAN].",
-      "metadata": {}
-    },
-    {
-      "id": "aud-1788594797145-367",
-      "timestamp": "2026-09-05T07:53:17.145Z",
-      "action": "RANGE_VALIDATION_PERFORMED",
-      "actor": "MedLens Anti-Hallucination Engine",
-      "provenance": "AI_EXTRACTED_VERIFIED",
-      "details": "Validation check for 'HAEMOGLOBIN' with range '13.0 - 17.0': VERIFIED_EXACT_MATCH.",
-      "metadata": {
-        "testName": "HAEMOGLOBIN",
-        "referenceRange": "13.0 - 17.0",
-        "validation": {
-          "isValid": true,
-          "isHallucinated": false,
-          "isAbsentInSource": false,
-          "status": "VERIFIED_EXACT_MATCH",
-          "confidence": 1,
-          "provenance": "AI_EXTRACTED_VERIFIED",
-          "matchType": "EXACT_SUBSTRING",
-          "reason": "Extracted reference interval matches source document verbatim.",
-          "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0..."
-        },
-        "evaluation": {
-          "flag": "LOW",
-          "label": "Low",
-          "color": "blue",
-          "note": "Below lower bound (13)",
-          "min": 13,
-          "max": 17
-        }
-      }
-    },
-    {
-      "id": "aud-1788594709383-812",
-      "timestamp": "2026-09-05T07:51:49.383Z",
-      "action": "USER_AUTHENTICATION_SUCCESS",
-      "actor": "Dr. Arvind Mehta, MD",
-      "provenance": "SYSTEM",
-      "details": "User Dr. Arvind Mehta, MD logged in with role [CLINICIAN].",
-      "metadata": {}
-    },
-    {
-      "id": "aud-1788594709356-65",
-      "timestamp": "2026-09-05T07:51:49.356Z",
-      "action": "RANGE_VALIDATION_PERFORMED",
-      "actor": "MedLens Anti-Hallucination Engine",
-      "provenance": "AI_EXTRACTED_VERIFIED",
-      "details": "Validation check for 'HAEMOGLOBIN' with range '13.0 - 17.0': VERIFIED_EXACT_MATCH.",
-      "metadata": {
-        "testName": "HAEMOGLOBIN",
-        "referenceRange": "13.0 - 17.0",
-        "validation": {
-          "isValid": true,
-          "isHallucinated": false,
-          "isAbsentInSource": false,
-          "status": "VERIFIED_EXACT_MATCH",
-          "confidence": 1,
-          "provenance": "AI_EXTRACTED_VERIFIED",
-          "matchType": "EXACT_SUBSTRING",
-          "reason": "Extracted reference interval matches source document verbatim.",
-          "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0..."
-        },
-        "evaluation": {
-          "flag": "LOW",
-          "label": "Low",
-          "color": "blue",
-          "note": "Below lower bound (13)",
-          "min": 13,
-          "max": 17
-        }
-      }
-    },
-    {
-      "id": "aud-1788594709236-408",
-      "timestamp": "2026-09-05T07:51:49.236Z",
+      "id": "aud-1788605058204-722",
+      "timestamp": "2026-09-05T10:44:18.205Z",
       "action": "SYSTEM_BOOTSTRAP_COMPLETE",
       "actor": "MedLens Core",
       "provenance": "SYSTEM",
@@ -1519,7 +2234,7 @@
       "unverifiedCount": 0,
       "observations": [
         {
-          "id": "obs-12-1788594709206",
+          "id": "obs-12-1788605058188",
           "testName": "HAEMOGLOBIN",
           "value": "11.8",
           "numericValue": 11.8,
@@ -1544,12 +2259,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...== haemoglobin 11.8 g/dl 13.0 - 17.0 rbc count 4.10 mill/cumm..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 11.8,
+            "testName": "HAEMOGLOBIN",
+            "unit": "g/dL",
+            "referenceRange": "13.0 - 17.0",
+            "bounds": {
+              "min": 13,
+              "max": 17,
+              "type": "interval"
+            },
+            "normalizedIndex": -0.3,
+            "percentOfNormal": -30,
+            "ratioToULN": 0.69,
+            "calibrationStatus": "BELOW_LOWER_LIMIT",
+            "harmonized": {
+              "value": 11.8,
+              "unit": "g/dL",
+              "originalValue": 11.8,
+              "originalUnit": "g/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 13,
+              "upperBoundary": 17,
+              "midpoint": 15
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.206Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-13-1788594709207",
+          "id": "obs-13-1788605058188",
           "testName": "RBC COUNT",
           "value": "4.10",
           "numericValue": 4.1,
@@ -1574,12 +2317,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...rbc count 4.10 mill/cumm 4.50 - 5.50 pcv hematocrit 36.2 % 40..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 4.1,
+            "testName": "RBC COUNT",
+            "unit": "mill/cumm",
+            "referenceRange": "4.50 - 5.50",
+            "bounds": {
+              "min": 4.5,
+              "max": 5.5,
+              "type": "interval"
+            },
+            "normalizedIndex": -0.4,
+            "percentOfNormal": -40,
+            "ratioToULN": 0.75,
+            "calibrationStatus": "BELOW_LOWER_LIMIT",
+            "harmonized": {
+              "value": 4.1,
+              "unit": "mill/cumm",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 4.5,
+              "upperBoundary": 5.5,
+              "midpoint": 5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.207Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-14-1788594709207",
+          "id": "obs-14-1788605058188",
           "testName": "PCV (HEMATOCRIT)",
           "value": "36.2",
           "numericValue": 36.2,
@@ -1604,12 +2373,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...50 pcv hematocrit 36.2 % 40.0 - 50.0 mcv 88.3 fl 80.0 - 100.0..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 36.2,
+            "testName": "PCV (HEMATOCRIT)",
+            "unit": "%",
+            "referenceRange": "40.0 - 50.0",
+            "bounds": {
+              "min": 40,
+              "max": 50,
+              "type": "interval"
+            },
+            "normalizedIndex": -0.38,
+            "percentOfNormal": -38,
+            "ratioToULN": 0.72,
+            "calibrationStatus": "BELOW_LOWER_LIMIT",
+            "harmonized": {
+              "value": 36.2,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 40,
+              "upperBoundary": 50,
+              "midpoint": 45
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.207Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-15-1788594709207",
+          "id": "obs-15-1788605058188",
           "testName": "MCV",
           "value": "88.3",
           "numericValue": 88.3,
@@ -1634,12 +2429,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... 40.0 - 50.0 mcv 88.3 fl 80.0 - 100.0 mch 28.8 pg 27.0 - 32.0 ..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 88.3,
+            "testName": "MCV",
+            "unit": "fL",
+            "referenceRange": "80.0 - 100.0",
+            "bounds": {
+              "min": 80,
+              "max": 100,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.415,
+            "percentOfNormal": 41,
+            "ratioToULN": 0.88,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 88.3,
+              "unit": "fL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 80,
+              "upperBoundary": 100,
+              "midpoint": 90
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.207Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-16-1788594709207",
+          "id": "obs-16-1788605058188",
           "testName": "MCH",
           "value": "28.8",
           "numericValue": 28.8,
@@ -1664,12 +2485,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...80.0 - 100.0 mch 28.8 pg 27.0 - 32.0 mchc 32.6 g/dl 31.5 - 34..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 28.8,
+            "testName": "MCH",
+            "unit": "pg",
+            "referenceRange": "27.0 - 32.0",
+            "bounds": {
+              "min": 27,
+              "max": 32,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.36,
+            "percentOfNormal": 36,
+            "ratioToULN": 0.9,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 28.8,
+              "unit": "pg",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 27,
+              "upperBoundary": 32,
+              "midpoint": 29.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.207Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-17-1788594709208",
+          "id": "obs-17-1788605058188",
           "testName": "MCHC",
           "value": "32.6",
           "numericValue": 32.6,
@@ -1694,12 +2541,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "....0 - 32.0 mchc 32.6 g/dl 31.5 - 34.5 total leukocyte count wb..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 32.6,
+            "testName": "MCHC",
+            "unit": "g/dL",
+            "referenceRange": "31.5 - 34.5",
+            "bounds": {
+              "min": 31.5,
+              "max": 34.5,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.367,
+            "percentOfNormal": 37,
+            "ratioToULN": 0.94,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 32.6,
+              "unit": "g/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 31.5,
+              "upperBoundary": 34.5,
+              "midpoint": 33
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.208Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-18-1788594709208",
+          "id": "obs-18-1788605058188",
           "testName": "TOTAL LEUKOCYTE COUNT (WBC)",
           "value": "11800",
           "numericValue": 11800,
@@ -1724,12 +2597,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...unt wbc 11800 cells/cumm 4000 - 10000 neutrophils 76 % 40 - 70..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 11800,
+            "testName": "TOTAL LEUKOCYTE COUNT (WBC)",
+            "unit": "cells/cumm",
+            "referenceRange": "4000 - 10000",
+            "bounds": {
+              "min": 4000,
+              "max": 10000,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.3,
+            "percentOfNormal": 130,
+            "ratioToULN": 1.18,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 11800,
+              "unit": "cells/cumm",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 4000,
+              "upperBoundary": 10000,
+              "midpoint": 7000
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.208Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-19-1788594709208",
+          "id": "obs-19-1788605058188",
           "testName": "NEUTROPHILS",
           "value": "76",
           "numericValue": 76,
@@ -1754,12 +2653,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...- 10000 neutrophils 76 % 40 - 70 lymphocytes 18 % 20 - 40..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 76,
+            "testName": "NEUTROPHILS",
+            "unit": "%",
+            "referenceRange": "40 - 70",
+            "bounds": {
+              "min": 40,
+              "max": 70,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.2,
+            "percentOfNormal": 120,
+            "ratioToULN": 1.09,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 76,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 40,
+              "upperBoundary": 70,
+              "midpoint": 55
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.208Z"
+          "extractedAt": "2026-09-05T10:44:18.188Z"
         },
         {
-          "id": "obs-20-1788594709208",
+          "id": "obs-20-1788605058189",
           "testName": "LYMPHOCYTES",
           "value": "18",
           "numericValue": 18,
@@ -1784,12 +2709,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...40 - 70 lymphocytes 18 % 20 - 40 monocytes 4 % 2 - 8 eosi..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 18,
+            "testName": "LYMPHOCYTES",
+            "unit": "%",
+            "referenceRange": "20 - 40",
+            "bounds": {
+              "min": 20,
+              "max": 40,
+              "type": "interval"
+            },
+            "normalizedIndex": -0.1,
+            "percentOfNormal": -10,
+            "ratioToULN": 0.45,
+            "calibrationStatus": "BELOW_LOWER_LIMIT",
+            "harmonized": {
+              "value": 18,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 20,
+              "upperBoundary": 40,
+              "midpoint": 30
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.208Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         },
         {
-          "id": "obs-21-1788594709209",
+          "id": "obs-21-1788605058189",
           "testName": "MONOCYTES",
           "value": "4",
           "numericValue": 4,
@@ -1814,12 +2765,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... % 20 - 40 monocytes 4 % 2 - 8 eosinophils 2 % 1 - 6 ba..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 4,
+            "testName": "MONOCYTES",
+            "unit": "%",
+            "referenceRange": "2 - 8",
+            "bounds": {
+              "min": 2,
+              "max": 8,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.333,
+            "percentOfNormal": 33,
+            "ratioToULN": 0.5,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 4,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 2,
+              "upperBoundary": 8,
+              "midpoint": 5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.209Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         },
         {
-          "id": "obs-22-1788594709209",
+          "id": "obs-22-1788605058189",
           "testName": "EOSINOPHILS",
           "value": "2",
           "numericValue": 2,
@@ -1844,12 +2821,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... % 2 - 8 eosinophils 2 % 1 - 6 basophils 0 % 0 - 1 abso..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 2,
+            "testName": "EOSINOPHILS",
+            "unit": "%",
+            "referenceRange": "1 - 6",
+            "bounds": {
+              "min": 1,
+              "max": 6,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.2,
+            "percentOfNormal": 20,
+            "ratioToULN": 0.33,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 2,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 1,
+              "upperBoundary": 6,
+              "midpoint": 3.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.209Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         },
         {
-          "id": "obs-23-1788594709209",
+          "id": "obs-23-1788605058189",
           "testName": "BASOPHILS",
           "value": "0",
           "numericValue": 0,
@@ -1874,12 +2877,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0 rbc count 4.10 mill/c..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 0,
+            "testName": "BASOPHILS",
+            "unit": "%",
+            "referenceRange": "0 - 1",
+            "bounds": {
+              "min": 0,
+              "max": 1,
+              "type": "interval"
+            },
+            "normalizedIndex": 0,
+            "percentOfNormal": 0,
+            "ratioToULN": 0,
+            "calibrationStatus": "BORDERLINE_NORMAL",
+            "harmonized": {
+              "value": 0,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 0,
+              "upperBoundary": 1,
+              "midpoint": 0.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.209Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         },
         {
-          "id": "obs-24-1788594709209",
+          "id": "obs-24-1788605058189",
           "testName": "ABSOLUTE NEUTROPHIL COUNT",
           "value": "8968",
           "numericValue": 8968,
@@ -1904,12 +2933,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...il count 8968 cells/cumm 2000 - 7000 platelet count 185000 ce..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 8968,
+            "testName": "ABSOLUTE NEUTROPHIL COUNT",
+            "unit": "cells/cumm",
+            "referenceRange": "2000 - 7000",
+            "bounds": {
+              "min": 2000,
+              "max": 7000,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.394,
+            "percentOfNormal": 139,
+            "ratioToULN": 1.28,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 8968,
+              "unit": "cells/cumm",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 2000,
+              "upperBoundary": 7000,
+              "midpoint": 4500
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.209Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         },
         {
-          "id": "obs-25-1788594709209",
+          "id": "obs-25-1788605058189",
           "testName": "PLATELET COUNT",
           "value": "185000",
           "numericValue": 185000,
@@ -1934,14 +2989,48 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... count 185000 cells/cumm 150000 - 450000 ========================..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 185000,
+            "testName": "PLATELET COUNT",
+            "unit": "cells/cumm",
+            "referenceRange": "150000 - 450000",
+            "bounds": {
+              "min": 150000,
+              "max": 450000,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.117,
+            "percentOfNormal": 12,
+            "ratioToULN": 0.41,
+            "calibrationStatus": "BORDERLINE_NORMAL",
+            "harmonized": {
+              "value": 185000,
+              "unit": "cells/cumm",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 150000,
+              "upperBoundary": 450000,
+              "midpoint": 300000
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.209Z"
+          "extractedAt": "2026-09-05T10:44:18.189Z"
         }
       ],
+      "calibrationMetadata": {
+        "methods": [],
+        "analyzers": [],
+        "accreditations": [
+          "NABL (ISO 15189)",
+          "CAP Certified"
+        ]
+      },
       "extractionEngine": "MedLens Grounded Clinical NLP Engine (Offline Deterministic)",
-      "processingTimeMs": 10,
-      "processedAt": "2026-09-05T07:51:49.210Z",
+      "processingTimeMs": 6,
+      "processedAt": "2026-09-05T10:44:18.189Z",
       "longitudinalDeltas": [],
       "patientSummary": {
         "overview": "This report from Dr. Lal PathLabs Ltd. - Central Reference Lab dated 2026-06-15 contains 14 structured lab measurements. 7 are within printed standard intervals, while 7 are outside the laboratory's printed reference ranges.",
@@ -2022,7 +3111,7 @@
         "disclaimer": "IMPORTANT NOTICE: MedLens is an assistive clinical information structuring and summarization tool. It DOES NOT diagnose illnesses, prescribe medication, or provide treatment advice. Laboratory results must always be evaluated in clinical context by a licensed medical practitioner."
       }
     },
-    "c56c3be8f4eea476a17cffa1e2a63add81e35109da62e20f47dff5eadb590f03": {
+    "c35c700946bd16ea0874387993254e320886610153d69fb6e6f52388a8fe2219": {
       "id": "rep-lipid-002",
       "documentTitle": "Lipid Profile (Cardiovascular Risk) - Apollo Diagnostics",
       "labName": "Apollo Diagnostics - Clinical Biochemistry",
@@ -2030,13 +3119,13 @@
       "patientName": "Rajesh Kumar",
       "patientAge": 48,
       "patientGender": "Male",
-      "rawText": "===============================================================\nAPOLLO DIAGNOSTICS - CLINICAL BIOCHEMISTRY DIVISION\nApollo Hospitals Enterprise Ltd, Jubilee Hills, Hyderabad\n===============================================================\nPatient Name: Rajesh Kumar          Age / Gender: 48 Yrs / Male\nSample ID   : AP-LIP-48201          Collection  : 02-Jul-2026 07:15 AM\nReferred By : Dr. Arvind Mehta, MD  Reported    : 02-Jul-2026 12:30 PM\nTest Panel  : LIPID PROFILE (FASTING - 12 HRS)\n===============================================================\nINVESTIGATION                OBSERVED  UNIT        BIOLOGICAL REF INTERVAL\n===============================================================\nTOTAL CHOLESTEROL            242.0     mg/dL       Desirable: < 200\n                                                   Borderline: 200 - 239\n                                                   High: >= 240\nTRIGLYCERIDES                215.0     mg/dL       Normal: < 150\n                                                   Borderline: 150 - 199\n                                                   High: 200 - 499\nHDL CHOLESTEROL              38.5      mg/dL       Desirable: > 40\n                                                   Low: < 40\nLDL CHOLESTEROL (DIRECT)     160.5     mg/dL       Optimal: < 100\n                                                   Near Optimal: 100 - 129\n                                                   Borderline High: 130 - 159\n                                                   High: >= 160\nVLDL CHOLESTEROL             43.0      mg/dL       Normal: 5 - 40\nCHOL / HDL RATIO             6.28      Ratio       Low Risk: 3.3 - 4.4\n                                                   Moderate: 4.5 - 7.0\nLDL / HDL RATIO              4.17      Ratio       Low Risk: 0.5 - 3.0\n===============================================================\nMETHODOLOGY: Fully Automated Enzymatic Spectrophotometry.\nNote: Fasting status confirmed (12 hours). Please correlate clinically.\n*** END OF REPORT ***",
-      "observationsCount": 7,
-      "abnormalCount": 6,
+      "rawText": "===============================================================\nAPOLLO DIAGNOSTICS - CLINICAL BIOCHEMISTRY DIVISION\nApollo Hospitals Enterprise Ltd, Jubilee Hills, Hyderabad\n===============================================================\nPatient Name: Rajesh Kumar          Age / Gender: 48 Yrs / Male\nSample ID   : AP-LIP-48201          Collection  : 02-Jul-2026 07:15 AM\nReferred By : Dr. Arvind Mehta, MD  Reported    : 02-Jul-2026 12:30 PM\nTest Panel  : LIPID PROFILE (FASTING - 12 HRS)\n===============================================================\nINVESTIGATION                OBSERVED  UNIT        BIOLOGICAL REF INTERVAL\n===============================================================\nTOTAL CHOLESTEROL            242.0     mg/dL       Desirable: < 200\n                                                   Borderline: 200 - 239\n                                                   High: >= 240\nTRIGLYCERIDES                215.0     mg/dL       Normal: < 150\n                                                   Borderline: 150 - 199\n                                                   High: 200 - 499\nHDL CHOLESTEROL              38.5      mg/dL       Desirable: > 40\n                                                   Low: < 40\nLDL CHOLESTEROL (DIRECT)     160.5     mg/dL       Optimal: < 100\n                                                   Near Optimal: 100 - 129\n                                                   Borderline High: 130 - 159\n                                                   High: >= 160\nVLDL CHOLESTEROL             43.0      mg/dL       Normal: 5 - 40\nCHOL / HDL RATIO             6.28      Ratio       Low Risk: 3.3 - 4.4\n                                                   Moderate: 4.5 - 7.0\nLDL / HDL RATIO              4.17      Ratio       Low Risk: 0.5 - 3.0\nGLUCOSE, FASTING (PLASMA)    116.0     mg/dL       70.0 - 99.0\nSERUM CREATININE             0.92      mg/dL       0.70 - 1.20\n===============================================================\nMETHODOLOGY: Fully Automated Enzymatic Spectrophotometry.\nNote: Fasting status confirmed (12 hours). Please correlate clinically.\n*** END OF REPORT ***",
+      "observationsCount": 9,
+      "abnormalCount": 7,
       "unverifiedCount": 0,
       "observations": [
         {
-          "id": "obs-11-1788594709218",
+          "id": "obs-11-1788605058197",
           "testName": "TOTAL CHOLESTEROL",
           "value": "242.0",
           "numericValue": 242,
@@ -2061,12 +3150,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... cholesterol 242.0 mg/dl desirable < 200 borderline 200 - 239 high >= 240 triglycerides 215.0 mg/d..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 242,
+            "testName": "TOTAL CHOLESTEROL",
+            "unit": "mg/dL",
+            "referenceRange": "Desirable: < 200; Borderline: 200 - 239; High: >= 240",
+            "bounds": {
+              "min": 200,
+              "max": 239,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.077,
+            "percentOfNormal": 108,
+            "ratioToULN": 1.01,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 242,
+              "unit": "mg/dL",
+              "originalValue": 242,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 200,
+              "upperBoundary": 239,
+              "midpoint": 219.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.218Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-14-1788594709219",
+          "id": "obs-14-1788605058197",
           "testName": "TRIGLYCERIDES",
           "value": "215.0",
           "numericValue": 215,
@@ -2091,12 +3208,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...riglycerides 215.0 mg/dl normal < 150 borderline 150 - 199 high 200 - 499 hdl cholesterol 38.5 mg/..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 215,
+            "testName": "TRIGLYCERIDES",
+            "unit": "mg/dL",
+            "referenceRange": "Normal: < 150; Borderline: 150 - 199; High: 200 - 499",
+            "bounds": {
+              "min": 150,
+              "max": 199,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.327,
+            "percentOfNormal": 133,
+            "ratioToULN": 1.08,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 215,
+              "unit": "mg/dL",
+              "originalValue": 215,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 150,
+              "upperBoundary": 199,
+              "midpoint": 174.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.219Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-17-1788594709219",
+          "id": "obs-17-1788605058197",
           "testName": "HDL CHOLESTEROL",
           "value": "38.5",
           "numericValue": 38.5,
@@ -2121,12 +3266,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...l cholesterol 38.5 mg/dl desirable > 40 low < 40 ldl cholesterol direct 1..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 38.5,
+            "testName": "HDL CHOLESTEROL",
+            "unit": "mg/dL",
+            "referenceRange": "Desirable: > 40; Low: < 40",
+            "bounds": {
+              "min": 40,
+              "max": null,
+              "type": "lower_only"
+            },
+            "normalizedIndex": 0.963,
+            "percentOfNormal": 96,
+            "ratioToULN": null,
+            "calibrationStatus": "BELOW_LOWER_LIMIT",
+            "harmonized": {
+              "value": 38.5,
+              "unit": "mg/dL",
+              "originalValue": 38.5,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 40,
+              "upperBoundary": null,
+              "midpoint": null
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.219Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-19-1788594709219",
+          "id": "obs-19-1788605058197",
           "testName": "LDL CHOLESTEROL (DIRECT)",
           "value": "160.5",
           "numericValue": 160.5,
@@ -2151,12 +3324,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...terol direct 160.5 mg/dl optimal < 100 near optimal 100 - 129 b..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 160.5,
+            "testName": "LDL CHOLESTEROL (DIRECT)",
+            "unit": "mg/dL",
+            "referenceRange": "Optimal: < 100",
+            "bounds": {
+              "min": 0,
+              "max": 100,
+              "type": "upper_only"
+            },
+            "normalizedIndex": 1.605,
+            "percentOfNormal": 161,
+            "ratioToULN": 1.61,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 160.5,
+              "unit": "mg/dL",
+              "originalValue": 160.5,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 0,
+              "upperBoundary": 100,
+              "midpoint": 50
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.219Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-23-1788594709219",
+          "id": "obs-23-1788605058197",
           "testName": "VLDL CHOLESTEROL",
           "value": "43.0",
           "numericValue": 43,
@@ -2181,12 +3382,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...l cholesterol 43.0 mg/dl normal 5 - 40 chol / hdl ratio 6.28 ra..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 43,
+            "testName": "VLDL CHOLESTEROL",
+            "unit": "mg/dL",
+            "referenceRange": "Normal: 5 - 40",
+            "bounds": {
+              "min": 5,
+              "max": 40,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.086,
+            "percentOfNormal": 109,
+            "ratioToULN": 1.08,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 43,
+              "unit": "mg/dL",
+              "originalValue": 43,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 5,
+              "upperBoundary": 40,
+              "midpoint": 22.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.219Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-24-1788594709220",
+          "id": "obs-24-1788605058197",
           "testName": "CHOL / HDL RATIO",
           "value": "6.28",
           "numericValue": 6.28,
@@ -2211,12 +3440,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...l / hdl ratio 6.28 ratio low risk 3.3 - 4.4 moderate 4.5 - 7.0 ldl /..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 6.28,
+            "testName": "CHOL / HDL RATIO",
+            "unit": "Ratio",
+            "referenceRange": "Low Risk: 3.3 - 4.4",
+            "bounds": {
+              "min": 3.3,
+              "max": 4.4,
+              "type": "interval"
+            },
+            "normalizedIndex": 2.709,
+            "percentOfNormal": 271,
+            "ratioToULN": 1.43,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 6.28,
+              "unit": "Ratio",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 3.3,
+              "upperBoundary": 4.4,
+              "midpoint": 3.85
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.220Z"
+          "extractedAt": "2026-09-05T10:44:18.197Z"
         },
         {
-          "id": "obs-26-1788594709220",
+          "id": "obs-26-1788605058198",
           "testName": "LDL / HDL RATIO",
           "value": "4.17",
           "numericValue": 4.17,
@@ -2239,22 +3494,172 @@
             "provenance": "AI_EXTRACTED_VERIFIED",
             "matchType": "EXACT_SUBSTRING",
             "reason": "Extracted reference interval matches source document verbatim.",
-            "matchSnippet": "...l / hdl ratio 4.17 ratio low risk 0.5 - 3.0 ========================..."
+            "matchSnippet": "...l / hdl ratio 4.17 ratio low risk 0.5 - 3.0 glucose fasting plasma 1..."
+          },
+          "calibration": {
+            "calibrated": true,
+            "value": 4.17,
+            "testName": "LDL / HDL RATIO",
+            "unit": "Ratio",
+            "referenceRange": "Low Risk: 0.5 - 3.0",
+            "bounds": {
+              "min": 0.5,
+              "max": 3,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.468,
+            "percentOfNormal": 147,
+            "ratioToULN": 1.39,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 4.17,
+              "unit": "Ratio",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 0.5,
+              "upperBoundary": 3,
+              "midpoint": 1.75
+            }
           },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.220Z"
+          "extractedAt": "2026-09-05T10:44:18.198Z"
+        },
+        {
+          "id": "obs-27-1788605058198",
+          "testName": "GLUCOSE, FASTING (PLASMA)",
+          "value": "116.0",
+          "numericValue": 116,
+          "unit": "mg/dL",
+          "referenceRange": "70.0 - 99.0",
+          "loincCode": "1558-6",
+          "loincDisplay": "Fasting glucose [Mass/volume] in Plasma",
+          "flag": "HIGH",
+          "flagLabel": "High",
+          "flagColor": "red",
+          "interpretationNote": "Above upper bound (99)",
+          "sourceLineNumber": 28,
+          "sourceSnippet": "GLUCOSE, FASTING (PLASMA)    116.0     mg/dL       70.0 - 99.0",
+          "validationResult": {
+            "isValid": true,
+            "isHallucinated": false,
+            "isAbsentInSource": false,
+            "status": "VERIFIED_EXACT_MATCH",
+            "confidence": 1,
+            "provenance": "AI_EXTRACTED_VERIFIED",
+            "matchType": "EXACT_SUBSTRING",
+            "reason": "Extracted reference interval matches source document verbatim.",
+            "matchSnippet": "...sting plasma 116.0 mg/dl 70.0 - 99.0 serum creatinine 0.92 mg..."
+          },
+          "calibration": {
+            "calibrated": true,
+            "value": 116,
+            "testName": "GLUCOSE, FASTING (PLASMA)",
+            "unit": "mg/dL",
+            "referenceRange": "70.0 - 99.0",
+            "bounds": {
+              "min": 70,
+              "max": 99,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.586,
+            "percentOfNormal": 159,
+            "ratioToULN": 1.17,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 116,
+              "unit": "mg/dL",
+              "originalValue": 116,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 70,
+              "upperBoundary": 99,
+              "midpoint": 84.5
+            }
+          },
+          "provenance": "AI_EXTRACTED_VERIFIED",
+          "confidence": 1,
+          "extractedAt": "2026-09-05T10:44:18.198Z"
+        },
+        {
+          "id": "obs-28-1788605058198",
+          "testName": "SERUM CREATININE",
+          "value": "0.92",
+          "numericValue": 0.92,
+          "unit": "mg/dL",
+          "referenceRange": "0.70 - 1.20",
+          "loincCode": "2160-0",
+          "loincDisplay": "Creatinine [Mass/volume] in Serum or Plasma",
+          "flag": "NORMAL",
+          "flagLabel": "Normal",
+          "flagColor": "green",
+          "interpretationNote": "Within reference interval (0.7 - 1.2)",
+          "sourceLineNumber": 29,
+          "sourceSnippet": "SERUM CREATININE             0.92      mg/dL       0.70 - 1.20",
+          "validationResult": {
+            "isValid": true,
+            "isHallucinated": false,
+            "isAbsentInSource": false,
+            "status": "VERIFIED_EXACT_MATCH",
+            "confidence": 1,
+            "provenance": "AI_EXTRACTED_VERIFIED",
+            "matchType": "EXACT_SUBSTRING",
+            "reason": "Extracted reference interval matches source document verbatim.",
+            "matchSnippet": "...um creatinine 0.92 mg/dl 0.70 - 1.20 ========================..."
+          },
+          "calibration": {
+            "calibrated": true,
+            "value": 0.92,
+            "testName": "SERUM CREATININE",
+            "unit": "mg/dL",
+            "referenceRange": "0.70 - 1.20",
+            "bounds": {
+              "min": 0.7,
+              "max": 1.2,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.44,
+            "percentOfNormal": 44,
+            "ratioToULN": 0.77,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 0.92,
+              "unit": "mg/dL",
+              "originalValue": 0.92,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 0.7,
+              "upperBoundary": 1.2,
+              "midpoint": 0.95
+            }
+          },
+          "provenance": "AI_EXTRACTED_VERIFIED",
+          "confidence": 1,
+          "extractedAt": "2026-09-05T10:44:18.198Z"
         }
       ],
+      "calibrationMetadata": {
+        "methods": [
+          "Ion-Selective Electrode (ISE)",
+          "Spectrophotometry / Photometric"
+        ],
+        "analyzers": [],
+        "accreditations": []
+      },
       "extractionEngine": "MedLens Grounded Clinical NLP Engine (Offline Deterministic)",
-      "processingTimeMs": 3,
-      "processedAt": "2026-09-05T07:51:49.220Z",
+      "processingTimeMs": 2,
+      "processedAt": "2026-09-05T10:44:18.198Z",
       "longitudinalDeltas": [],
       "patientSummary": {
-        "overview": "This report from Apollo Diagnostics - Clinical Biochemistry dated 2026-07-02 contains 7 structured lab measurements. 1 are within printed standard intervals, while 6 are outside the laboratory's printed reference ranges.",
-        "totalParameters": 7,
-        "normalCount": 1,
-        "abnormalCount": 6,
+        "overview": "This report from Apollo Diagnostics - Clinical Biochemistry dated 2026-07-02 contains 9 structured lab measurements. 2 are within printed standard intervals, while 7 are outside the laboratory's printed reference ranges.",
+        "totalParameters": 9,
+        "normalCount": 2,
+        "abnormalCount": 7,
         "unverifiedCount": 0,
         "keyFindings": [
           {
@@ -2304,6 +3709,14 @@
             "referenceRange": "Low Risk: 0.5 - 3.0",
             "plainExplanation": "A standard biological biomarker measured in this diagnostic investigation.",
             "statusType": "HIGH"
+          },
+          {
+            "parameter": "GLUCOSE, FASTING (PLASMA)",
+            "status": "Higher than the laboratory's printed reference range",
+            "value": "116.0 mg/dL",
+            "referenceRange": "70.0 - 99.0",
+            "plainExplanation": "The baseline sugar concentration in your blood after fasting, supplying cellular fuel.",
+            "statusType": "HIGH"
           }
         ],
         "questionsForDoctor": [
@@ -2321,7 +3734,7 @@
         "disclaimer": "IMPORTANT NOTICE: MedLens is an assistive clinical information structuring and summarization tool. It DOES NOT diagnose illnesses, prescribe medication, or provide treatment advice. Laboratory results must always be evaluated in clinical context by a licensed medical practitioner."
       }
     },
-    "a020951c62ea8c344dbff12ebba404d04c3c5208bbdafdb4e52252140a933cc9": {
+    "18869c2e1f2e8b2f2999a6ed2dbe754efc91b96558e200a7b534569992b407d2": {
       "id": "rep-diabetic-003",
       "documentTitle": "Diabetic & Renal Health Panel - Metropolis Healthcare",
       "labName": "Metropolis Healthcare Ltd. - Global Reference Lab",
@@ -2329,13 +3742,13 @@
       "patientName": "Rajesh Kumar",
       "patientAge": 48,
       "patientGender": "Male",
-      "rawText": "===============================================================\nMETROPOLIS HEALTHCARE LTD.\nGlobal Reference Laboratory, Kohinoor City, Kurla (W), Mumbai\n===============================================================\nPatient Name: Rajesh Kumar          Age / Gender: 48 Y / M\nRegistration: MHL-MUM-773918        Collected   : 10-Aug-2026 08:00 AM\nRef. Doctor : Dr. Arvind Mehta, MD  Report Date : 10-Aug-2026 01:15 PM\n===============================================================\nTEST DESCRIPTION             RESULT    UNIT        REFERENCE RANGE\n===============================================================\nGLUCOSE, FASTING (PLASMA)    142.0     mg/dL       70.0 - 99.0 (Normal)\n                                                   100.0 - 125.0 (Impaired)\n                                                   >= 126.0 (Diabetic)\nGLUCOSE, POST-PRANDIAL       210.0     mg/dL       < 140.0 (Normal)\n                                                   140.0 - 199.0 (Impaired)\n                                                   >= 200.0 (Diabetic)\nHbA1c (GLYCOSYLATED HB)      7.9       %           < 5.7 (Non-diabetic)\n                                                   5.7 - 6.4 (Prediabetes)\n                                                   >= 6.5 (Diabetes)\nESTIMATED AVG GLUCOSE (eAG)  180.0     mg/dL       N/A\nSERUM CREATININE             1.08      mg/dL       0.70 - 1.20\nBLOOD UREA NITROGEN (BUN)    16.5      mg/dL       8.0 - 23.0\nBUN / CREATININE RATIO       15.28     Ratio       10.0 - 20.0\nURIC ACID                    6.4       mg/dL       3.5 - 7.2\n===============================================================\nMethod: HPLC (Bio-Rad D-10) for HbA1c; Hexokinase for Plasma Glucose.\n*** END OF REPORT ***",
-      "observationsCount": 8,
-      "abnormalCount": 3,
+      "rawText": "===============================================================\nMETROPOLIS HEALTHCARE LTD.\nGlobal Reference Laboratory, Kohinoor City, Kurla (W), Mumbai\n===============================================================\nPatient Name: Rajesh Kumar          Age / Gender: 48 Y / M\nRegistration: MHL-MUM-773918        Collected   : 10-Aug-2026 08:00 AM\nRef. Doctor : Dr. Arvind Mehta, MD  Report Date : 10-Aug-2026 01:15 PM\n===============================================================\nTEST DESCRIPTION             RESULT    UNIT        REFERENCE RANGE\n===============================================================\nGLUCOSE, FASTING (PLASMA)    142.0     mg/dL       70.0 - 99.0 (Normal)\n                                                   100.0 - 125.0 (Impaired)\n                                                   >= 126.0 (Diabetic)\nGLUCOSE, POST-PRANDIAL       210.0     mg/dL       < 140.0 (Normal)\n                                                   140.0 - 199.0 (Impaired)\n                                                   >= 200.0 (Diabetic)\nHbA1c (GLYCOSYLATED HB)      7.9       %           < 5.7 (Non-diabetic)\n                                                   5.7 - 6.4 (Prediabetes)\n                                                   >= 6.5 (Diabetes)\nESTIMATED AVG GLUCOSE (eAG)  180.0     mg/dL       N/A\nSERUM CREATININE             1.52      mg/dL       0.70 - 1.20\nSERUM POTASSIUM              5.3       mmol/L      3.5 - 5.1\nBLOOD UREA NITROGEN (BUN)    16.5      mg/dL       8.0 - 23.0\nBUN / CREATININE RATIO       15.28     Ratio       10.0 - 20.0\nURIC ACID                    6.4       mg/dL       3.5 - 7.2\n===============================================================\nMethod: HPLC (Bio-Rad D-10) for HbA1c; Hexokinase for Plasma Glucose.\n*** END OF REPORT ***",
+      "observationsCount": 9,
+      "abnormalCount": 5,
       "unverifiedCount": 1,
       "observations": [
         {
-          "id": "obs-10-1788594709228",
+          "id": "obs-10-1788605058201",
           "testName": "GLUCOSE, FASTING (PLASMA)",
           "value": "142.0",
           "numericValue": 142,
@@ -2360,12 +3773,40 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...sting plasma 142.0 mg/dl 70.0 - 99.0 normal 100.0 - 125.0 impaired >= 126.0 diabetic glucos..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 142,
+            "testName": "GLUCOSE, FASTING (PLASMA)",
+            "unit": "mg/dL",
+            "referenceRange": "70.0 - 99.0 (Normal); 100.0 - 125.0 (Impaired)",
+            "bounds": {
+              "min": 70,
+              "max": 99,
+              "type": "interval"
+            },
+            "normalizedIndex": 2.483,
+            "percentOfNormal": 248,
+            "ratioToULN": 1.43,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 142,
+              "unit": "mg/dL",
+              "originalValue": 142,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 70,
+              "upperBoundary": 99,
+              "midpoint": 84.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.228Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-13-1788594709228",
+          "id": "obs-13-1788605058201",
           "testName": "GLUCOSE, POST-PRANDIAL",
           "value": "210.0",
           "numericValue": 210,
@@ -2390,19 +3831,47 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...ost-prandial 210.0 mg/dl < 140.0 normal 140.0 - 199.0 impaired >= 200.0 diabetic hba1c ..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 210,
+            "testName": "GLUCOSE, POST-PRANDIAL",
+            "unit": "mg/dL",
+            "referenceRange": "< 140.0 (Normal); 140.0 - 199.0 (Impaired)",
+            "bounds": {
+              "min": 140,
+              "max": 199,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.186,
+            "percentOfNormal": 119,
+            "ratioToULN": 1.06,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 210,
+              "unit": "mg/dL",
+              "originalValue": 210,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 140,
+              "upperBoundary": 199,
+              "midpoint": 169.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.228Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-16-1788594709229",
+          "id": "obs-16-1788605058201",
           "testName": "HbA1c (GLYCOSYLATED HB)",
           "value": "7.9",
           "numericValue": 7.9,
           "unit": "%",
           "referenceRange": "< 5.7 (Non-diabetic); 5.7 - 6.4 (Prediabetes)",
-          "loincCode": "UNK-LOINC",
-          "loincDisplay": "Unclassified Clinical Observation",
+          "loincCode": "4548-4",
+          "loincDisplay": "Hemoglobin A1c/Hemoglobin.total in Blood",
           "flag": "HIGH",
           "flagLabel": "High",
           "flagColor": "red",
@@ -2420,19 +3889,45 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...1c glycosylated hb 7.9 % < 5.7 non-diabetic 5.7 - 6.4 prediabetes >= 6.5 diabetes estimate..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 7.9,
+            "testName": "HbA1c (GLYCOSYLATED HB)",
+            "unit": "%",
+            "referenceRange": "< 5.7 (Non-diabetic); 5.7 - 6.4 (Prediabetes)",
+            "bounds": {
+              "min": 5.7,
+              "max": 6.4,
+              "type": "interval"
+            },
+            "normalizedIndex": 3.143,
+            "percentOfNormal": 314,
+            "ratioToULN": 1.23,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 7.9,
+              "unit": "%",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 5.7,
+              "upperBoundary": 6.4,
+              "midpoint": 6.050000000000001
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.229Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-19-1788594709229",
+          "id": "obs-19-1788605058201",
           "testName": "ESTIMATED AVG GLUCOSE (eAG)",
           "value": "180.0",
           "numericValue": 180,
           "unit": "mg/dL",
           "referenceRange": "N/A",
-          "loincCode": "UNK-LOINC",
-          "loincDisplay": "Unclassified Clinical Observation",
+          "loincCode": "27353-2",
+          "loincDisplay": "Glucose average [Mass/volume] in Blood estimated from HbA1c",
           "flag": "UNVERIFIED",
           "flagLabel": "Needs Review",
           "flagColor": "amber",
@@ -2450,25 +3945,32 @@
             "recommendation": "Flagged for manual review. MedLens refuses to invent reference intervals.",
             "matchSnippet": null
           },
+          "calibration": {
+            "calibrated": false,
+            "reason": "REFERENCE_RANGE_ABSENT",
+            "normalizedIndex": null,
+            "ratioToULN": null,
+            "calibrationStatus": "UNVERIFIED_ABSENT_RANGE"
+          },
           "provenance": "AI_EXTRACTED_NEEDS_REVIEW",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.229Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-20-1788594709229",
+          "id": "obs-20-1788605058201",
           "testName": "SERUM CREATININE",
-          "value": "1.08",
-          "numericValue": 1.08,
+          "value": "1.52",
+          "numericValue": 1.52,
           "unit": "mg/dL",
           "referenceRange": "0.70 - 1.20",
           "loincCode": "2160-0",
           "loincDisplay": "Creatinine [Mass/volume] in Serum or Plasma",
-          "flag": "NORMAL",
-          "flagLabel": "Normal",
-          "flagColor": "green",
-          "interpretationNote": "Within reference interval (0.7 - 1.2)",
+          "flag": "HIGH",
+          "flagLabel": "High",
+          "flagColor": "red",
+          "interpretationNote": "Above upper bound (1.2)",
           "sourceLineNumber": 21,
-          "sourceSnippet": "SERUM CREATININE             1.08      mg/dL       0.70 - 1.20",
+          "sourceSnippet": "SERUM CREATININE             1.52      mg/dL       0.70 - 1.20",
           "validationResult": {
             "isValid": true,
             "isHallucinated": false,
@@ -2478,14 +3980,98 @@
             "provenance": "AI_EXTRACTED_VERIFIED",
             "matchType": "EXACT_SUBSTRING",
             "reason": "Extracted reference interval matches source document verbatim.",
-            "matchSnippet": "...um creatinine 1.08 mg/dl 0.70 - 1.20 blood urea nitrogen bun ..."
+            "matchSnippet": "...um creatinine 1.52 mg/dl 0.70 - 1.20 serum potassium 5.3 mmol..."
+          },
+          "calibration": {
+            "calibrated": true,
+            "value": 1.52,
+            "testName": "SERUM CREATININE",
+            "unit": "mg/dL",
+            "referenceRange": "0.70 - 1.20",
+            "bounds": {
+              "min": 0.7,
+              "max": 1.2,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.64,
+            "percentOfNormal": 164,
+            "ratioToULN": 1.27,
+            "calibrationStatus": "CRITICALLY_ELEVATED",
+            "harmonized": {
+              "value": 1.52,
+              "unit": "mg/dL",
+              "originalValue": 1.52,
+              "originalUnit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 0.7,
+              "upperBoundary": 1.2,
+              "midpoint": 0.95
+            }
           },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.229Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-21-1788594709229",
+          "id": "obs-21-1788605058201",
+          "testName": "SERUM POTASSIUM",
+          "value": "5.3",
+          "numericValue": 5.3,
+          "unit": "mmol/L",
+          "referenceRange": "3.5 - 5.1",
+          "loincCode": "2823-3",
+          "loincDisplay": "Potassium [Moles/volume] in Serum or Plasma",
+          "flag": "HIGH",
+          "flagLabel": "High",
+          "flagColor": "red",
+          "interpretationNote": "Above upper bound (5.1)",
+          "sourceLineNumber": 22,
+          "sourceSnippet": "SERUM POTASSIUM              5.3       mmol/L      3.5 - 5.1",
+          "validationResult": {
+            "isValid": true,
+            "isHallucinated": false,
+            "isAbsentInSource": false,
+            "status": "VERIFIED_EXACT_MATCH",
+            "confidence": 1,
+            "provenance": "AI_EXTRACTED_VERIFIED",
+            "matchType": "EXACT_SUBSTRING",
+            "reason": "Extracted reference interval matches source document verbatim.",
+            "matchSnippet": "...rum potassium 5.3 mmol/l 3.5 - 5.1 blood urea nitrogen bun ..."
+          },
+          "calibration": {
+            "calibrated": true,
+            "value": 5.3,
+            "testName": "SERUM POTASSIUM",
+            "unit": "mmol/L",
+            "referenceRange": "3.5 - 5.1",
+            "bounds": {
+              "min": 3.5,
+              "max": 5.1,
+              "type": "interval"
+            },
+            "normalizedIndex": 1.125,
+            "percentOfNormal": 113,
+            "ratioToULN": 1.04,
+            "calibrationStatus": "ABOVE_UPPER_LIMIT",
+            "harmonized": {
+              "value": 5.3,
+              "unit": "mmol/L",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 3.5,
+              "upperBoundary": 5.1,
+              "midpoint": 4.3
+            }
+          },
+          "provenance": "AI_EXTRACTED_VERIFIED",
+          "confidence": 1,
+          "extractedAt": "2026-09-05T10:44:18.201Z"
+        },
+        {
+          "id": "obs-22-1788605058201",
           "testName": "BLOOD UREA NITROGEN (BUN)",
           "value": "16.5",
           "numericValue": 16.5,
@@ -2497,7 +4083,7 @@
           "flagLabel": "Normal",
           "flagColor": "green",
           "interpretationNote": "Within reference interval (8 - 23)",
-          "sourceLineNumber": 22,
+          "sourceLineNumber": 23,
           "sourceSnippet": "BLOOD UREA NITROGEN (BUN)    16.5      mg/dL       8.0 - 23.0",
           "validationResult": {
             "isValid": true,
@@ -2510,12 +4096,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "... nitrogen bun 16.5 mg/dl 8.0 - 23.0 bun / creatinine ratio 1..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 16.5,
+            "testName": "BLOOD UREA NITROGEN (BUN)",
+            "unit": "mg/dL",
+            "referenceRange": "8.0 - 23.0",
+            "bounds": {
+              "min": 8,
+              "max": 23,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.567,
+            "percentOfNormal": 57,
+            "ratioToULN": 0.72,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 16.5,
+              "unit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 8,
+              "upperBoundary": 23,
+              "midpoint": 15.5
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.229Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-22-1788594709229",
+          "id": "obs-23-1788605058201",
           "testName": "BUN / CREATININE RATIO",
           "value": "15.28",
           "numericValue": 15.28,
@@ -2527,7 +4139,7 @@
           "flagLabel": "Normal",
           "flagColor": "green",
           "interpretationNote": "Within reference interval (10 - 20)",
-          "sourceLineNumber": 23,
+          "sourceLineNumber": 24,
           "sourceSnippet": "BUN / CREATININE RATIO       15.28     Ratio       10.0 - 20.0",
           "validationResult": {
             "isValid": true,
@@ -2540,12 +4152,38 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...tinine ratio 15.28 ratio 10.0 - 20.0 uric acid 6.4 mg/dl 3.5 ..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 15.28,
+            "testName": "BUN / CREATININE RATIO",
+            "unit": "Ratio",
+            "referenceRange": "10.0 - 20.0",
+            "bounds": {
+              "min": 10,
+              "max": 20,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.528,
+            "percentOfNormal": 53,
+            "ratioToULN": 0.76,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 15.28,
+              "unit": "Ratio",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 10,
+              "upperBoundary": 20,
+              "midpoint": 15
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.229Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         },
         {
-          "id": "obs-23-1788594709230",
+          "id": "obs-24-1788605058201",
           "testName": "URIC ACID",
           "value": "6.4",
           "numericValue": 6.4,
@@ -2557,7 +4195,7 @@
           "flagLabel": "Normal",
           "flagColor": "green",
           "interpretationNote": "Within reference interval (3.5 - 7.2)",
-          "sourceLineNumber": 24,
+          "sourceLineNumber": 25,
           "sourceSnippet": "URIC ACID                    6.4       mg/dL       3.5 - 7.2",
           "validationResult": {
             "isValid": true,
@@ -2570,20 +4208,81 @@
             "reason": "Extracted reference interval matches source document verbatim.",
             "matchSnippet": "...20.0 uric acid 6.4 mg/dl 3.5 - 7.2 ========================..."
           },
+          "calibration": {
+            "calibrated": true,
+            "value": 6.4,
+            "testName": "URIC ACID",
+            "unit": "mg/dL",
+            "referenceRange": "3.5 - 7.2",
+            "bounds": {
+              "min": 3.5,
+              "max": 7.2,
+              "type": "interval"
+            },
+            "normalizedIndex": 0.784,
+            "percentOfNormal": 78,
+            "ratioToULN": 0.89,
+            "calibrationStatus": "OPTIMAL_NORMAL",
+            "harmonized": {
+              "value": 6.4,
+              "unit": "mg/dL",
+              "isConverted": false
+            },
+            "calibratedBand": {
+              "lowerBoundary": 3.5,
+              "upperBoundary": 7.2,
+              "midpoint": 5.35
+            }
+          },
           "provenance": "AI_EXTRACTED_VERIFIED",
           "confidence": 1,
-          "extractedAt": "2026-09-05T07:51:49.230Z"
+          "extractedAt": "2026-09-05T10:44:18.201Z"
         }
       ],
+      "calibrationMetadata": {
+        "methods": [
+          "HPLC (High-Performance Liquid Chromatography)",
+          "Hexokinase (Enzymatic)"
+        ],
+        "analyzers": [
+          "Bio-Rad D-10 Hemoglobin Analyzer"
+        ],
+        "accreditations": []
+      },
       "extractionEngine": "MedLens Grounded Clinical NLP Engine (Offline Deterministic)",
-      "processingTimeMs": 2,
-      "processedAt": "2026-09-05T07:51:49.230Z",
-      "longitudinalDeltas": [],
+      "processingTimeMs": 0,
+      "processedAt": "2026-09-05T10:44:18.201Z",
+      "longitudinalDeltas": [
+        {
+          "testName": "GLUCOSE, FASTING (PLASMA)",
+          "currentValue": 142,
+          "priorValue": 116,
+          "priorDate": "2026-07-02",
+          "unit": "mg/dL",
+          "diff": "+26",
+          "pctChange": "+22%",
+          "isSignificant": true,
+          "direction": "INCREASED",
+          "flagChange": null
+        },
+        {
+          "testName": "SERUM CREATININE",
+          "currentValue": 1.52,
+          "priorValue": 0.92,
+          "priorDate": "2026-07-02",
+          "unit": "mg/dL",
+          "diff": "+0.6",
+          "pctChange": "+65%",
+          "isSignificant": true,
+          "direction": "INCREASED",
+          "flagChange": "NORMAL → HIGH"
+        }
+      ],
       "patientSummary": {
-        "overview": "This report from Metropolis Healthcare Ltd. - Global Reference Lab dated 2026-08-10 contains 8 structured lab measurements. 4 are within printed standard intervals, while 3 are outside the laboratory's printed reference ranges.",
-        "totalParameters": 8,
-        "normalCount": 4,
-        "abnormalCount": 3,
+        "overview": "This report from Metropolis Healthcare Ltd. - Global Reference Lab dated 2026-08-10 contains 9 structured lab measurements. 3 are within printed standard intervals, while 5 are outside the laboratory's printed reference ranges.",
+        "totalParameters": 9,
+        "normalCount": 3,
+        "abnormalCount": 5,
         "unverifiedCount": 1,
         "keyFindings": [
           {
@@ -2611,6 +4310,22 @@
             "statusType": "HIGH"
           },
           {
+            "parameter": "SERUM CREATININE",
+            "status": "Higher than the laboratory's printed reference range",
+            "value": "1.52 mg/dL",
+            "referenceRange": "0.70 - 1.20",
+            "plainExplanation": "A natural muscle metabolism byproduct filtered and cleared by healthy kidneys.",
+            "statusType": "HIGH"
+          },
+          {
+            "parameter": "SERUM POTASSIUM",
+            "status": "Higher than the laboratory's printed reference range",
+            "value": "5.3 mmol/L",
+            "referenceRange": "3.5 - 5.1",
+            "plainExplanation": "Critical intracellular electrolyte governing cellular membrane potentials and cardiac rhythm.",
+            "statusType": "HIGH"
+          },
+          {
             "parameter": "ESTIMATED AVG GLUCOSE (eAG)",
             "status": "Reference range missing or unverified in source document",
             "value": "180.0 mg/dL",
@@ -2623,7 +4338,8 @@
           "What lifestyle, dietary, or clinical factors might explain why my GLUCOSE, FASTING (PLASMA) (142.0 mg/dL) is above the lab range (70.0 - 99.0 (Normal); 100.0 - 125.0 (Impaired))?",
           "What lifestyle, dietary, or clinical factors might explain why my GLUCOSE, POST-PRANDIAL (210.0 mg/dL) is above the lab range (< 140.0 (Normal); 140.0 - 199.0 (Impaired))?",
           "What lifestyle, dietary, or clinical factors might explain why my HbA1c (GLYCOSYLATED HB) (7.9 %) is above the lab range (< 5.7 (Non-diabetic); 5.7 - 6.4 (Prediabetes))?",
-          "The laboratory did not list a biological reference interval for ESTIMATED AVG GLUCOSE (eAG) (180.0 mg/dL). Could you help interpret how this result relates to my current health?"
+          "What lifestyle, dietary, or clinical factors might explain why my SERUM CREATININE (1.52 mg/dL) is above the lab range (0.70 - 1.20)?",
+          "What lifestyle, dietary, or clinical factors might explain why my SERUM POTASSIUM (5.3 mmol/L) is above the lab range (3.5 - 5.1)?"
         ],
         "patientContextNotes": [
           "Self-reported history of Type 2 Diabetes Mellitus (Diagnosed 2021), Mild Dyslipidemia, Primary Hypertension was noted during intake.",

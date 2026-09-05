@@ -49,4 +49,53 @@ router.post("/", (req, res) => {
   }
 });
 
+// GET /api/intake/dli - Drug-Lab Interaction Scanner
+router.get("/dli", async (req, res) => {
+  try {
+    const { scanDrugLabInteractions } = await import("../services/dliService.js");
+    const medications = store.patient?.patientContext?.currentMedications || [];
+    
+    // Aggregate observations from all reports
+    const allObservations = [];
+    (store.reports || []).forEach(r => {
+      (r.observations || []).forEach(obs => {
+        allObservations.push({
+          ...obs,
+          reportDate: r.testDate,
+          labName: r.labName
+        });
+      });
+    });
+
+    const interactions = scanDrugLabInteractions(medications, allObservations);
+
+    res.json({
+      success: true,
+      patientName: store.patient.fullName,
+      activeMedications: medications,
+      totalInteractionsCount: interactions.length,
+      criticalCount: interactions.filter(i => i.severity === "HIGH").length,
+      interactions
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// GET /api/intake/care-gaps - Preventive Screening & Care Gap Engine
+router.get("/care-gaps", async (req, res) => {
+  try {
+    const { evaluateCareGaps } = await import("../services/careGapService.js");
+    const evaluation = evaluateCareGaps(store.patient, store.reports || []);
+
+    res.json({
+      success: true,
+      evaluation
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 export default router;
+

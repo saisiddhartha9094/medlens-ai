@@ -83,6 +83,8 @@ VLDL CHOLESTEROL             43.0      mg/dL       Normal: 5 - 40
 CHOL / HDL RATIO             6.28      Ratio       Low Risk: 3.3 - 4.4
                                                    Moderate: 4.5 - 7.0
 LDL / HDL RATIO              4.17      Ratio       Low Risk: 0.5 - 3.0
+GLUCOSE, FASTING (PLASMA)    116.0     mg/dL       70.0 - 99.0
+SERUM CREATININE             0.92      mg/dL       0.70 - 1.20
 ===============================================================
 METHODOLOGY: Fully Automated Enzymatic Spectrophotometry.
 Note: Fasting status confirmed (12 hours). Please correlate clinically.
@@ -118,7 +120,8 @@ HbA1c (GLYCOSYLATED HB)      7.9       %           < 5.7 (Non-diabetic)
                                                    5.7 - 6.4 (Prediabetes)
                                                    >= 6.5 (Diabetes)
 ESTIMATED AVG GLUCOSE (eAG)  180.0     mg/dL       N/A
-SERUM CREATININE             1.08      mg/dL       0.70 - 1.20
+SERUM CREATININE             1.52      mg/dL       0.70 - 1.20
+SERUM POTASSIUM              5.3       mmol/L      3.5 - 5.1
 BLOOD UREA NITROGEN (BUN)    16.5      mg/dL       8.0 - 23.0
 BUN / CREATININE RATIO       15.28     Ratio       10.0 - 20.0
 URIC ACID                    6.4       mg/dL       3.5 - 7.2
