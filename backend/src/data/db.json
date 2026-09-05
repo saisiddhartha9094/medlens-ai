@@ -1161,6 +1161,132 @@
   ],
   "auditLog": [
     {
+      "id": "aud-1788602558433-733",
+      "timestamp": "2026-09-05T10:02:38.433Z",
+      "action": "USER_AUTHENTICATION_SUCCESS",
+      "actor": "Dr. Arvind Mehta, MD",
+      "provenance": "SYSTEM",
+      "details": "User Dr. Arvind Mehta, MD logged in with role [CLINICIAN].",
+      "metadata": {}
+    },
+    {
+      "id": "aud-1788602558415-850",
+      "timestamp": "2026-09-05T10:02:38.415Z",
+      "action": "RANGE_VALIDATION_PERFORMED",
+      "actor": "MedLens Anti-Hallucination Engine",
+      "provenance": "AI_EXTRACTED_VERIFIED",
+      "details": "Validation check for 'HAEMOGLOBIN' with range '13.0 - 17.0': VERIFIED_EXACT_MATCH.",
+      "metadata": {
+        "testName": "HAEMOGLOBIN",
+        "referenceRange": "13.0 - 17.0",
+        "validation": {
+          "isValid": true,
+          "isHallucinated": false,
+          "isAbsentInSource": false,
+          "status": "VERIFIED_EXACT_MATCH",
+          "confidence": 1,
+          "provenance": "AI_EXTRACTED_VERIFIED",
+          "matchType": "EXACT_SUBSTRING",
+          "reason": "Extracted reference interval matches source document verbatim.",
+          "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0..."
+        },
+        "evaluation": {
+          "flag": "LOW",
+          "label": "Low",
+          "color": "blue",
+          "note": "Below lower bound (13)",
+          "min": 13,
+          "max": 17
+        }
+      }
+    },
+    {
+      "id": "aud-1788602526343-710",
+      "timestamp": "2026-09-05T10:02:06.344Z",
+      "action": "DATA_CALIBRATION_PERFORMED",
+      "actor": "MedLens Calibration Service",
+      "provenance": "AI_DERIVED",
+      "details": "Calibrated 'SERUM CREATININE' (88.4 umol/L): status CRITICALLY_ELEVATED, ratio to ULN: 73.67.",
+      "metadata": {
+        "obs": {
+          "testName": "SERUM CREATININE",
+          "value": 88.4,
+          "numericValue": 88.4,
+          "unit": "umol/L",
+          "referenceRange": "0.70 - 1.20 mg/dL",
+          "labName": "International Lab"
+        },
+        "calibration": {
+          "calibrated": true,
+          "value": 88.4,
+          "testName": "SERUM CREATININE",
+          "unit": "umol/L",
+          "referenceRange": "0.70 - 1.20 mg/dL",
+          "bounds": {
+            "min": 0.7,
+            "max": 1.2,
+            "type": "interval"
+          },
+          "normalizedIndex": 175.4,
+          "percentOfNormal": 17540,
+          "ratioToULN": 73.67,
+          "calibrationStatus": "CRITICALLY_ELEVATED",
+          "harmonized": {
+            "value": 1,
+            "unit": "mg/dL",
+            "originalValue": 88.4,
+            "originalUnit": "umol/L",
+            "isConverted": true
+          },
+          "calibratedBand": {
+            "lowerBoundary": 0.7,
+            "upperBoundary": 1.2,
+            "midpoint": 0.95
+          }
+        }
+      }
+    },
+    {
+      "id": "aud-1788602332178-649",
+      "timestamp": "2026-09-05T09:58:52.178Z",
+      "action": "USER_AUTHENTICATION_SUCCESS",
+      "actor": "Dr. Arvind Mehta, MD",
+      "provenance": "SYSTEM",
+      "details": "User Dr. Arvind Mehta, MD logged in with role [CLINICIAN].",
+      "metadata": {}
+    },
+    {
+      "id": "aud-1788602332159-705",
+      "timestamp": "2026-09-05T09:58:52.159Z",
+      "action": "RANGE_VALIDATION_PERFORMED",
+      "actor": "MedLens Anti-Hallucination Engine",
+      "provenance": "AI_EXTRACTED_VERIFIED",
+      "details": "Validation check for 'HAEMOGLOBIN' with range '13.0 - 17.0': VERIFIED_EXACT_MATCH.",
+      "metadata": {
+        "testName": "HAEMOGLOBIN",
+        "referenceRange": "13.0 - 17.0",
+        "validation": {
+          "isValid": true,
+          "isHallucinated": false,
+          "isAbsentInSource": false,
+          "status": "VERIFIED_EXACT_MATCH",
+          "confidence": 1,
+          "provenance": "AI_EXTRACTED_VERIFIED",
+          "matchType": "EXACT_SUBSTRING",
+          "reason": "Extracted reference interval matches source document verbatim.",
+          "matchSnippet": "...haemoglobin 11.8 g/dl 13.0 - 17.0..."
+        },
+        "evaluation": {
+          "flag": "LOW",
+          "label": "Low",
+          "color": "blue",
+          "note": "Below lower bound (13)",
+          "min": 13,
+          "max": 17
+        }
+      }
+    },
+    {
       "id": "aud-1788599658162-106",
       "timestamp": "2026-09-05T09:14:18.162Z",
       "action": "USER_AUTHENTICATION_SUCCESS",

@@ -48,4 +48,50 @@ router.post("/verify-range", (req, res) => {
   }
 });
 
+/**
+ * POST /api/validator/calibrate
+ * Calibrate a clinical data point against reference ranges and unit standards
+ */
+router.post("/calibrate", async (req, res) => {
+  try {
+    const { calibrateObservation } = await import("../services/calibrationService.js");
+    const { testName, value, unit, referenceRange, labName } = req.body;
+
+    if (value === undefined || value === null) {
+      return res.status(400).json({
+        success: false,
+        error: "Missing required parameter: 'value' is required."
+      });
+    }
+
+    const obs = {
+      testName: testName || "UNSPECIFIED_TEST",
+      value,
+      numericValue: parseFloat(value),
+      unit: unit || "",
+      referenceRange: referenceRange || "",
+      labName: labName || "Unknown Laboratory"
+    };
+
+    const calibration = calibrateObservation(obs);
+
+    addAuditEntry(
+      "DATA_CALIBRATION_PERFORMED",
+      "MedLens Calibration Service",
+      "AI_DERIVED",
+      `Calibrated '${obs.testName}' (${obs.value} ${obs.unit}): status ${calibration.calibrationStatus}, ratio to ULN: ${calibration.ratioToULN || 'N/A'}.`,
+      { obs, calibration }
+    );
+
+    res.json({
+      success: true,
+      observation: obs,
+      calibration
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 export default router;
+

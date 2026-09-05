@@ -13,6 +13,7 @@
 import { verifyReferenceRange, evaluateValueStatus } from "./validatorService.js";
 import { findLoincMapping } from "../data/loincDictionary.js";
 import { getCachedExtraction, setCachedExtraction, computeLongitudinalDeltas } from "../data/store.js";
+import { calibrateObservation, extractCalibrationMetadata } from "./calibrationService.js";
 
 /**
  * Deterministic Clinical Table Extraction Algorithm
@@ -98,11 +99,20 @@ export function extractObservationsFromText(rawText) {
       const status = evaluateValueStatus(value, refRange, validation);
       const loinc = findLoincMapping(rawTestName);
 
+      const numVal = isNaN(parseFloat(value)) ? null : parseFloat(value);
+      const calibration = calibrateObservation({
+        testName: rawTestName,
+        value,
+        numericValue: numVal,
+        unit,
+        referenceRange: refRange
+      });
+
       observations.push({
         id: `obs-${idx}-${Date.now()}`,
         testName: rawTestName,
         value: value,
-        numericValue: isNaN(parseFloat(value)) ? null : parseFloat(value),
+        numericValue: numVal,
         unit: unit,
         referenceRange: refRange,
         loincCode: loinc.code,
@@ -114,6 +124,7 @@ export function extractObservationsFromText(rawText) {
         sourceLineNumber: idx + 1,
         sourceSnippet: line,
         validationResult: validation,
+        calibration,
         provenance: validation.isValid ? "AI_EXTRACTED_VERIFIED" : "AI_EXTRACTED_NEEDS_REVIEW",
         confidence: validation.confidence,
         extractedAt: new Date().toISOString()
@@ -187,11 +198,20 @@ ${rawText}`;
     const status = evaluateValueStatus(item.value, item.referenceRange, validation);
     const loinc = findLoincMapping(item.testName);
 
+    const numVal = isNaN(parseFloat(item.value)) ? null : parseFloat(item.value);
+    const calibration = calibrateObservation({
+      testName: item.testName,
+      value: item.value,
+      numericValue: numVal,
+      unit: item.unit,
+      referenceRange: item.referenceRange
+    });
+
     return {
       id: `gemini-obs-${idx}-${Date.now()}`,
       testName: item.testName,
       value: item.value,
-      numericValue: isNaN(parseFloat(item.value)) ? null : parseFloat(item.value),
+      numericValue: numVal,
       unit: item.unit,
       referenceRange: item.referenceRange,
       loincCode: loinc.code,
@@ -203,6 +223,7 @@ ${rawText}`;
       sourceLineNumber: 1,
       sourceSnippet: `${item.testName} ${item.value} ${item.unit} ${item.referenceRange}`,
       validationResult: validation,
+      calibration,
       provenance: validation.isValid ? "AI_EXTRACTED_VERIFIED" : "AI_EXTRACTED_NEEDS_REVIEW",
       confidence: validation.confidence,
       extractedAt: new Date().toISOString()
@@ -272,6 +293,7 @@ export async function processReportExtraction(rawText, userMetadata = {}, apiKey
     abnormalCount: extracted.observations.filter(o => o.flag === "HIGH" || o.flag === "LOW" || o.flag === "ABNORMAL").length,
     unverifiedCount: extracted.observations.filter(o => o.validationResult.isValid === false).length,
     observations: extracted.observations,
+    calibrationMetadata: extractCalibrationMetadata(rawText),
     extractionEngine: engineLabel,
     processingTimeMs: Date.now() - startTime,
     processedAt: new Date().toISOString()

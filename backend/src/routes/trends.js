@@ -1,9 +1,10 @@
 import express from "express";
 import { store } from "../data/store.js";
+import { calibrateTrendSeries, extractCalibrationMetadata } from "../services/calibrationService.js";
 
 const router = express.Router();
 
-// GET longitudinal biomarker trends across all reports
+// GET longitudinal biomarker trends across all reports with multi-lab calibration
 router.get("/", (req, res) => {
   try {
     const keyParameters = [
@@ -31,6 +32,8 @@ router.get("/", (req, res) => {
     const sortedReports = [...store.reports].sort((a, b) => new Date(a.testDate) - new Date(b.testDate));
 
     sortedReports.forEach(report => {
+      const reportCalibrationMeta = extractCalibrationMetadata(report.rawText || "");
+
       (report.observations || []).forEach(obs => {
         const upper = obs.testName.toUpperCase();
         for (const target of keyParameters) {
@@ -40,11 +43,13 @@ router.get("/", (req, res) => {
                 reportId: report.id,
                 date: report.testDate,
                 labName: report.labName,
+                testName: obs.testName,
                 value: obs.numericValue,
                 unit: obs.unit,
                 referenceRange: obs.referenceRange,
                 flag: obs.flag,
-                provenance: obs.provenance
+                provenance: obs.provenance,
+                reportCalibrationMeta
               });
             }
             break;
@@ -53,11 +58,11 @@ router.get("/", (req, res) => {
       });
     });
 
-    // Filter out parameters with zero data points
+    // Filter out parameters with zero data points and calibrate longitudinal series
     const activeTrends = {};
-    for (const [key, data] of Object.entries(trends)) {
-      if (data.length > 0) {
-        activeTrends[key] = data;
+    for (const [key, rawData] of Object.entries(trends)) {
+      if (rawData.length > 0) {
+        activeTrends[key] = calibrateTrendSeries(rawData);
       }
     }
 
