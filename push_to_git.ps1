@@ -1,15 +1,15 @@
 $git = "C:\Users\DHARMA TEJA\AppData\Local\Microsoft\WinGet\Packages\Git.MinGit_Microsoft.Winget.Source_8wekyb3d8bbwe\cmd\git.exe"
 
-Write-Host "Staging all files..."
-& $git add .
+Write-Host "Staging Vercel deployment files..."
+& $git add vercel.json api/ package.json backend/src/server.js backend/src/data/db.json
 
 Write-Host "Committing updates..."
-& $git commit -m "fix: Resilient apiFetch fallback and static dist hosting on port 5000
+& $git commit -m "feat(deploy): Configure full-stack Vercel deployment and serverless API
 
-- Built resilient apiFetch utility with automatic failover to direct backend on http://127.0.0.1:5000
-- Enabled Express static asset serving and SPA fallback for frontend/dist on port 5000
-- Added preview proxy configuration to vite.config.js for port 4173
-- Rebuilt frontend production bundle with resilient apiFetch"
+- Added vercel.json with Vite build configuration and /api route rewrites
+- Created api/index.js Vercel serverless function entry point
+- Configured npm workspaces in root package.json
+- Enabled Vercel environment checks and .vercel.app CORS support in server.js"
 
 Write-Host "Pushing to remote origin main..."
 & $git push origin main
